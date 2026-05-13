@@ -1,2 +1,3 @@
 Checks: '*,-fuchsia-*,-llvmlibc-*'
+ExcludeHeaderFilterRegex: 'external/.*'
 HeaderFilterRegex: '.*'
