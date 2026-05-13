@@ -25,8 +25,7 @@ jobs:
     - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
 
     - name: Install LLVM 19
-      run: |
-        sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" 19
+      run: sudo apt install clang-19
         
     - uses: actions/checkout@v4
       with:
