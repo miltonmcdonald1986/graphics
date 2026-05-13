@@ -23,7 +23,11 @@ jobs:
     - run: sudo apt-get update
     
     - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
-    
+
+    - name: Install LLVM 19
+      run: |
+        sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" 19
+        
     - uses: actions/checkout@v4
       with:
         submodules: recursive
@@ -33,7 +37,7 @@ jobs:
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/external/vcpkg/scripts/buildsystems/vcpkg.cmake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_C_COMPILER=clang-19 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/external/vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build
       # Build your program with the given configuration
