@@ -1,1 +1,2 @@
 Checks: '*,-fuchsia-*,-llvmlibc-*'
+HeaderFilterRegex: '.*'
