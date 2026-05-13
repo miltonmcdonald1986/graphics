@@ -36,5 +36,8 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/external/vcpkg/scripts/buildsystems/vcpkg.cmake
 
+    - name: Build (populate compile_commands.json)
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
     - name: Run clang-tidy
       run: clang-tidy-19 -p build $(git ls-files '*.cpp')
