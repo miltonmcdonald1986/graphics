@@ -1,9 +1,16 @@
 #include "platform_glfw3.hpp"
 
+#include <expected>
+#include <memory>
+#include <source_location>
+
 #include <GLFW/glfw3.h>
 
 #include <graphics/core/diagnostic.hpp>
+#include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/logging.hpp>
+#include <graphics/core/log_level.hpp>
+#include <graphics/core/status.hpp>
 
 #include "glfw_callbacks.hpp"
 
@@ -20,14 +27,16 @@ namespace graphics::platform
 		glfwSetErrorCallback(glfw_error_callback);
 
 		if (glfwInit() == GLFW_TRUE)
+		{
 			core::log_message(
 				core::LogLevel::Info,
 				core::create_diagnostic_message(
 					core::DiagnosticCategory::Platform,
 					"Initialized GLFW"));
+		}
 		else
 		{
-			core::Diagnostic error
+			const core::Diagnostic error
 			{
 				.category = core::DiagnosticCategory::Platform,
 				.location = std::source_location::current(),
@@ -58,11 +67,13 @@ namespace graphics::platform
 			glfwTerminate();
 		}
 		else
+		{
 			core::log_message(
-				core::LogLevel::Warn, 
+				core::LogLevel::Warn,
 				core::create_diagnostic_message(
-					core::DiagnosticCategory::Platform, 
+					core::DiagnosticCategory::Platform,
 					"GLFW is not initialized; skipping shutdown"));
+		}
 
 		return {};
 	}

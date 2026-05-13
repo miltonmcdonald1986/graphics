@@ -24,6 +24,6 @@ namespace graphics::platform
 
 	auto create_platform_glfw() -> std::unique_ptr<PlatformGLFW>;
 
-}
+} // namespace graphics::platform
 
 #endif // GRAPHICS_PLATFORM_PLATFORM_GLFW3_HPP

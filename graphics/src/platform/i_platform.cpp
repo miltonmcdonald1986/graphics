@@ -23,7 +23,9 @@ namespace graphics::platform
 			}
 		}
 		else
+		{
 			return create_platform_default();
+		}
 	}
 
 } // namespace graphics::platform

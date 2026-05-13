@@ -1,3 +1,5 @@
-Checks: '*,-fuchsia-*,-llvmlibc-*'
+Checks: '*,-fuchsia-*,-llvmlibc-*,-llvm-header-guard'
 ExcludeHeaderFilterRegex: 'external/.*'
 HeaderFilterRegex: '.*'
+CheckOptions:
+    cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor: 'true'
