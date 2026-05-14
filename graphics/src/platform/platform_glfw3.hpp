@@ -6,27 +6,24 @@
 namespace graphics::platform
 {
 
-	class PlatformGLFW final : public IPlatform
-	{
+class PlatformGLFW final : public IPlatform
+{
 
-	public:
+  public:
+    PlatformGLFW();
+    ~PlatformGLFW() override;
 
-		PlatformGLFW();
-		~PlatformGLFW() override;
+    PlatformGLFW (const PlatformGLFW &) = delete;
+    auto operator= (const PlatformGLFW &) -> PlatformGLFW & = delete;
 
-		PlatformGLFW(const PlatformGLFW&) = delete;
-		auto operator=(const PlatformGLFW&) -> PlatformGLFW& = delete;
+    PlatformGLFW (PlatformGLFW &&) = delete;
+    auto operator= (PlatformGLFW &&) -> PlatformGLFW & = delete;
 
-		PlatformGLFW(PlatformGLFW&&) = delete;
-		auto operator=(PlatformGLFW&&) -> PlatformGLFW& = delete;
+  private:
+    bool m_initialized = false;
+};
 
-	private:
-
-		bool m_initialized = false;
-
-	};
-
-	auto create_platform_glfw() -> core::Expected<std::unique_ptr<PlatformGLFW> >;
+auto create_platform_glfw() -> core::Expected<std::unique_ptr<PlatformGLFW>>;
 
 } // namespace graphics::platform
 

@@ -7,16 +7,15 @@
 namespace graphics::core
 {
 
-	enum class DiagnosticCategory : std::uint8_t
-	{
-		Core,
-		Platform,
-		Unknown
-	};
+enum class DiagnosticCategory : std::uint8_t
+{
+    Core,
+    Platform,
+    Unknown
+};
 
-	auto translate_diagnostic_category_to_string(
-		DiagnosticCategory category
-	) -> std::string;
+auto translate_diagnostic_category_to_string (DiagnosticCategory category)
+    -> std::string;
 
 } // namespace graphics::core
 

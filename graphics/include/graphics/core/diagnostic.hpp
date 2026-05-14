@@ -10,22 +10,20 @@
 namespace graphics::core
 {
 
-	struct Diagnostic
-	{
-		DiagnosticCategory category { DiagnosticCategory::Unknown };
-		LogLevel level { LogLevel::Error };
-		std::source_location location;
-		std::string message;
-	};
+struct Diagnostic
+{
+    DiagnosticCategory category{DiagnosticCategory::Unknown};
+    LogLevel level{LogLevel::Error};
+    std::source_location location;
+    std::string message;
+};
 
-	auto log_diagnostic(const Diagnostic& diagnostic) -> void;
+auto log_diagnostic (const Diagnostic &diagnostic) -> void;
 
-	auto log_diagnostic(
-		DiagnosticCategory category, 
-		const std::string& message, 
-		LogLevel level = LogLevel::Error,
-		std::source_location location = std::source_location::current()
-	) -> void;
+auto log_diagnostic (DiagnosticCategory category,
+    const std::string &message,
+    LogLevel level = LogLevel::Error,
+    std::source_location location = std::source_location::current()) -> void;
 
 } // namespace graphics::core
 

@@ -8,10 +8,8 @@
 namespace graphics::core
 {
 
-	auto log_message(
-		LogLevel level, 
-		const std::string& message
-	) -> void;
+auto log_message (LogLevel level,
+    const std::string &message) -> void;
 
 } // namespace graphics::core
 

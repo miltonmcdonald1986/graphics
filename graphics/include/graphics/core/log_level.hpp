@@ -6,15 +6,15 @@
 namespace graphics::core
 {
 
-	enum class LogLevel : std::uint8_t
-	{
-		Trace,
-		Debug,
-		Info,
-		Warn,
-		Error,
-		Critical
-	};
+enum class LogLevel : std::uint8_t
+{
+    Trace,
+    Debug,
+    Info,
+    Warn,
+    Error,
+    Critical
+};
 
 } // namespace graphics::core
 

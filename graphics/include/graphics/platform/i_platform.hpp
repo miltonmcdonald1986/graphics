@@ -10,14 +10,17 @@
 namespace graphics::platform
 {
 
-	class IPlatform
-	{
-	public:
-		virtual ~IPlatform() = default;
-	};
+class IPlatform
+{
+  public:
+    virtual ~IPlatform() = default;
+};
 
-	using PlatformPtr = std::unique_ptr<IPlatform>;
-	auto create_platform(std::optional<Backend> o_backend = std::nullopt) -> core::Expected<PlatformPtr>;
+using PlatformPtr = std::unique_ptr<IPlatform>;
+using ExpectedPlatformPtr = core::Expected<PlatformPtr>;
+
+auto create_platform (std::optional<Backend> o_backend = std::nullopt)
+    -> ExpectedPlatformPtr;
 
 } // namespace graphics::platform
 

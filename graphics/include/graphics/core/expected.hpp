@@ -8,27 +8,25 @@
 namespace graphics::core
 {
 
-	/*---------*/
-	/* Aliases */
-	/*---------*/
+/*---------*/
+/* Aliases */
+/*---------*/
 
-	template<typename T>
-	using Expected = std::expected<T, Diagnostic>;
+template <typename T> using Expected = std::expected<T, Diagnostic>;
 
-	using Unexpected = std::unexpected<Diagnostic>;
+using Unexpected = std::unexpected<Diagnostic>;
 
-	/*-----------*/
-	/* Functions */
-	/*-----------*/
+/*-----------*/
+/* Functions */
+/*-----------*/
 
-	auto create_unexpected(const Diagnostic& diagnostic) -> Unexpected;
+auto create_unexpected (const Diagnostic &diagnostic) -> Unexpected;
 
-	auto create_unexpected(
-		DiagnosticCategory category, 
-		const std::string& message, 
-		LogLevel level = LogLevel::Error, 
-		std::source_location location = std::source_location::current()
-	) -> Unexpected;
+auto create_unexpected (DiagnosticCategory category,
+    const std::string &message,
+    LogLevel level = LogLevel::Error,
+    std::source_location location = std::source_location::current())
+    -> Unexpected;
 
 } // namespace graphics::core
 

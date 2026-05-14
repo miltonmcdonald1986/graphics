@@ -6,7 +6,7 @@
 namespace graphics::core
 {
 
-	using Status = Expected<void>;
+using Status = Expected<void>;
 
 } // namespace graphics::core
 
