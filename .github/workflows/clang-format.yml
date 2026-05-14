@@ -19,8 +19,7 @@ jobs:
           
       - name: Install clang-format
         run: |
-          sudo apt update
-          sudo apt install clang-format-22
+          pip install clang-format==22.0.0
           
       - run: clang-format --version
 
