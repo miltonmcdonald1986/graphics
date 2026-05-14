@@ -9,6 +9,6 @@ namespace graphics::platform
 		const char* description
 	) -> void;
 
-}
+} // namespace graphics::platform
 
 #endif // GRAPHICS_PLATFORM_GLFW_CALLBACKS_HPP

@@ -1,37 +1,45 @@
 #include <graphics/core/diagnostic.hpp>
 
 #include <format>
+#include <string>
+
+#include <graphics/core/diagnostic_category.hpp>
+#include <graphics/core/log_level.hpp>
+#include <graphics/core/logging.hpp>
 
 namespace graphics::core
 {
 
-	auto create_diagnostic_message(
-		const Diagnostic& diagnostic
-	) -> std::string
+	auto log_diagnostic(const Diagnostic& diagnostic) -> void
 	{
-		return std::format(
-			"[{}] {} ({}:{})", 
-			translate_diagnostic_category_to_string(diagnostic.category), 
-			diagnostic.message, 
-			diagnostic.location.file_name(), 
-			diagnostic.location.line()
+		log_message(
+			diagnostic.level, 
+			std::format(
+				"[{}] {} ({}:{})", 
+				translate_diagnostic_category_to_string(diagnostic.category), 
+				diagnostic.message, 
+				diagnostic.location.file_name(), 
+				diagnostic.location.line()
+			)
 		);
 	}
 
-	auto create_diagnostic_message(
-		DiagnosticCategory category, 
-		const std::string& message, 
+	auto log_diagnostic(
+		DiagnosticCategory category,
+		const std::string& message,
+		LogLevel level,
 		std::source_location location
-	) -> std::string
+	) -> void
 	{
-		Diagnostic diagnostic
+		const Diagnostic diagnostic
 		{
 			.category = category,
+			.level = level,
 			.location = location,
 			.message = message
 		};
 
-		return create_diagnostic_message(diagnostic);
+		log_diagnostic(diagnostic);
 	}
 
-}
+} // namespace graphics::core

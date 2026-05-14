@@ -4,7 +4,7 @@
 namespace graphics::platform
 {
 
-	enum class Backend
+	enum class Backend : std::uint8_t
 	{
 		GLFW
 	};

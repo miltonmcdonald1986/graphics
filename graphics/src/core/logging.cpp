@@ -1,7 +1,13 @@
-#include <graphics/core/logging.hpp>
+#include <graphics/core/logging.hpp> // NOLINT(misc-include-cleaner)
 
-#include <spdlog/spdlog.h>
+#include <memory>
+#include <string>
+
+#include <spdlog/common.h>
+#include <spdlog/logger.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+
+#include <graphics/core/log_level.hpp>
 
 namespace graphics::core
 {
@@ -12,7 +18,7 @@ namespace graphics::core
 	) -> void
 	{
 		static bool first_time = true;
-		static auto sp_logger = spdlog::stdout_color_mt("graphics");
+		static const std::shared_ptr<spdlog::logger> sp_logger = spdlog::stdout_color_mt("graphics");
 		if (first_time)
 		{
 #ifdef _DEBUG

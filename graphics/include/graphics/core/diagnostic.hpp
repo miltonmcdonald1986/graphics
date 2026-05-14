@@ -5,27 +5,28 @@
 #include <string>
 
 #include "diagnostic_category.hpp"
+#include "log_level.hpp"
 
 namespace graphics::core
 {
 
 	struct Diagnostic
 	{
-		DiagnosticCategory		category{ DiagnosticCategory::Unknown };
-		std::source_location	location;
-		std::string				message;
+		DiagnosticCategory category { DiagnosticCategory::Unknown };
+		LogLevel level { LogLevel::Error };
+		std::source_location location;
+		std::string message;
 	};
 
-	auto create_diagnostic_message(
-		const Diagnostic& diagnostic
-	) -> std::string;
+	auto log_diagnostic(const Diagnostic& diagnostic) -> void;
 
-	auto create_diagnostic_message(
+	auto log_diagnostic(
 		DiagnosticCategory category, 
 		const std::string& message, 
+		LogLevel level = LogLevel::Error,
 		std::source_location location = std::source_location::current()
-	) -> std::string;
+	) -> void;
 
-}
+} // namespace graphics::core
 
 #endif // GRAPHICS_CORE_DIAGNOSTIC_HPP

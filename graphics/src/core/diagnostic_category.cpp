@@ -1,5 +1,7 @@
 #include <graphics/core/diagnostic_category.hpp>
 
+#include <string>
+
 namespace graphics::core
 {
 

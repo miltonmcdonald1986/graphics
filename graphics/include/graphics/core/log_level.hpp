@@ -4,7 +4,7 @@
 namespace graphics::core
 {
 
-	enum class LogLevel
+	enum class LogLevel : std::uint8_t
 	{
 		Trace,
 		Debug,

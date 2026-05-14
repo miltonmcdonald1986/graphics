@@ -1,16 +1,30 @@
 #include <graphics/platform/i_platform.hpp>
 
+#include <optional>
+
+#include <graphics/core/expected.hpp>
+#include <graphics/platform/backend.hpp>
+
 #include "platform_glfw3.hpp"
 
-namespace graphics::platform
+namespace
 {
 
-	auto create_platform_default() -> std::unique_ptr<IPlatform>
+	using graphics::core::Expected;
+	using graphics::platform::PlatformPtr;
+	using graphics::platform::create_platform_glfw;
+
+	auto create_platform_default() -> Expected<PlatformPtr>
 	{
 		return create_platform_glfw();
 	}
 
-	auto create_platform(std::optional<Backend> o_backend) -> std::unique_ptr<IPlatform>
+} // namespace
+
+namespace graphics::platform
+{
+
+	auto create_platform(std::optional<Backend> o_backend) -> core::Expected<PlatformPtr>
 	{
 		if (o_backend.has_value())
 		{

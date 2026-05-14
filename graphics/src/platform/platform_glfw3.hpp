@@ -11,10 +11,14 @@ namespace graphics::platform
 
 	public:
 
-		~PlatformGLFW() override = default;
+		PlatformGLFW();
+		~PlatformGLFW() override;
 
-		auto init()		-> core::Status override;
-		auto shutdown() -> core::Status override;
+		PlatformGLFW(const PlatformGLFW&) = delete;
+		auto operator=(const PlatformGLFW&) -> PlatformGLFW& = delete;
+
+		PlatformGLFW(PlatformGLFW&&) = delete;
+		auto operator=(PlatformGLFW&&) -> PlatformGLFW& = delete;
 
 	private:
 
@@ -22,7 +26,7 @@ namespace graphics::platform
 
 	};
 
-	auto create_platform_glfw() -> std::unique_ptr<PlatformGLFW>;
+	auto create_platform_glfw() -> core::Expected<std::unique_ptr<PlatformGLFW> >;
 
 } // namespace graphics::platform
 

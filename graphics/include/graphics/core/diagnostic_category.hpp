@@ -6,7 +6,7 @@
 namespace graphics::core
 {
 
-	enum class DiagnosticCategory
+	enum class DiagnosticCategory : std::uint8_t
 	{
 		Core,
 		Platform,
@@ -17,6 +17,6 @@ namespace graphics::core
 		DiagnosticCategory category
 	) -> std::string;
 
-}
+} // namespace graphics::core
 
 #endif // GRAPHICS_CORE_DIAGNOSTIC_CATEGORY_HPP

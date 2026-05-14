@@ -14,13 +14,11 @@ namespace graphics::platform
 	{
 	public:
 		virtual ~IPlatform() = default;
-
-		virtual auto init()		-> core::Status = 0;
-		virtual auto shutdown() -> core::Status = 0;
 	};
 
-	auto create_platform(std::optional<Backend> o_backend = std::nullopt) -> std::unique_ptr<IPlatform>;
+	using PlatformPtr = std::unique_ptr<IPlatform>;
+	auto create_platform(std::optional<Backend> o_backend = std::nullopt) -> core::Expected<PlatformPtr>;
 
-}
+} // namespace graphics::platform
 
 #endif // GRAPHICS_PLATFORM_I_PLATFORM_HPP
