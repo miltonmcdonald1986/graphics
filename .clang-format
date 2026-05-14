@@ -12,5 +12,5 @@ SpaceBeforeParens : NonEmptyParentheses
 BreakBeforeCloseBracketFunction : true
 SeparateDefinitionBlocks : Always
 AlignAfterOpenBracket : false
-BinPackParameters : AlwaysOnePerLine
+BinPackParameters : false
 ...
