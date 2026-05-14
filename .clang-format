@@ -3,10 +3,7 @@ Language : Cpp
 BreakBeforeBraces : Allman
 UseTab : Never
 IndentWidth : 4
-SortIncludes : 
-  Enabled : true
-  IgnoreCase : true
-  IgnoreExtension : true
+SortIncludes : CaseInsensitive
 SortUsingDeclarations : LexicographicNumeric
 SpaceBeforeParens : NonEmptyParentheses
 BreakBeforeCloseBracketFunction : true
