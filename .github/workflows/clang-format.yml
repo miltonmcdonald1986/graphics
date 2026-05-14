@@ -19,7 +19,7 @@ jobs:
           
       - name: Install clang-format
         run: |
-          pip install clang-format==22.0.0
+          pip install clang-format==22.1.5
           
       - run: clang-format --version
 
