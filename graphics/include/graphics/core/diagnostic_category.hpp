@@ -1,6 +1,7 @@
 #ifndef GRAPHICS_CORE_DIAGNOSTIC_CATEGORY_HPP
 #define GRAPHICS_CORE_DIAGNOSTIC_CATEGORY_HPP
 
+#include <cstdint>
 #include <string>
 
 namespace graphics::core
