@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - run: sudo apt-get update
-    - run: pip install clang-tidy==22.0.0
+    - run: pip install clang-tidy==22.1.0
     - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
             
     - uses: actions/checkout@v4
