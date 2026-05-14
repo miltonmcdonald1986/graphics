@@ -12,8 +12,7 @@
 namespace graphics::core
 {
 
-auto log_message (LogLevel level,
-    const std::string &message) -> void
+auto log_message (LogLevel level, const std::string &message) -> void
 {
     static bool first_time = true;
     static const std::shared_ptr<spdlog::logger> sp_logger =

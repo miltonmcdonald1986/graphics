@@ -4,8 +4,7 @@
 namespace graphics::platform
 {
 
-auto glfw_error_callback (int error_code,
-    const char *description) -> void;
+auto glfw_error_callback (int error_code, const char *description) -> void;
 
 } // namespace graphics::platform
 
