@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - run: sudo apt-get update
-    - run: sudo apt-get install clang-tidy-19
+    - run: sudo apt-get install clang-tidy-22
     - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
             
     - uses: actions/checkout@v4
