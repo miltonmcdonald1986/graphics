@@ -1,6 +1,12 @@
 #include <graphics/core/expected.hpp>
 
-#include <graphics/core/logging.hpp>
+#include <expected>
+#include <source_location>
+#include <string>
+
+#include <graphics/core/diagnostic.hpp>
+#include <graphics/core/diagnostic_category.hpp>
+#include <graphics/core/log_level.hpp>
 
 namespace graphics::core
 {

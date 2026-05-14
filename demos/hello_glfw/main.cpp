@@ -26,7 +26,7 @@ auto main() -> int
 			return 1;
 		}
 
-		PlatformPtr platform = std::move(expected_platform.value());
+		const PlatformPtr platform = std::move(expected_platform.value());
 
 		return 0;
 	}
