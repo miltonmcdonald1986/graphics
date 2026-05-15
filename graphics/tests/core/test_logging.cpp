@@ -82,7 +82,7 @@ TEST_F (LoggingTest, MultipleMessagesAreRecorded)
     for (auto it = entries.begin(); it != entries.end(); ++it)
     {
         auto index = std::distance (it, entries.begin());
-        switch (index) 
+        switch (index)
         {
         case 0:
             EXPECT_EQ ((*it).message, "A");
@@ -100,7 +100,7 @@ TEST_F (LoggingTest, MultipleMessagesAreRecorded)
 TEST_F (LoggingTest, EmptyMessageIsAllowed)
 {
     log_message (LogLevel::Error, "");
-    
+
     auto mock = get_mock_logger();
     const auto& entries = mock->get_entries();
     ASSERT_EQ (entries.size(), 1);
