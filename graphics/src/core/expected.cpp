@@ -11,14 +11,14 @@
 namespace graphics::core
 {
 
-auto create_unexpected (const Diagnostic &diagnostic) -> Unexpected
+auto create_unexpected (const Diagnostic& diagnostic) -> Unexpected
 {
     core::log_diagnostic (diagnostic);
     return std::unexpected (diagnostic);
 }
 
 auto create_unexpected (DiagnosticCategory category,
-    const std::string &message,
+    const std::string& message,
     LogLevel level,
     std::source_location location) -> Unexpected
 {
