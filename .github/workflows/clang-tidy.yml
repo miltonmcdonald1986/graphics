@@ -20,6 +20,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Add the Official LLVM APT repository
+      run: |
+        wget https://apt.llvm.org/llvm.sh
+        chmod +x llvm.sh
+        sudo ./llvm.sh 22
+
+    - name: Install clang-tidy-22
+      run: sudo apt-get install -y clang-tidy-22
+
+    - name: Verify Installation
+      run: clang-tidy-22 --version
+
     - run: |
         sudo apt-get update
         sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" 22
