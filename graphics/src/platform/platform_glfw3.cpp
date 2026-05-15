@@ -34,8 +34,7 @@ PlatformGLFW::PlatformGLFW()
 
     if (glfwInit() == GLFW_TRUE)
     {
-        core::log_diagnostic (core::DiagnosticCategory::Platform,
-            "Initialized GLFW", core::LogLevel::Info);
+        core::log_diagnostic (core::DiagnosticCategory::Platform, "Initialized GLFW", core::LogLevel::Info);
 
         m_initialized = true;
     }
