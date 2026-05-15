@@ -1,13 +1,24 @@
 #include <graphics/core/logging.hpp>
+
+#include <string>
+#include <string_view>
+#include <vector>
+
 #include <gtest/gtest.h>
+
+#include <graphics/core/log_level.hpp>
 
 #include <graphics_internal/core/i_logger.hpp>
 
-using namespace graphics::core;
+using graphics::core::get_logger;
+using graphics::core::ILogger;
+using graphics::core::LogLevel;
 
-class MockLogger : public ILogger
+namespace
 {
-  public:
+
+struct MockLogger : public ILogger
+{
     struct Entry
     {
         LogLevel level;
@@ -18,11 +29,10 @@ class MockLogger : public ILogger
 
     void log (LogLevel level, std::string_view message) override
     {
-        entries.push_back ({level, std::string (message)});
+        entries.push_back (Entry{ .level = level, .message = std::string (message)});
     }
 };
 
-// Utility to reset logger before each test
 class LoggingTest : public ::testing::Test
 {
   protected:
@@ -35,7 +45,9 @@ class LoggingTest : public ::testing::Test
     }
 };
 
-TEST_F (LoggingTest, forwards_to_logger)
+} // namespace
+
+TEST_F (LoggingTest, ForwardsToLogger)
 {
     get_logger() = mock; // override the global logger
 
@@ -46,7 +58,7 @@ TEST_F (LoggingTest, forwards_to_logger)
     EXPECT_EQ (mock->entries[0].message, "Hello world");
 }
 
-TEST_F (LoggingTest, multiple_messages_are_recorded)
+TEST_F (LoggingTest, MultipleMessagesAreRecorded)
 {
     log_message (LogLevel::Debug, "A");
     log_message (LogLevel::Warn, "B");
@@ -56,7 +68,7 @@ TEST_F (LoggingTest, multiple_messages_are_recorded)
     EXPECT_EQ (mock->entries[1].message, "B");
 }
 
-TEST_F (LoggingTest, empty_message_is_allowed)
+TEST_F (LoggingTest, EmptyMessageIsAllowed)
 {
     log_message (LogLevel::Error, "");
 
@@ -64,7 +76,7 @@ TEST_F (LoggingTest, empty_message_is_allowed)
     EXPECT_EQ (mock->entries[0].message, "");
 }
 
-TEST_F (LoggingTest, long_message_is_forwarded)
+TEST_F (LoggingTest, LongMessageIsForwarded)
 {
     std::string long_msg (5000, 'x');
 
@@ -74,7 +86,7 @@ TEST_F (LoggingTest, long_message_is_forwarded)
     EXPECT_EQ (mock->entries[0].message, long_msg);
 }
 
-TEST_F (LoggingTest, all_levels_are_forwarded)
+TEST_F (LoggingTest, AllLevelsAreForwarded)
 {
     log_message (LogLevel::Trace, "t");
     log_message (LogLevel::Debug, "d");
@@ -93,7 +105,7 @@ TEST_F (LoggingTest, all_levels_are_forwarded)
     EXPECT_EQ (mock->entries[5].level, LogLevel::Critical);
 }
 
-TEST_F (LoggingTest, logger_can_be_replaced)
+TEST_F (LoggingTest, LoggerCanBeReplaced)
 {
     auto mock2 = std::make_shared<MockLogger>();
     get_logger() = mock2;
@@ -104,7 +116,7 @@ TEST_F (LoggingTest, logger_can_be_replaced)
     EXPECT_EQ (mock2->entries[0].message, "X");
 }
 
-TEST_F (LoggingTest, only_one_log_call_occurs)
+TEST_F (LoggingTest, OnlyOneLogCallOccurs)
 {
     log_message (LogLevel::Warn, "Side effects?");
 

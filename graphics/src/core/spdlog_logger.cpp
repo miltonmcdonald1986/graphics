@@ -1,5 +1,12 @@
 #include "spdlog_logger.hpp"
 
+#include <string_view>
+
+#include <spdlog/common.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
+
+#include <graphics/core/log_level.hpp>
+
 namespace graphics::core
 {
 

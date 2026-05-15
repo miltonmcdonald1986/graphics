@@ -1,11 +1,6 @@
 #include <graphics/core/logging.hpp> // NOLINT(misc-include-cleaner)
 
-#include <memory>
 #include <string>
-
-#include <spdlog/common.h>
-#include <spdlog/logger.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
 
 #include <graphics/core/log_level.hpp>
 
