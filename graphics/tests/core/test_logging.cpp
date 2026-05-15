@@ -29,7 +29,10 @@ struct MockLogger : public ILogger
         std::string message;
     };
 
-    [[nodiscard]] auto get_entries() const -> std::span<const Entry> { return m_entries; }
+    [[nodiscard]] auto get_entries() const -> std::span<const Entry>
+    {
+        return m_entries;
+    }
 
     auto log (LogLevel level, std::string_view message) -> void override
     {
@@ -50,7 +53,10 @@ class LoggingTest : public ::testing::Test
         get_logger() = mock;
     }
 
-    [[nodiscard]] auto get_mock_logger() const -> std::shared_ptr<MockLogger> { return mock; }
+    [[nodiscard]] auto get_mock_logger() const -> std::shared_ptr<MockLogger>
+    {
+        return mock;
+    }
 
   private:
     std::shared_ptr<MockLogger> mock;
@@ -173,7 +179,6 @@ TEST_F (LoggingTest, CriticalIsForwarded)
     EXPECT_EQ (entries.front().level, LogLevel::Critical);
     EXPECT_EQ (entries.front().message, "c");
 }
-
 
 TEST_F (LoggingTest, LoggerCanBeReplaced)
 {
