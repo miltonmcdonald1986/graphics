@@ -78,3 +78,23 @@ jobs:
       with:
         name: coverage-report
         path: coverage_html
+
+  publish-coverage:
+    needs: coverage
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Download coverage artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: coverage-report
+        path: coverage_html
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: coverage_html
+        destination_dir: coverage
