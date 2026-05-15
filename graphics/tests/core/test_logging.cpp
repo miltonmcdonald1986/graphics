@@ -1,5 +1,6 @@
 #include <graphics/core/logging.hpp>
 
+#include <cstddef>
 #include <iterator>
 #include <memory>
 #include <span>
@@ -109,8 +110,8 @@ TEST_F (LoggingTest, EmptyMessageIsAllowed)
 
 TEST_F (LoggingTest, LongMessageIsForwarded)
 {
-    const size_t num_chars = 5000;
-    std::string long_msg (num_chars, 'x');
+    const std::size_t num_chars = 5000;
+    const std::string long_msg (num_chars, 'x');
 
     log_message (LogLevel::Info, long_msg);
 
