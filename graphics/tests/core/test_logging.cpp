@@ -1,6 +1,8 @@
 #include <graphics/core/logging.hpp>
 
+#include <iterator>
 #include <memory>
+#include <span>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -27,9 +29,9 @@ struct MockLogger : public ILogger
         std::string message;
     };
 
-    auto get_entries() const -> std::span<const Entry> { return m_entries; }
+    [[nodiscard]] auto get_entries() const -> std::span<const Entry> { return m_entries; }
 
-    void log (LogLevel level, std::string_view message) override
+    auto log (LogLevel level, std::string_view message) -> void override
     {
         m_entries.push_back (Entry{
             .level = level, .message = std::string (message)});
@@ -41,14 +43,14 @@ struct MockLogger : public ILogger
 
 class LoggingTest : public ::testing::Test
 {
-  public:
-    void SetUp() override
+  protected:
+    auto SetUp() -> void override
     {
         mock = std::make_shared<MockLogger>();
         get_logger() = mock;
     }
 
-    auto get_mock_logger() const -> std::shared_ptr<MockLogger> { return mock; }
+    [[nodiscard]] auto get_mock_logger() const -> std::shared_ptr<MockLogger> { return mock; }
 
   private:
     std::shared_ptr<MockLogger> mock;
@@ -88,6 +90,9 @@ TEST_F (LoggingTest, MultipleMessagesAreRecorded)
         case 1:
             EXPECT_EQ ((*it).message, "B");
             break;
+        default:
+            FAIL();
+            break;
         }
     }
 }
@@ -104,7 +109,8 @@ TEST_F (LoggingTest, EmptyMessageIsAllowed)
 
 TEST_F (LoggingTest, LongMessageIsForwarded)
 {
-    std::string long_msg (5000, 'x');
+    const size_t num_chars = 5000;
+    std::string long_msg (num_chars, 'x');
 
     log_message (LogLevel::Info, long_msg);
 
@@ -114,46 +120,60 @@ TEST_F (LoggingTest, LongMessageIsForwarded)
     EXPECT_EQ (entries.front().message, long_msg);
 }
 
-TEST_F (LoggingTest, AllLevelsAreForwarded)
+TEST_F (LoggingTest, TraceIsForwarded)
 {
     log_message (LogLevel::Trace, "t");
-    log_message (LogLevel::Debug, "d");
-    log_message (LogLevel::Info, "i");
-    log_message (LogLevel::Warn, "w");
-    log_message (LogLevel::Error, "e");
-    log_message (LogLevel::Critical, "c");
-
-    auto mock = get_mock_logger();
-    const auto& entries = mock->get_entries();
-
-    ASSERT_EQ (entries.size(), 6);
-
-    for (auto it = entries.begin(); it != entries.end(); ++it)
-    {
-        auto index = std::distance (it, entries.begin());
-        switch (index) 
-        {
-        case 0:
-            EXPECT_EQ ((*it).level, LogLevel::Trace);
-            break;
-        case 1:
-            EXPECT_EQ ((*it).level, LogLevel::Debug);
-            break;
-        case 2:
-            EXPECT_EQ ((*it).level, LogLevel::Info);
-            break;
-        case 3:
-            EXPECT_EQ ((*it).level, LogLevel::Warn);
-            break;
-        case 4:
-            EXPECT_EQ ((*it).level, LogLevel::Error);
-            break;
-        case 5:
-            EXPECT_EQ ((*it).level, LogLevel::Critical);
-            break;
-        }
-    }    
+    auto entries = get_mock_logger()->get_entries();
+    ASSERT_EQ (entries.size(), 1);
+    EXPECT_EQ (entries.front().level, LogLevel::Trace);
+    EXPECT_EQ (entries.front().message, "t");
 }
+
+TEST_F (LoggingTest, DebugIsForwarded)
+{
+    log_message (LogLevel::Debug, "d");
+    auto entries = get_mock_logger()->get_entries();
+    ASSERT_EQ (entries.size(), 1);
+    EXPECT_EQ (entries.front().level, LogLevel::Debug);
+    EXPECT_EQ (entries.front().message, "d");
+}
+
+TEST_F (LoggingTest, InfoIsForwarded)
+{
+    log_message (LogLevel::Info, "i");
+    auto entries = get_mock_logger()->get_entries();
+    ASSERT_EQ (entries.size(), 1);
+    EXPECT_EQ (entries.front().level, LogLevel::Info);
+    EXPECT_EQ (entries.front().message, "i");
+}
+
+TEST_F (LoggingTest, WarnIsForwarded)
+{
+    log_message (LogLevel::Warn, "w");
+    auto entries = get_mock_logger()->get_entries();
+    ASSERT_EQ (entries.size(), 1);
+    EXPECT_EQ (entries.front().level, LogLevel::Warn);
+    EXPECT_EQ (entries.front().message, "w");
+}
+
+TEST_F (LoggingTest, ErrorIsForwarded)
+{
+    log_message (LogLevel::Error, "e");
+    auto entries = get_mock_logger()->get_entries();
+    ASSERT_EQ (entries.size(), 1);
+    EXPECT_EQ (entries.front().level, LogLevel::Error);
+    EXPECT_EQ (entries.front().message, "e");
+}
+
+TEST_F (LoggingTest, CriticalIsForwarded)
+{
+    log_message (LogLevel::Critical, "c");
+    auto entries = get_mock_logger()->get_entries();
+    ASSERT_EQ (entries.size(), 1);
+    EXPECT_EQ (entries.front().level, LogLevel::Critical);
+    EXPECT_EQ (entries.front().message, "c");
+}
+
 
 TEST_F (LoggingTest, LoggerCanBeReplaced)
 {
