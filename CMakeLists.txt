@@ -7,5 +7,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+option(graphics_ENABLE_TESTING "Enable testing" ${PROJECT_IS_TOP_LEVEL})
+if(graphics_ENABLE_TESTING)
+  enable_testing()
+endif()
+
 add_subdirectory(graphics)
 add_subdirectory(demos)

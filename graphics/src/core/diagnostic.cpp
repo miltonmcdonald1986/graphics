@@ -10,7 +10,7 @@
 namespace graphics::core
 {
 
-auto log_diagnostic (const Diagnostic &diagnostic) -> void
+auto log_diagnostic (const Diagnostic& diagnostic) -> void
 {
     log_message (diagnostic.level,
         std::format ("[{}] {} ({}:{})",
@@ -20,7 +20,7 @@ auto log_diagnostic (const Diagnostic &diagnostic) -> void
 }
 
 auto log_diagnostic (DiagnosticCategory category,
-    const std::string &message,
+    const std::string& message,
     LogLevel level,
     std::source_location location) -> void
 {
