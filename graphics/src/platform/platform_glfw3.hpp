@@ -13,11 +13,11 @@ class PlatformGLFW final : public IPlatform
     PlatformGLFW();
     ~PlatformGLFW() override;
 
-    PlatformGLFW (const PlatformGLFW &) = delete;
-    auto operator= (const PlatformGLFW &) -> PlatformGLFW & = delete;
+    PlatformGLFW (const PlatformGLFW&) = delete;
+    auto operator= (const PlatformGLFW&) -> PlatformGLFW& = delete;
 
-    PlatformGLFW (PlatformGLFW &&) = delete;
-    auto operator= (PlatformGLFW &&) -> PlatformGLFW & = delete;
+    PlatformGLFW (PlatformGLFW&&) = delete;
+    auto operator= (PlatformGLFW&&) -> PlatformGLFW& = delete;
 
   private:
     bool m_initialized = false;

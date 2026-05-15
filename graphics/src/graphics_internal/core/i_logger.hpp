@@ -18,6 +18,6 @@ struct ILogger
 using LoggerPtr = std::shared_ptr<ILogger>;
 auto get_logger() -> LoggerPtr&;
 
-}
+} // namespace graphics::core
 
 #endif // GRAPHICS_CORE_I_LOGGER_HPP
