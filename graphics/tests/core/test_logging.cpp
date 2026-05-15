@@ -29,7 +29,8 @@ struct MockLogger : public ILogger
 
     void log (LogLevel level, std::string_view message) override
     {
-        entries.push_back (Entry{ .level = level, .message = std::string (message)});
+        entries.push_back (Entry{
+            .level = level, .message = std::string (message)});
     }
 };
 
