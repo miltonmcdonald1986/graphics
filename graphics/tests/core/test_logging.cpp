@@ -199,9 +199,3 @@ TEST_F (LoggingTest, OnlyOneLogCallOccurs)
 
     ASSERT_EQ (get_mock_logger()->get_entries().size(), 1);
 }
-
-TEST (AsanCheck, ShouldCrash)
-{
-    int* p = new int[1];
-    p[5] = 42; // out-of-bounds write
-}
