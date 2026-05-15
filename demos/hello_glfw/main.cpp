@@ -1,5 +1,4 @@
 #include <cstdio>
-#include <format>
 #include <utility>
 
 #include <graphics/core/expected.hpp>

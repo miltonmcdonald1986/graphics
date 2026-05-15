@@ -17,16 +17,22 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
-          
-      - name: Install clang-format
+
+      - name: Add the Official LLVM APT repository
         run: |
-          pip install clang-format==22.1.5
-          
-      - run: clang-format --version
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 22
+
+      - name: Install clang-tidy-22
+        run: sudo apt-get install -y clang-format-22
+
+      - name: Verify Installation
+        run: clang-format-22 --version
 
       - name: Apply clang-format
         run: |
-          git ls-files '*.cpp' '*.hpp' '*.h' | xargs clang-format -i
+          git ls-files '*.cpp' '*.hpp' '*.h' | xargs clang-format-22 -i
 
       - name: Commit changes
         run: |
