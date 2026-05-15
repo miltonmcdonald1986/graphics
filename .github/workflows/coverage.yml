@@ -65,7 +65,7 @@ jobs:
           -instr-profile=coverage.profdata \
           -format=html \
           -output-dir=coverage_html \
-          -ignore-filename-regex="(external|vcpkg|tests)"
+          -ignore-filename-regex="(spdlog_logger.cpp|external|vcpkg|tests)"
 
     - name: Generate coverage summary
       run: |
