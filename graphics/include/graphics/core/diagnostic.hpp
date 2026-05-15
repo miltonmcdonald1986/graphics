@@ -18,10 +18,10 @@ struct Diagnostic
     std::string message;
 };
 
-auto log_diagnostic (const Diagnostic &diagnostic) -> void;
+auto log_diagnostic (const Diagnostic& diagnostic) -> void;
 
 auto log_diagnostic (DiagnosticCategory category,
-    const std::string &message,
+    const std::string& message,
     LogLevel level = LogLevel::Error,
     std::source_location location = std::source_location::current()) -> void;
 

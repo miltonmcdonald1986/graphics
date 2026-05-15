@@ -1,0 +1,54 @@
+name: ASAN + UBSAN
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  BUILD_TYPE: Debug
+
+jobs:
+  build-sanitizers:
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: sudo apt-get update
+    
+    - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
+
+    - name: Add the Official LLVM APT repository
+      run: |
+        wget https://apt.llvm.org/llvm.sh
+        chmod +x llvm.sh
+        sudo ./llvm.sh 22
+
+    - name: Install clang-tidy-22
+      run: sudo apt-get install -y clang-tidy-22
+
+    - name: Verify Installation
+      run: clang-tidy-22 --version
+        
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - run: ./external/vcpkg/bootstrap-vcpkg.sh
+
+    - name: Configure CMake (ASAN + UBSAN)
+      run: |
+        cmake -B ${{github.workspace}}/build \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DCMAKE_C_COMPILER=clang-22 \
+          -DCMAKE_CXX_COMPILER=clang++-22 \
+          -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/external/vcpkg/scripts/buildsystems/vcpkg.cmake \
+          -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer -O1 -g" \
+          -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined"
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config Debug --parallel
+
+    - name: Test (ASAN + UBSAN)
+      working-directory: ${{github.workspace}}/build
+      run: ctest -C Debug --output-on-failure

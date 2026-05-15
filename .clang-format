@@ -10,4 +10,5 @@ BreakBeforeCloseBracketFunction : true
 SeparateDefinitionBlocks : Always
 AlignAfterOpenBracket : false
 BinPackParameters : false
+PointerAlignment : Left
 ...

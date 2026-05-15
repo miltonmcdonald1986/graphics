@@ -8,7 +8,7 @@
 namespace graphics::platform
 {
 
-auto glfw_error_callback (int error_code, const char *description) -> void
+auto glfw_error_callback (int error_code, const char* description) -> void
 {
     core::log_diagnostic (core::DiagnosticCategory::Platform,
         std::format ("GLFW error {}: {}", error_code, description));

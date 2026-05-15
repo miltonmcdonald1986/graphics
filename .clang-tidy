@@ -1,5 +1,5 @@
 Checks: '*,-abseil-*,-altera-*,-android-*,-boost-*,-darwin-*,-fuchsia-*,-hicpp-special-member-functions,-llvmlibc-*,-llvm-header-guard,-llvm-prefer-static-over-anonymous-namespace,-mpi-*,-objc-*,-openmp-*'
-ExcludeHeaderFilterRegex: 'external/.*'
+ExcludeHeaderFilterRegex: 'external/.*,build/.*'
 HeaderFilterRegex: '.*'
 WarningsAsErrors: '*'
 CheckOptions:
