@@ -1,0 +1,72 @@
+name: Coverage (Clang)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  BUILD_TYPE: Debug
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: sudo apt-get update
+
+    - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
+
+    - name: Add the Official LLVM APT repository
+      run: |
+        wget https://apt.llvm.org/llvm.sh
+        chmod +x llvm.sh
+        sudo ./llvm.sh 22
+
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - run: ./external/vcpkg/bootstrap-vcpkg.sh
+
+    - name: Configure CMake (Coverage)
+      run: |
+        cmake -B ${{github.workspace}}/build -S . \
+          -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+          -DCMAKE_C_COMPILER=clang-22 \
+          -DCMAKE_CXX_COMPILER=clang++-22 \
+          -DCMAKE_CXX_FLAGS="--coverage -fprofile-instr-generate -fcoverage-mapping" \
+          -DCMAKE_EXE_LINKER_FLAGS="--coverage" \
+          -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/external/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Run tests with coverage
+      working-directory: ${{github.workspace}}/build
+      run: |
+        LLVM_PROFILE_FILE="coverage.profraw" ctest -C ${{env.BUILD_TYPE}} --output-on-failure
+
+    - name: Merge profile data
+      run: |
+        llvm-profdata-22 merge -sparse coverage.profraw -o coverage.profdata
+
+    - name: Generate coverage HTML report
+      run: |
+        llvm-cov-22 show ${{github.workspace}}/build/graphics_core_tests \
+          -instr-profile=coverage.profdata \
+          -format=html \
+          -output-dir=coverage_html \
+          -ignore-filename-regex="(external|vcpkg|tests)"
+
+    - name: Generate coverage summary
+      run: |
+        llvm-cov-22 report ${{github.workspace}}/build/graphics_core_tests \
+          -instr-profile=coverage.profdata
+
+    - name: Upload coverage HTML
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: coverage_html
