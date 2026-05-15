@@ -88,7 +88,7 @@ TEST_F (LoggingTest, MultipleMessagesAreRecorded)
     ASSERT_EQ (entries.size(), 2);
     for (auto it = entries.begin(); it != entries.end(); ++it)
     {
-        auto index = std::distance (it, entries.begin());
+        auto index = std::distance (entries.begin(), it);
         switch (index)
         {
         case 0:
