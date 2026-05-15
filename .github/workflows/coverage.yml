@@ -63,7 +63,7 @@ jobs:
 
     - name: Generate coverage summary
       run: |
-        llvm-cov-22 report ${{github.workspace}}/build/graphics_core_tests \
+        llvm-cov-22 report ${{github.workspace}}/build/graphics/tests/core/graphics_core_tests \
           -instr-profile=coverage.profdata
 
     - name: Upload coverage HTML
