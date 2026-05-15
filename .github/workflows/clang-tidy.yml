@@ -20,8 +20,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: sudo apt-get update
-    - run: pip install clang-tidy==22.1.0
+    - run: |
+        sudo apt-get update
+        sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" 22
+        sudo apt-get install -y clang-format-22 clang-tidy-22
+
     - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
             
     - uses: actions/checkout@v4
