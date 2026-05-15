@@ -70,7 +70,8 @@ jobs:
     - name: Generate coverage summary
       run: |
         llvm-cov-22 report ${{github.workspace}}/build/graphics/tests/core/graphics_core_tests \
-          -instr-profile=coverage.profdata
+          -instr-profile=coverage.profdata \
+          -ignore-filename-regex="(spdlog_logger.cpp|external|vcpkg|tests)"
 
     - name: Upload coverage HTML
       uses: actions/upload-artifact@v4
