@@ -8,3 +8,8 @@
 
 # graphics
 C++ Graphics Library
+
+### 📊 Code Coverage Report
+View the latest report here:  
+➡️ https://miltonmcdonald.github.io/graphics/coverage/
+
