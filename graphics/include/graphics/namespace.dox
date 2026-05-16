@@ -1,0 +1,79 @@
+/// \namespace graphics::core
+/// \brief Core diagnostics, logging, and error-handling subsystem.
+///
+/// The `graphics::core` namespace provides the foundational error-reporting
+/// and diagnostic facilities used throughout the engine. This includes
+/// diagnostic message representation, subsystem categorization, log levels,
+/// logging interfaces, and lightweight error/expected-value utilities.
+///
+/// # Responsibilities
+///
+/// ## Diagnostics
+/// - Diagnostic message structure (`Diagnostic`)
+/// - Source-location-aware error reporting
+/// - Diagnostic categories (`DiagnosticCategory`)
+/// - Severity levels (`LogLevel`)
+///
+/// These components provide a unified mechanism for describing and reporting
+/// errors, warnings, and informational messages across all engine subsystems.
+///
+/// ## Logging
+/// - Logging interface and helpers (`logging.hpp`)
+/// - Integration with diagnostic messages
+///
+/// Logging is built on top of the diagnostic system and provides a consistent
+/// way to emit structured messages during engine execution.
+///
+/// ## Error and Status Handling
+/// - Status codes (`status.hpp`)
+/// - Expected-value type (`expected.hpp`)
+///
+/// These utilities support expressive and lightweight error propagation
+/// without relying on exceptions, enabling predictable control flow and
+/// efficient error handling.
+///
+/// # Notes
+/// - All engine subsystems should use these facilities for reporting errors
+///   and diagnostics.
+/// - Higher-level modules (rendering, math, platform) depend on this layer.
+/// - This namespace forms the foundation of the engine's reliability model.
+///
+/// \see graphics
+
+/// \namespace graphics::platform
+/// \brief Platform abstraction layer of the graphics engine.
+///
+/// The `graphics::platform` namespace defines the interfaces and backend
+/// selection mechanisms used to interact with the underlying operating
+/// system and windowing environment. This layer isolates platform-specific
+/// behavior behind a clean, engine-facing API.
+///
+/// # Responsibilities
+///
+/// ## Platform Interface
+/// - `i_platform` — abstract interface representing the platform backend
+///
+/// The platform interface defines the minimal set of operations required by
+/// the engine, such as initialization, shutdown, window creation, and event
+/// polling. All platform backends must implement this interface.
+///
+/// ## Backend Selection
+/// - `backend.hpp` — backend enumeration and selection helpers
+///
+/// This component provides the mechanism for choosing which platform
+/// implementation to use (e.g., GLFW, Win32, SDL). It allows the engine to
+/// remain backend-agnostic while supporting multiple windowing systems.
+///
+/// # Design Goals
+/// - Provide a stable, minimal API for platform interaction
+/// - Allow multiple backend implementations without changing engine code
+/// - Keep platform-specific details isolated from higher-level systems
+///
+/// # Notes
+/// - All platform backends must implement `i_platform`.
+/// - Backend selection is performed through the facilities in `backend.hpp`.
+/// - Higher-level systems (rendering, diagnostics, input) depend on this
+///   namespace for window creation and event dispatch.
+///
+/// \see graphics
+/// \see graphics::core

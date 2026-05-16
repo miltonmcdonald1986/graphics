@@ -17,15 +17,17 @@ namespace graphics::core
 /// severity level, source location, and a human-readable message.
 struct Diagnostic
 {
-    /// High-level category describing the subsystem that produced
-    /// the diagnostic (e.g., Core, Platform).
+    /// High-level category describing the subsystem that produced the
+    /// diagnostic (e.g., Core, Platform).
     DiagnosticCategory category{DiagnosticCategory::Unknown};
 
     /// Severity level of the diagnostic (Error, Warning, Info, etc.).
     LogLevel level{LogLevel::Error};
 
     /// Source location where the diagnostic originated.
-    /// Automatically populated using `std::source_location::current()`.
+
+    /// Normally, this would be automatically populated using
+    /// `std::source_location::current()`.
     std::source_location location;
 
     /// Human-readable description of the diagnostic event.
