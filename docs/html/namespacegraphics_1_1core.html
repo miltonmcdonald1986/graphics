@@ -161,30 +161,30 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Core diagnostics, logging, and error-handling subsystem. </p>
-<p>The <code><a class="el" href="namespacegraphics_1_1core.html" title="Core diagnostics, logging, and error-handling subsystem.">graphics::core</a></code> namespace provides the foundational error-reporting and diagnostic facilities used throughout the engine. This includes diagnostic message representation, subsystem categorization, log levels, logging interfaces, and lightweight error/expected-value utilities.</p>
+<p>The <a class="el" href="namespacegraphics_1_1core.html" title="Core diagnostics, logging, and error-handling subsystem.">graphics::core</a> namespace provides the foundational error-reporting and diagnostic facilities used throughout the engine. This includes diagnostic message representation, subsystem categorization, log levels, logging interfaces, and lightweight error/expected-value utilities.</p>
 <h1><a class="anchor" id="autotoc_md0"></a>
 Responsibilities</h1>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Diagnostics</h2>
 <ul>
-<li><a class="el" href="structgraphics_1_1core_1_1Diagnostic.html">Diagnostic</a> message structure (<code><a class="el" href="structgraphics_1_1core_1_1Diagnostic.html">Diagnostic</a></code>)</li>
+<li><a class="el" href="structgraphics_1_1core_1_1Diagnostic.html">Diagnostic</a> message structure (<a class="el" href="structgraphics_1_1core_1_1Diagnostic.html">Diagnostic</a>)</li>
 <li>Source-location-aware error reporting</li>
-<li><a class="el" href="structgraphics_1_1core_1_1Diagnostic.html">Diagnostic</a> categories (<code>DiagnosticCategory</code>)</li>
-<li>Severity levels (<code>LogLevel</code>)</li>
+<li><a class="el" href="structgraphics_1_1core_1_1Diagnostic.html">Diagnostic</a> categories (DiagnosticCategory)</li>
+<li>Severity levels (LogLevel)</li>
 </ul>
 <p>These components provide a unified mechanism for describing and reporting errors, warnings, and informational messages across all engine subsystems.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Logging</h2>
 <ul>
-<li>Logging interface and helpers (<code><a class="el" href="logging_8hpp_source.html">logging.hpp</a></code>)</li>
+<li>Logging interface and helpers (<a class="el" href="logging_8hpp_source.html">logging.hpp</a>)</li>
 <li>Integration with diagnostic messages</li>
 </ul>
 <p>Logging is built on top of the diagnostic system and provides a consistent way to emit structured messages during engine execution.</p>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Error and Status Handling</h2>
 <ul>
-<li>Status codes (<code><a class="el" href="status_8hpp_source.html">status.hpp</a></code>)</li>
-<li>Expected-value type (<code><a class="el" href="expected_8hpp_source.html">expected.hpp</a></code>)</li>
+<li>Status codes (<a class="el" href="status_8hpp_source.html">status.hpp</a>)</li>
+<li>Expected-value type (<a class="el" href="expected_8hpp_source.html">expected.hpp</a>)</li>
 </ul>
 <p>These utilities support expressive and lightweight error propagation without relying on exceptions, enabling predictable control flow and efficient error handling.</p>
 <h1><a class="anchor" id="autotoc_md4"></a>
