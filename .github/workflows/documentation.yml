@@ -22,18 +22,11 @@ jobs:
       run: |
         doxygen Doxyfile
 
-    - name: Upload full repo snapshot
-      uses: actions/upload-artifact@v4
-      with:
-        name: repo-after-doxygen
-        path: ${{ github.workspace }}
-        retention-days: 3
-
     - name: Upload docs artifact
       uses: actions/upload-artifact@v4
       with:
         name: docs-html
-        path: docs/html
+        path: html
 
   publish-docs:
     needs: build-docs
