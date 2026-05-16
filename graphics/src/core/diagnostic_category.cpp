@@ -1,6 +1,8 @@
-#include <graphics_internal/core/diagnostic_category.hpp>
+#include <graphics/core/diagnostic_category.hpp>
 
 #include <string>
+
+#include <graphics_internal/core/diagnostic_category.hpp>
 
 namespace graphics::core
 {
