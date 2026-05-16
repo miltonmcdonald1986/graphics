@@ -7,15 +7,28 @@
 namespace graphics::core
 {
 
+/// \brief High-level category describing the subsystem that produced a
+/// diagnostic.
+///
+/// `DiagnosticCategory` classifies diagnostics according to the engine
+/// subsystem that emitted them. This allows log filtering, routing, and
+/// structured reporting across different parts of the engine.
+///
+/// The categories are intentionally coarse-grained and represent the major
+/// architectural layers of the engine.
+///
+/// - `Core` - Diagnostics originating from core engine logic.
+/// - `Platform` - Diagnostics from platform or windowing backends.
+/// - `Unknown` - Diagnostics that cannot be attributed to a specific subsystem.
+///
+/// \see Diagnostic
+/// \see LogLevel
 enum class DiagnosticCategory : std::uint8_t
 {
-    Core,
-    Platform,
-    Unknown
+    Core,     ///< Core engine subsystem.
+    Platform, ///< Platform or windowing subsystem.
+    Unknown   ///< Unclassified or unspecified subsystem.
 };
-
-auto translate_diagnostic_category_to_string (DiagnosticCategory category)
-    -> std::string;
 
 } // namespace graphics::core
 

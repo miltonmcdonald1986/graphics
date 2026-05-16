@@ -1,5 +1,5 @@
-#ifndef GRAPHICS_CORE_I_LOGGER_HPP
-#define GRAPHICS_CORE_I_LOGGER_HPP
+#ifndef GRAPHICS_INTERNAL_CORE_I_LOGGER_HPP
+#define GRAPHICS_INTERNAL_CORE_I_LOGGER_HPP
 
 #include <memory>
 #include <string_view>
@@ -20,4 +20,4 @@ auto get_logger() -> LoggerPtr&;
 
 } // namespace graphics::core
 
-#endif // GRAPHICS_CORE_I_LOGGER_HPP
+#endif // GRAPHICS_INTERNAL_CORE_I_LOGGER_HPP

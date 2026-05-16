@@ -1,4 +1,4 @@
-#include <graphics/core/diagnostic_category.hpp>
+#include <graphics_internal/core/diagnostic_category.hpp>
 
 #include <string>
 

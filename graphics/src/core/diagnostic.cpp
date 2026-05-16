@@ -7,6 +7,8 @@
 #include <graphics/core/log_level.hpp>
 #include <graphics/core/logging.hpp>
 
+#include <graphics_internal/core/diagnostic_category.hpp>
+
 namespace graphics::core
 {
 
