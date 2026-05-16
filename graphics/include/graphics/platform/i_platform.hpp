@@ -10,11 +10,16 @@
 namespace graphics::platform
 {
 
+/// \brief Interface for platform backends.
+///
+/// Defines the minimal API required for platform initialization,
+/// shutdown, and window/event management.
 struct IPlatform
 {
   public:
     virtual ~IPlatform() = default;
 };
+
 
 using PlatformPtr = std::unique_ptr<IPlatform>;
 using ExpectedPlatformPtr = core::Expected<PlatformPtr>;
