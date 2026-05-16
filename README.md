@@ -5,11 +5,4 @@
 [![clang-format](https://github.com/miltonmcdonald1986/graphics/actions/workflows/clang-format.yml/badge.svg)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/clang-format.yml)
 [![ASAN + UBSAN](https://github.com/miltonmcdonald1986/graphics/actions/workflows/asan-ubsan.yml/badge.svg)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/asan-ubsan.yml)
 [![Coverage (Clang)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/coverage.yml/badge.svg)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/coverage.yml)
-
-# graphics
-C++ Graphics Library
-
-### 📊 Code Coverage Report
-View the latest report here:  
-➡️ https://miltonmcdonald.github.io/graphics/coverage/
-
+[![Documentation](https://github.com/miltonmcdonald1986/graphics/actions/workflows/documentation.yml/badge.svg)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/documentation.yml)
