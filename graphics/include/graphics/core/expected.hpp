@@ -36,8 +36,36 @@ using Unexpected = std::unexpected<Diagnostic>;
 
 #pragma region functions
 
+/// \brief Creates an `Unexpected` value from an existing diagnostic.
+///
+/// Wraps the given `Diagnostic` inside an `Unexpected` object. This is the
+/// preferred way to propagate a previously constructed diagnostic through
+/// functions that return `Expected<T>` or `Status`.
+///
+/// \param diagnostic The diagnostic describing the failure.
+/// \return An `Unexpected` containing the provided diagnostic.
+///
+/// \see Unexpected
+/// \see Expected
 auto create_unexpected (const Diagnostic& diagnostic) -> Unexpected;
 
+/// \brief Creates an `Unexpected` value from diagnostic components.
+///
+/// Constructs a `Diagnostic` using the provided category, message, severity
+/// level, and source location, then wraps it inside an `Unexpected`. This
+/// overload is convenient for inline error reporting where a full
+/// `Diagnostic` object is not already available.
+///
+/// \param category The subsystem category associated with the diagnostic.
+/// \param message Human-readable description of the failure.
+/// \param level Severity level of the diagnostic. Defaults to `Error`.
+/// \param location Source location where the diagnostic originated.
+///                 Defaults to `std::source_location::current()`.
+/// \return An `Unexpected` containing the constructed diagnostic.
+///
+/// \see Unexpected
+/// \see Diagnostic
+/// \see Expected
 auto create_unexpected (DiagnosticCategory category,
     const std::string& message,
     LogLevel level = LogLevel::Error,
