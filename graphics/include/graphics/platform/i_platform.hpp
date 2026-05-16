@@ -10,7 +10,7 @@
 namespace graphics::platform
 {
 
-class IPlatform
+struct IPlatform
 {
   public:
     virtual ~IPlatform() = default;

@@ -26,3 +26,10 @@ target_include_directories(graphics
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
+
+# -----------------------------
+# Add tests for the graphics lib
+# -----------------------------
+if (graphics_ENABLE_TESTING)
+    add_subdirectory(tests)
+endif()

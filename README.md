@@ -3,6 +3,6 @@
 [![Build clang](https://github.com/miltonmcdonald1986/graphics/actions/workflows/build-clang.yml/badge.svg)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/build-clang.yml)
 [![Run clang-tidy](https://github.com/miltonmcdonald1986/graphics/actions/workflows/clang-tidy.yml/badge.svg)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/clang-tidy.yml)
 [![clang-format](https://github.com/miltonmcdonald1986/graphics/actions/workflows/clang-format.yml/badge.svg)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/clang-format.yml)
-
-# graphics
-C++ Graphics Library
+[![ASAN + UBSAN](https://github.com/miltonmcdonald1986/graphics/actions/workflows/asan-ubsan.yml/badge.svg)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/asan-ubsan.yml)
+[![Coverage (Clang)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/coverage.yml/badge.svg)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/coverage.yml)
+[![Documentation](https://github.com/miltonmcdonald1986/graphics/actions/workflows/documentation.yml/badge.svg)](https://github.com/miltonmcdonald1986/graphics/actions/workflows/documentation.yml)
