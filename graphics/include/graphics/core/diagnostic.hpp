@@ -10,11 +10,25 @@
 namespace graphics::core
 {
 
+/// Represents a single diagnostic message emitted by the engine.
+///
+/// A diagnostic captures categorized information about an event such as an
+/// error, warning, or informational message. It includes the category,
+/// severity level, source location, and a human-readable message.
 struct Diagnostic
 {
+    /// High-level category describing the subsystem that produced
+    /// the diagnostic (e.g., Core, Platform).
     DiagnosticCategory category{DiagnosticCategory::Unknown};
+
+    /// Severity level of the diagnostic (Error, Warning, Info, etc.).
     LogLevel level{LogLevel::Error};
+
+    /// Source location where the diagnostic originated.
+    /// Automatically populated using `std::source_location::current()`.
     std::source_location location;
+
+    /// Human-readable description of the diagnostic event.
     std::string message;
 };
 
