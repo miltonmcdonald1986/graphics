@@ -12,7 +12,8 @@ namespace graphics::platform
 /// - GLFW: Use the GLFW-based platform backend.
 enum class Backend : std::uint8_t
 {
-    GLFW ///< GLFW platform backend.
+    GLFW, ///< GLFW platform backend.
+    SDL2  ///< SDL2 platform backend.
 };
 
 } // namespace graphics::platform

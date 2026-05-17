@@ -1,0 +1,30 @@
+#ifndef GRAPHICS_PLATFORM_PLATFORM_SDL2_HPP
+#define GRAPHICS_PLATFORM_PLATFORM_SDL2_HPP
+
+#include <graphics/platform/i_platform.hpp>
+
+namespace graphics::platform
+{
+
+class PlatformSDL2 final : public IPlatform
+{
+
+  public:
+    PlatformSDL2();
+    ~PlatformSDL2() override;
+
+    PlatformSDL2 (const PlatformSDL2&) = delete;
+    auto operator= (const PlatformSDL2&) -> PlatformSDL2& = delete;
+
+    PlatformSDL2 (PlatformSDL2&&) = delete;
+    auto operator= (PlatformSDL2&&) -> PlatformSDL2& = delete;
+
+  private:
+    bool m_initialized = false;
+};
+
+auto create_platform_sdl2() -> core::Expected<std::unique_ptr<PlatformSDL2>>;
+
+} // namespace graphics::platform
+
+#endif // GRAPHICS_PLATFORM_PLATFORM_SDL2_HPP

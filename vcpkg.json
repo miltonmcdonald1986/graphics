@@ -4,6 +4,7 @@
   "dependencies": [
     "glfw3",
     "gtest",
+    "sdl2",
     "spdlog"
   ]
 }

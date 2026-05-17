@@ -17,7 +17,7 @@ auto main() -> int
 {
     try
     {
-        auto expected_platform = create_platform (Backend::GLFW);
+        auto expected_platform = create_platform (Backend::SDL2);
         if (!expected_platform)
         {
             log_message (LogLevel::Error,

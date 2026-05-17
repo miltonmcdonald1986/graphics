@@ -6,12 +6,14 @@
 #include <graphics/platform/backend.hpp>
 
 #include "platform_glfw3.hpp"
+#include "platform_sdl2.hpp"
 
 namespace
 {
 
 using graphics::core::Expected;
 using graphics::platform::create_platform_glfw;
+using graphics::platform::create_platform_sdl2;
 using graphics::platform::PlatformPtr;
 
 auto create_platform_default() -> Expected<PlatformPtr>
@@ -33,6 +35,8 @@ auto create_platform (std::optional<Backend> o_backend)
         {
         case Backend::GLFW:
             return create_platform_glfw();
+        case Backend::SDL2:
+            return create_platform_sdl2();
         default:
             return create_platform_default();
         }

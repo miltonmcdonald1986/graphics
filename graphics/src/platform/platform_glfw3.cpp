@@ -24,7 +24,7 @@ auto create_platform_glfw() -> core::Expected<std::unique_ptr<PlatformGLFW>>
     catch (...)
     {
         return core::create_unexpected (core::DiagnosticCategory::Platform,
-            "Failed to create platform");
+            "Failed to create GLFW platform");
     }
 }
 
