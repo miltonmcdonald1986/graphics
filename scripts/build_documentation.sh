@@ -10,6 +10,9 @@ fi
 
 REQUIRED_DOXYGEN="1.14.0"
 
+printf 'DEBUG REQUIRED   : %q\n' "$REQUIRED_DOXYGEN"
+printf 'DEBUG INSTALLED  : %q\n' "$INSTALLED_DOXYGEN"
+
 #Extract the actual version installed
 INSTALLED_DOXYGEN="$(doxygen --version 2>/dev/null | awk '{print $1}' | tr -d '\r\n')"
 
