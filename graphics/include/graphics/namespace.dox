@@ -1,4 +1,17 @@
 /**
+ * \namespace graphics
+ * \brief Root namespace for the graphics engine.
+ *
+ * Contains all engine subsystems, including:
+ * - graphics::core (diagnostics, logging, error handling)
+ * - graphics::platform (platform abstraction and backend selection)
+ *
+ * This namespace itself does not contain code directly; it serves as the
+ * top-level grouping for all engine modules.
+ */
+namespace graphics;
+
+/**
  * \namespace graphics::core
  * \brief Core diagnostics, logging, and error-handling subsystem.
  *
@@ -82,3 +95,4 @@
  * \see graphics
  * \see graphics::core
  */
+ namespace graphics::platform;
