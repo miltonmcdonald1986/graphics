@@ -11,10 +11,10 @@ fi
 REQUIRED_DOXYGEN="1.14.0"
 
 #Extract the actual version installed
-INSTALLED_DOXYGEN="$(doxygen --version 2>/dev/null || echo "none")"
+INSTALLED_DOXYGEN="$(doxygen --version 2>/dev/null | awk '{print $1}')"
 
 echo "Required Doxygen:  $REQUIRED_DOXYGEN"
-echo "Installed Docygen: $INSTALLED_DOXYGEN"
+echo "Installed Doxygen: $INSTALLED_DOXYGEN"
 
 #Compare versions
 if [[ "$INSTALLED_DOXYGEN" != "REQUIRED_DOXYGEN" ]]; then
