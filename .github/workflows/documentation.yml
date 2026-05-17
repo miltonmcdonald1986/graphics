@@ -21,17 +21,14 @@ jobs:
         tar -xzf doxygen-1.14.0.linux.bin.tar.gz
         sudo mv doxygen-1.14.0/bin/doxygen /usr/local/bin/doxygen
 
-    - run: doxygen --version
-
     - name: Generate Doxygen documentation
-      run: |
-        doxygen Doxyfile
+    - run: ./github/workflows/documentation.sh
 
     - name: Upload docs artifact
       uses: actions/upload-artifact@v4
       with:
         name: docs-html
-        path: graphics/docs
+        path: build/docs
 
   publish-docs:
     needs: build-docs
