@@ -14,8 +14,13 @@ REQUIRED_DOXYGEN="1.14.0"
 INSTALLED_DOXYGEN="$(doxygen --version 2>/dev/null | awk '{print $1}' | tr -d '\r\n')"
 
 
-printf 'DEBUG REQUIRED   : %q\n' "$REQUIRED_DOXYGEN"
-printf 'DEBUG INSTALLED  : %q\n' "$INSTALLED_DOXYGEN"
+printf 'DEBUG REQUIRED BYTES  : '
+printf '%s' "$REQUIRED_DOXYGEN" | od -An -t x1
+printf '\n'
+
+printf 'DEBUG INSTALLED BYTES : '
+printf '%s' "$INSTALLED_DOXYGEN" | od -An -t x1
+printf '\n'
 
 echo "Required Doxygen:  $REQUIRED_DOXYGEN"
 echo "Installed Doxygen: $INSTALLED_DOXYGEN"
