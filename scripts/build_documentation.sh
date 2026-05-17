@@ -25,5 +25,7 @@ fi
 
 echo "Doxygen version OK."
 
+mkdir -p build/docs
+
 # Generate docs
 doxygen Doxyfile
