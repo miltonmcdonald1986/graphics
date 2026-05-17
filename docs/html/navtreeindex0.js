@@ -41,6 +41,7 @@ var NAVTREEINDEX0 =
 "namespacegraphics_1_1core.html#ae77b6d6c21bd12f3b27adb35bf19dcf8":[0,0,0,0,9],
 "namespacegraphics_1_1platform.html":[0,0,0,1],
 "namespacegraphics_1_1platform.html#a54007b07082dcd600a280c0c8d8e3c85":[0,0,0,1,3],
+"namespacegraphics_1_1platform.html#a54007b07082dcd600a280c0c8d8e3c85a2320cc88dc435ddbb381c8b30b85e8a9":[0,0,0,1,3,1],
 "namespacegraphics_1_1platform.html#a54007b07082dcd600a280c0c8d8e3c85ab274032f1807b8cd2f7553d82555c73c":[0,0,0,1,3,0],
 "namespacegraphics_1_1platform.html#a7743d304b29903995700fbf29887bf77":[0,0,0,1,2],
 "namespacegraphics_1_1platform.html#a9ceb40fcca228eece16c8efe542dc1df":[0,0,0,1,4],

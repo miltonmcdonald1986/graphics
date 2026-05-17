@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['trace_0',['Trace',['../namespacegraphics_1_1core.html#ac6a2e0d6ea98e362d789a9dbb965a06dadd4ec0ac4e58f7c32a01244ae91150b1',1,'graphics::core']]]
+  ['sdl2_0',['SDL2',['../namespacegraphics_1_1platform.html#a54007b07082dcd600a280c0c8d8e3c85a2320cc88dc435ddbb381c8b30b85e8a9',1,'graphics::platform']]]
 ];
