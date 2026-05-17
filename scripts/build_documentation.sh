@@ -11,7 +11,7 @@ fi
 REQUIRED_DOXYGEN="1.14.0"
 
 #Extract the actual version installed
-INSTALLED_DOXYGEN="$(doxygen --version 2>/dev/null | awk '{print $1}')"
+INSTALLED_DOXYGEN="$(doxygen --version 2>/dev/null | awk '{print $1}' | tr -d '\r\n')"
 
 echo "Required Doxygen:  $REQUIRED_DOXYGEN"
 echo "Installed Doxygen: $INSTALLED_DOXYGEN"
