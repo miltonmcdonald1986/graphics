@@ -131,7 +131,7 @@ auto PlatformGLFW::swap_backend_buffers (window::IWindow* window) const -> void
 {
     if (WindowGLFW* window_glfw = static_cast<WindowGLFW*> (window))
     {
-        glfwSwapBuffers(window_glfw->get_glfw_window());
+        glfwSwapBuffers (window_glfw->get_glfw_window());
     }
     else
     {

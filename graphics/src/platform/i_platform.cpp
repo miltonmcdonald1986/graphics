@@ -182,7 +182,8 @@ auto IPlatform::destroy_window (uint32_t id) -> void
     m_free_list.push_back (handle.id);
     log_diagnostic (DiagnosticCategory::Platform,
         format ("Slot {} is now free", handle.id), LogLevel::Debug);
-    log_diagnostic (DiagnosticCategory::Platform, format ("free ids: {}", m_free_list), LogLevel::Debug);
+    log_diagnostic (DiagnosticCategory::Platform,
+        format ("free ids: {}", m_free_list), LogLevel::Debug);
 }
 
 auto IPlatform::has_windows() const -> bool
@@ -206,7 +207,6 @@ auto IPlatform::swap_buffers (std::uint32_t window) const -> void
             format ("There is no window with id {}", window), LogLevel::Warn);
     }
 }
-
 
 auto IPlatform::window_should_close (std::uint32_t id) const -> Expected<bool>
 {

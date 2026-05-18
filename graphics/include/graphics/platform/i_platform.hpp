@@ -30,7 +30,8 @@ struct IPlatform
     auto has_windows() const -> bool;
     auto poll_events() const -> void;
     auto swap_buffers (std::uint32_t window) const -> void;
-    auto window_should_close (std::uint32_t window) const -> core::Expected<bool>;
+    auto window_should_close (std::uint32_t window) const
+        -> core::Expected<bool>;
 
   protected:
     virtual auto create_backend_window (const window::WindowDesc&) const
