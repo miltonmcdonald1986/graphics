@@ -1,6 +1,15 @@
 #include "platform_sdl2.hpp"
 
+#include <memory>
+#include <cstdio>
+
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_error.h>
+
+#include <graphics/core/diagnostic.hpp>
+#include <graphics/core/diagnostic_category.hpp>
+#include <graphics/core/expected.hpp>
+#include <graphics/core/log_level.hpp>
 
 namespace graphics::platform
 {

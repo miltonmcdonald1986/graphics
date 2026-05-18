@@ -13,7 +13,6 @@ namespace
 
 using graphics::core::Expected;
 using graphics::platform::create_platform_glfw;
-using graphics::platform::create_platform_sdl2;
 using graphics::platform::PlatformPtr;
 
 auto create_platform_default() -> Expected<PlatformPtr>
