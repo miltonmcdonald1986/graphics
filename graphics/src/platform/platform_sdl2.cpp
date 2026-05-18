@@ -43,8 +43,8 @@ PlatformSDL2::PlatformSDL2()
 {
     if (SDL_Init (SDL_INIT_VIDEO) == 0)
     {
-        log_diagnostic (DiagnosticCategory::Platform,
-            "Initialized SDL2", LogLevel::Info);
+        log_diagnostic (DiagnosticCategory::Platform, "Initialized SDL2",
+            LogLevel::Info);
 
         m_initialized = true;
     }
@@ -64,16 +64,15 @@ PlatformSDL2::~PlatformSDL2()
     {
         if (m_initialized)
         {
-            log_diagnostic (DiagnosticCategory::Platform,
-                "Shutting down SDL2", LogLevel::Info);
+            log_diagnostic (DiagnosticCategory::Platform, "Shutting down SDL2",
+                LogLevel::Info);
 
             SDL_Quit();
         }
         else
         {
             log_diagnostic (DiagnosticCategory::Platform,
-                "SDL2 is not initialized; skipping shutdown",
-                LogLevel::Warn);
+                "SDL2 is not initialized; skipping shutdown", LogLevel::Warn);
         }
     }
     catch (...)
@@ -91,8 +90,7 @@ auto PlatformSDL2::create_backend_window (const WindowDesc& desc) const
     return nullptr;
 }
 
-auto PlatformSDL2::destroy_backend_window (IWindow* window) const
-    -> void
+auto PlatformSDL2::destroy_backend_window (IWindow* window) const -> void
 {
     log_diagnostic (DiagnosticCategory::Platform,
         "PlatformSDL2::destroy_backend_window not implemented");
@@ -104,8 +102,7 @@ auto PlatformSDL2::poll_backend_events() const -> void
         "PlatformSDL2::poll_backend_events not implemented");
 }
 
-auto PlatformSDL2::swap_backend_buffers (window::IWindow* window) const
-    -> void
+auto PlatformSDL2::swap_backend_buffers (window::IWindow* window) const -> void
 {
     log_diagnostic (DiagnosticCategory::Platform,
         "PlatformSDL2::swap_backend_buffers not implemented");
