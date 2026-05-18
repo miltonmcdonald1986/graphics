@@ -32,7 +32,7 @@ jobs:
     - name: Verify Installation
       run: clang-tidy-22 --version
 
-    - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
+    - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config autoconf autoconf-archive automake libtoolize
             
     - uses: actions/checkout@v4
       with:
