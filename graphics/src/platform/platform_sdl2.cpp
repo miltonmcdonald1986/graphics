@@ -1,7 +1,7 @@
 #include "platform_sdl2.hpp"
 
-#include <memory>
 #include <cstdio>
+#include <memory>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
