@@ -16,7 +16,7 @@ jobs:
     steps:
     - run: sudo apt-get update
     
-    - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config autoconf autoconf-archive automake libtool
+    - run: sudo apt install libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config autoconf autoconf-archive automake libtool libltdl-dev
 
     - name: Add the Official LLVM APT repository
       run: |
