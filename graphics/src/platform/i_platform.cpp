@@ -200,7 +200,7 @@ auto IPlatform::destroy_window (uint32_t id) -> void
     free_list.push_back (handle.id);
     log_diagnostic (DiagnosticCategory::Platform,
         format ("Slot {} is now free", handle.id), LogLevel::Debug);
-    
+
     // Generate free list string for diagnostic purposes.
     if (!free_list.empty())
     {
