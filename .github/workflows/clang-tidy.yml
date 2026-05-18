@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run: sudo apt-get update
+    
     - name: Add the Official LLVM APT repository
       run: |
         wget https://apt.llvm.org/llvm.sh
