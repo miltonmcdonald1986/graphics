@@ -70,10 +70,7 @@ struct IPlatform::Impl
     std::vector<Slot> m_windows;
 };
 
-IPlatform::IPlatform() 
-    : impl(std::make_unique<Impl>())
-{
-}
+IPlatform::IPlatform() : impl (std::make_unique<Impl>()) {}
 
 IPlatform::~IPlatform() = default;
 
@@ -86,7 +83,7 @@ auto IPlatform::create_window (const WindowDesc& desc) -> Expected<uint32_t>
 
     auto& free_list = impl->m_free_list;
     auto& windows = impl->m_windows;
-    
+
     if (!free_list.empty())
     {
         id = free_list.back();
@@ -203,7 +200,8 @@ auto IPlatform::destroy_window (uint32_t id) -> void
     free_list.push_back (handle.id);
     log_diagnostic (DiagnosticCategory::Platform,
         format ("Slot {} is now free", handle.id), LogLevel::Debug);
-    log_diagnostic (DiagnosticCategory::Platform, format ("free ids: {}", free_list), LogLevel::Debug);
+    log_diagnostic (DiagnosticCategory::Platform,
+        format ("free ids: {}", free_list), LogLevel::Debug);
 }
 
 auto IPlatform::has_windows() const -> bool
