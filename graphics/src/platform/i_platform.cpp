@@ -200,8 +200,22 @@ auto IPlatform::destroy_window (uint32_t id) -> void
     free_list.push_back (handle.id);
     log_diagnostic (DiagnosticCategory::Platform,
         format ("Slot {} is now free", handle.id), LogLevel::Debug);
-    log_diagnostic (DiagnosticCategory::Platform,
-        format ("free ids: {}", free_list), LogLevel::Debug);
+    
+    // Generate free list string for diagnostic purposes.
+    if (!free_list.empty())
+    {
+        std::string ids = "free ids: [";
+        ids += " ";
+        ids += std::to_string (free_list[0]);
+        for (int count = 1; count < free_list.size(); ++count)
+        {
+            ids += ", ";
+            ids += std::to_string (free_list[count]);
+        }
+        ids += " ]";
+
+        log_diagnostic (DiagnosticCategory::Platform, ids, LogLevel::Debug);
+    }
 }
 
 auto IPlatform::has_windows() const -> bool
