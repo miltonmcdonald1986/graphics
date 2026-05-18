@@ -39,7 +39,7 @@ struct IPlatform
     /// \brief Retrieve all currently active window IDs.
     /// \return Vector of valid window IDs.
     auto get_all_window_ids() const -> std::vector<std::uint32_t>;
-    
+
     /// \brief Check whether any windows are currently active.
     /// \return True if at least one window exists.
     auto has_windows() const -> bool;
@@ -70,14 +70,14 @@ struct IPlatform
     /// \brief Backend-specific window destruction.
     virtual auto destroy_backend_window (window::IWindow* window) const
         -> void = 0;
-    
+
     /// \brief Backend-specific event polling.
     virtual auto poll_backend_events() const -> void = 0;
 
     /// \brief Backend-specific buffer swap.
     virtual auto swap_backend_buffers (window::IWindow* window) const
         -> void = 0;
-    
+
     /// \brief Backend-specific close-request query.
     virtual auto window_backend_should_close (window::IWindow* window) const
         -> core::Expected<bool> = 0;
@@ -85,7 +85,7 @@ struct IPlatform
   private:
     /// \brief Internal implementation details (PIMPL).
     struct Impl;
-    
+
     /// \brief Pointer to internal implementation.
     std::unique_ptr<Impl> impl;
 };
