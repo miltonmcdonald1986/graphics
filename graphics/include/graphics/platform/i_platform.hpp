@@ -59,26 +59,30 @@ struct IPlatform
 
   protected:
     /// \brief Construct the platform interface.
-    ///
-    /// Initializes internal state but does not create backend resources.
     IPlatform();
 
-    /// \brief Backend-specific window destruction.
+    /// \brief Create a backend-specific window.
+    /// \param desc Window creation parameters.
+    /// \return Newly created backend window instance.
     virtual auto create_backend_window (const window::WindowDesc&) const
         -> std::unique_ptr<window::IWindow> = 0;
 
-    /// \brief Backend-specific window destruction.
+    /// \brief Destroy a backend-specific window.
+    /// \param window Pointer to the backend window to destroy.
     virtual auto destroy_backend_window (window::IWindow* window) const
         -> void = 0;
 
-    /// \brief Backend-specific event polling.
+    /// \brief Poll backend-specific events.
     virtual auto poll_backend_events() const -> void = 0;
 
-    /// \brief Backend-specific buffer swap.
+    /// \brief Swap buffers for a backend-specific window.
+    /// \param window Pointer to the backend window.
     virtual auto swap_backend_buffers (window::IWindow* window) const
         -> void = 0;
 
-    /// \brief Backend-specific close-request query.
+    /// \brief Query whether a backend-specific window should close.
+    /// \param window Pointer to the backend window.
+    /// \return True if the window requested closure.
     virtual auto window_backend_should_close (window::IWindow* window) const
         -> core::Expected<bool> = 0;
 
