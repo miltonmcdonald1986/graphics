@@ -7,7 +7,6 @@
 
 #include <graphics/core/status.hpp>
 #include <graphics/platform/backend.hpp>
-#include <graphics/platform/slot.hpp>
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
@@ -21,7 +20,7 @@ namespace graphics::platform
 struct IPlatform
 {
   public:
-    virtual ~IPlatform() = default;
+    virtual ~IPlatform();
 
     auto create_window (const window::WindowDesc& desc)
         -> core::Expected<std::uint32_t>;
@@ -33,6 +32,7 @@ struct IPlatform
     auto window_should_close (std::uint32_t window) const -> core::Expected<bool>;
 
   protected:
+    IPlatform();
     virtual auto create_backend_window (const window::WindowDesc&) const
         -> std::unique_ptr<window::IWindow> = 0;
     virtual auto destroy_backend_window (window::IWindow* window) const
@@ -44,8 +44,8 @@ struct IPlatform
         -> core::Expected<bool> = 0;
 
   private:
-    std::vector<std::uint32_t> m_free_list;
-    std::vector<Slot> m_windows;
+    struct Impl;
+    std::unique_ptr<Impl> impl;
 };
 
 /// \brief Creates a platform backend instance.
