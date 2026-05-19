@@ -28,7 +28,14 @@ jobs:
       with:
         submodules: recursive
 
-    - run: ./external/vcpkg/bootstrap-vcpkg.sh
+    - name: Bootstrap vcpkg
+      env:
+          VCPKG_FORCE_SYSTEM_BINARIES: 1
+          VCPKG_DOWNLOAD_TOOL: aria2
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y aria2
+        ./external/vcpkg/bootstrap-vcpkg.sh
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
