@@ -1,7 +1,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <format>
-#include <utility>
+#include <memory>
 
 #include <graphics/core/expected.hpp>
 #include <graphics/core/log_level.hpp>
@@ -32,12 +32,14 @@ auto main() -> int
             return 1;
         }
 
-        WindowDesc desc{.width = 800,
-            .height = 600,
+        const int width = 800;
+        const int height = 600;
+        WindowDesc desc{.width = width,
+            .height = height,
             .title = "Window1",
             .fullscreen = false};
 
-        Expected<uint32_t> win1 = platform->create_window (desc);
+        const Expected<uint32_t> win1 = platform->create_window (desc);
         if (!win1)
         {
             log_message (LogLevel::Error, "Failed to create window");
@@ -45,7 +47,7 @@ auto main() -> int
         }
 
         desc.title = "Window2";
-        Expected<uint32_t> win2 = platform->create_window (desc);
+        const Expected<uint32_t> win2 = platform->create_window (desc);
         if (!win2)
         {
             log_message (LogLevel::Error, "Failed to create window");

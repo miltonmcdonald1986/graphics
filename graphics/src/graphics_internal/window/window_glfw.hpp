@@ -13,13 +13,19 @@ namespace graphics::window
 class WindowGLFW final : public IWindow
 {
   public:
-    WindowGLFW (const WindowDesc& desc);
+    explicit WindowGLFW (const WindowDesc& desc);
     ~WindowGLFW() override;
 
-    auto should_close() const -> bool override;
+    WindowGLFW (const WindowGLFW&) = delete;
+    WindowGLFW& operator= (const WindowGLFW&) = delete;
 
-    auto get_glfw_window() const -> GLFWwindow*;
-    auto is_initialized() const -> bool;
+    WindowGLFW (WindowGLFW&&) = delete;
+    WindowGLFW& operator= (WindowGLFW&&) = delete;
+
+    [[nodiscard]] auto should_close() const -> bool override;
+
+    [[nodiscard]] auto get_glfw_window() const -> GLFWwindow*;
+    [[nodiscard]] auto is_initialized() const -> bool;
 
   private:
     bool m_should_close{false};

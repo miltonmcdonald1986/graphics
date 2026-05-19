@@ -13,7 +13,7 @@ struct IWindow
   public:
     virtual ~IWindow() = default;
 
-    virtual auto should_close() const -> bool = 0;
+    [[nodiscard]] virtual auto should_close() const -> bool = 0;
 };
 
 } // namespace graphics::window

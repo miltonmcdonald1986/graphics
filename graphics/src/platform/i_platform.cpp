@@ -1,11 +1,17 @@
 #include <graphics/platform/i_platform.hpp>
 
 #include <algorithm>
+#include <cstdint>
 #include <format>
 #include <optional>
 
+#include <graphics/core/diagnostic.hpp>
+#include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/expected.hpp>
+#include <graphics/core/log_level.hpp>
 #include <graphics/platform/backend.hpp>
+#include <graphics/window/i_window.hpp>
+#include <graphics/window/window_desc.hpp>
 
 #include <graphics_internal/platform/slot.hpp>
 
@@ -33,6 +39,8 @@ struct Handle
     uint32_t gen{};
 };
 
+constexpr uint32_t INDEX_BITS = 16;
+
 auto create_platform_default() -> unique_ptr<IPlatform>
 {
     return create_platform_glfw();
@@ -40,7 +48,7 @@ auto create_platform_default() -> unique_ptr<IPlatform>
 
 auto pack_handle (uint32_t id, uint32_t gen) -> uint32_t
 {
-    uint32_t packed = (gen << 16) | id;
+    uint32_t packed = (gen << INDEX_BITS) | id;
     log_diagnostic (DiagnosticCategory::Platform,
         format ("packed (id,gen)=({},{}) to {}", id, gen, packed),
         LogLevel::Trace);
@@ -50,7 +58,7 @@ auto pack_handle (uint32_t id, uint32_t gen) -> uint32_t
 
 auto unpack_handle (uint32_t handle) -> Handle
 {
-    Handle unpacked{.id = handle & 0xFFFF, .gen = handle >> 16};
+    Handle unpacked{.id = handle & 0xFFFF, .gen = handle >> INDEX_BITS};
     log_diagnostic (DiagnosticCategory::Platform,
         format ("unpacked {} to (id,gen)=({},{})", handle, unpacked.id,
             unpacked.gen),
@@ -241,20 +249,20 @@ auto IPlatform::swap_buffers (std::uint32_t window) const -> void
     }
 }
 
-auto IPlatform::window_should_close (std::uint32_t id) const -> Expected<bool>
+auto IPlatform::window_should_close (std::uint32_t win_id) const -> Expected<bool>
 {
     auto& windows = impl->m_windows;
-    uint32_t raw_id = unpack_handle (id).id;
+    uint32_t raw_id = unpack_handle (win_id).id;
     if (windows.size() <= raw_id)
         return core::create_unexpected (core::DiagnosticCategory::Platform,
-            format ("There is no window with id {}", id), LogLevel::Warn);
+            format ("There is no window with id {}", win_id), LogLevel::Warn);
 
     const std::unique_ptr<IWindow>& window =
-        windows.at (unpack_handle (id).id).window;
+        windows.at (unpack_handle (win_id).id).window;
     if (!window)
     {
         return core::create_unexpected (core::DiagnosticCategory::Platform,
-            format ("There is no window with id {}", id), LogLevel::Warn);
+            format ("There is no window with id {}", win_id), LogLevel::Warn);
     }
 
     return window_backend_should_close (window.get());

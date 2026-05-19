@@ -10,7 +10,7 @@ struct WindowDesc
 {
     int width{};
     int height{};
-    std::string title{};
+    std::string title;
     bool fullscreen{};
 };
 

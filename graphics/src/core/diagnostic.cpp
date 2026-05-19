@@ -1,6 +1,7 @@
 #include <graphics/core/diagnostic.hpp>
 
 #include <format>
+#include <source_location>
 #include <string>
 
 #include <graphics/core/diagnostic_category.hpp>

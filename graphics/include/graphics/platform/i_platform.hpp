@@ -34,15 +34,15 @@ struct IPlatform
 
     /// \brief Destroy a previously created window.
     /// \param id Window ID to destroy.
-    auto destroy_window (std::uint32_t id) -> void;
+    auto destroy_window (std::uint32_t win_id) -> void;
 
     /// \brief Retrieve all currently active window IDs.
     /// \return Vector of valid window IDs.
-    auto get_all_window_ids() const -> std::vector<std::uint32_t>;
+    [[nodiscard]] auto get_all_window_ids() const -> std::vector<std::uint32_t>;
 
     /// \brief Check whether any windows are currently active.
     /// \return True if at least one window exists.
-    auto has_windows() const -> bool;
+    [[nodiscard]] auto has_windows() const -> bool;
 
     /// \brief Poll backend-specific events (input, window messages, etc.).
     auto poll_events() const -> void;
@@ -54,7 +54,7 @@ struct IPlatform
     /// \brief Query whether the specified window should close.
     /// \param window Window ID.
     /// \return True if the window requested closure.
-    auto window_should_close (std::uint32_t window) const
+    [[nodiscard]] auto window_should_close (std::uint32_t win_id) const
         -> core::Expected<bool>;
 
   protected:
@@ -64,7 +64,7 @@ struct IPlatform
     /// \brief Create a backend-specific window.
     /// \param desc Window creation parameters.
     /// \return Newly created backend window instance.
-    virtual auto create_backend_window (const window::WindowDesc&) const
+    [[nodiscard]] virtual auto create_backend_window (const window::WindowDesc&) const
         -> std::unique_ptr<window::IWindow> = 0;
 
     /// \brief Destroy a backend-specific window.
