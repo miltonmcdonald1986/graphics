@@ -8,6 +8,11 @@
 namespace graphics::window
 {
 
+/// @brief Interface representing a platform window.
+///
+/// This abstract base class defines the minimal API required for window
+/// backends. Implementations provide backend‑specific behavior for querying
+/// window state, handling close requests, and integrating with the platform.
 struct IWindow
 {
   public:
