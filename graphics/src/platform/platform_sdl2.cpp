@@ -84,7 +84,7 @@ PlatformSDL2::~PlatformSDL2()
     }
 }
 
-auto PlatformSDL2::create_backend_window (const WindowDesc& desc) const
+auto PlatformSDL2::create_backend_window (const WindowDesc& /*desc*/) const
     -> unique_ptr<IWindow>
 {
     log_diagnostic (DiagnosticCategory::Platform,
@@ -93,7 +93,7 @@ auto PlatformSDL2::create_backend_window (const WindowDesc& desc) const
     return nullptr;
 }
 
-auto PlatformSDL2::destroy_backend_window (IWindow* window) const -> void
+auto PlatformSDL2::destroy_backend_window (IWindow* /*window*/) const -> void
 {
     log_diagnostic (DiagnosticCategory::Platform,
         "PlatformSDL2::destroy_backend_window not implemented");
@@ -105,13 +105,13 @@ auto PlatformSDL2::poll_backend_events() const -> void
         "PlatformSDL2::poll_backend_events not implemented");
 }
 
-auto PlatformSDL2::swap_backend_buffers (window::IWindow* window) const -> void
+auto PlatformSDL2::swap_backend_buffers (window::IWindow* /*window*/) const -> void
 {
     log_diagnostic (DiagnosticCategory::Platform,
         "PlatformSDL2::swap_backend_buffers not implemented");
 }
 
-auto PlatformSDL2::window_backend_should_close (IWindow* window) const
+auto PlatformSDL2::window_backend_should_close (IWindow* /*window*/) const
     -> Expected<bool>
 {
     return create_unexpected (DiagnosticCategory::Platform,

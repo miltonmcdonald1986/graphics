@@ -8,9 +8,12 @@ namespace graphics::window
 {
 
 WindowGLFW::WindowGLFW (const WindowDesc& desc)
+    : m_window (glfwCreateWindow (desc.width,
+          desc.height,
+          desc.title.c_str(),
+          desc.fullscreen ? glfwGetPrimaryMonitor() : nullptr,
+          nullptr))
 {
-    m_window = glfwCreateWindow (desc.width, desc.height, desc.title.c_str(),
-        desc.fullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 }
 
 WindowGLFW::~WindowGLFW() { m_window = nullptr; }
