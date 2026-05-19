@@ -105,7 +105,8 @@ auto PlatformSDL2::poll_backend_events() const -> void
         "PlatformSDL2::poll_backend_events not implemented");
 }
 
-auto PlatformSDL2::swap_backend_buffers (window::IWindow* /*window*/) const -> void
+auto PlatformSDL2::swap_backend_buffers (window::IWindow* /*window*/) const
+    -> void
 {
     log_diagnostic (DiagnosticCategory::Platform,
         "PlatformSDL2::swap_backend_buffers not implemented");
