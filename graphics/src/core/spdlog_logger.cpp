@@ -19,6 +19,8 @@ SpdlogLogger::SpdlogLogger()
 #else
     m_logger->set_level (spdlog::level::err);
 #endif
+
+    m_logger->set_pattern ("%v");
 }
 
 auto SpdlogLogger::log (LogLevel level, std::string_view message) -> void

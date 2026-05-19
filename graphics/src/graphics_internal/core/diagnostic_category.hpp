@@ -8,7 +8,7 @@
 namespace graphics::core
 {
 
-	auto translate_diagnostic_category_to_string (DiagnosticCategory category)
+auto translate_diagnostic_category_to_string (DiagnosticCategory category)
     -> std::string;
 
 } // namespace graphics::core

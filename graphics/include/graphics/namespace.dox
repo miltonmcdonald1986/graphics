@@ -96,3 +96,49 @@ namespace graphics;
  * \see graphics::core
  */
  namespace graphics::platform;
+
+ /**
+ * \namespace graphics::window
+ * \brief Window abstraction subsystem of the graphics engine.
+ *
+ * The graphics::window namespace defines the engine-facing window API and the
+ * associated configuration structures used to describe and manage native
+ * windows. This subsystem provides a backend-agnostic interface for creating,
+ * controlling, and querying window state, while delegating platform-specific
+ * behavior to implementations in graphics::platform.
+ *
+ * # Responsibilities
+ *
+ * ## Window Interface
+ * - IWindow — abstract interface representing an engine window
+ *
+ * The window interface defines the operations required by higher-level systems,
+ * including querying window size and state, handling visibility and focus, and
+ * interacting with the underlying platform window. All platform backends must
+ * provide a concrete implementation of this interface.
+ *
+ * ## Window Description
+ * - WindowDesc — configuration structure for window creation
+ *
+ * This structure encapsulates the parameters needed to create a window,
+ * including dimensions, title, display mode, and optional flags. It provides a
+ * consistent, engine-level description that is independent of any specific
+ * windowing backend.
+ *
+ * # Design Goals
+ * - Provide a stable, minimal API for window creation and management
+ * - Keep platform-specific window details isolated behind IWindow
+ * - Support multiple backend implementations without modifying engine code
+ * - Serve as the foundation for rendering, input, and event dispatch systems
+ *
+ * # Notes
+ * - All platform backends must implement IWindow.
+ * - Window creation is performed through the platform interface
+ *   (graphics::platform::i_platform).
+ * - Higher-level systems (rendering, input, diagnostics) depend on this
+ *   namespace for window lifecycle and state queries.
+ *
+ * \see graphics
+ * \see graphics::platform
+ */
+namespace graphics::window {}

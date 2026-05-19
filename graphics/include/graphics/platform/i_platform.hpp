@@ -3,9 +3,12 @@
 
 #include <memory>
 #include <optional>
+#include <vector>
 
 #include <graphics/core/status.hpp>
 #include <graphics/platform/backend.hpp>
+#include <graphics/window/i_window.hpp>
+#include <graphics/window/window_desc.hpp>
 
 namespace graphics::platform
 {
@@ -17,21 +20,80 @@ namespace graphics::platform
 struct IPlatform
 {
   public:
-    virtual ~IPlatform() = default;
+    /// \brief Interface for platform backends.
+    ///
+    /// Defines the minimal API required for platform initialization,
+    /// shutdown, and window/event management.
+    virtual ~IPlatform();
+
+    /// \brief Create a new window using the backend implementation.
+    /// \param desc Window creation parameters.
+    /// \return Window ID on success, or a Diagnostic on failure.
+    auto create_window (const window::WindowDesc& desc)
+        -> core::Expected<std::uint32_t>;
+
+    /// \brief Destroy a previously created window.
+    /// \param win_id Window ID to destroy.
+    auto destroy_window (std::uint32_t win_id) -> void;
+
+    /// \brief Retrieve all currently active window IDs.
+    /// \return Vector of valid window IDs.
+    [[nodiscard]] auto get_all_window_ids() const -> std::vector<std::uint32_t>;
+
+    /// \brief Check whether any windows are currently active.
+    /// \return True if at least one window exists.
+    [[nodiscard]] auto has_windows() const -> bool;
+
+    /// \brief Poll backend-specific events (input, window messages, etc.).
+    auto poll_events() const -> void;
+
+    /// \brief Swap buffers for the specified window.
+    /// \param window Window ID.
+    auto swap_buffers (std::uint32_t window) const -> void;
+
+    /// \brief Query whether the specified window should close.
+    /// \param win_id Window ID.
+    /// \return True if the window requested closure.
+    [[nodiscard]] auto window_should_close (std::uint32_t win_id) const
+        -> core::Expected<bool>;
+
+  protected:
+    /// \brief Construct the platform interface.
+    IPlatform();
+
+    /// \brief Create a backend-specific window.
+    /// \param desc Window creation parameters.
+    /// \return Newly created backend window instance.
+    [[nodiscard]] virtual auto create_backend_window (
+        const window::WindowDesc& desc
+    ) const -> std::unique_ptr<window::IWindow> = 0;
+
+    /// \brief Destroy a backend-specific window.
+    /// \param window Pointer to the backend window to destroy.
+    virtual auto destroy_backend_window (window::IWindow* window) const
+        -> void = 0;
+
+    /// \brief Poll backend-specific events.
+    virtual auto poll_backend_events() const -> void = 0;
+
+    /// \brief Swap buffers for a backend-specific window.
+    /// \param window Pointer to the backend window.
+    virtual auto swap_backend_buffers (window::IWindow* window) const
+        -> void = 0;
+
+    /// \brief Query whether a backend-specific window should close.
+    /// \param window Pointer to the backend window.
+    /// \return True if the window requested closure.
+    virtual auto window_backend_should_close (window::IWindow* window) const
+        -> core::Expected<bool> = 0;
+
+  private:
+    /// \brief Internal implementation details (PIMPL).
+    struct Impl;
+
+    /// \brief Pointer to internal implementation.
+    std::unique_ptr<Impl> impl;
 };
-
-/// \brief Owning pointer to an IPlatform implementation.
-///
-/// PlatformPtr is the standard handle type returned by platform
-/// initialization functions. It owns the underlying platform backend
-/// instance via std::unique_ptr.
-using PlatformPtr = std::unique_ptr<IPlatform>;
-
-/// \brief Expected result type for platform creation.
-///
-/// ExpectedPlatformPtr represents either a valid PlatformPtr on success
-/// or a Diagnostic describing the failure.
-using ExpectedPlatformPtr = core::Expected<PlatformPtr>;
 
 /// \brief Creates a platform backend instance.
 ///
@@ -45,7 +107,7 @@ using ExpectedPlatformPtr = core::Expected<PlatformPtr>;
 /// \return ExpectedPlatformPtr containing either a valid PlatformPtr or a
 ///         Diagnostic describing the failure.
 auto create_platform (std::optional<Backend> o_backend = std::nullopt)
-    -> ExpectedPlatformPtr;
+    -> std::unique_ptr<IPlatform>;
 
 } // namespace graphics::platform
 
