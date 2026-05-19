@@ -17,10 +17,10 @@ class WindowGLFW final : public IWindow
     ~WindowGLFW() override;
 
     WindowGLFW (const WindowGLFW&) = delete;
-    WindowGLFW& operator= (const WindowGLFW&) = delete;
+    auto operator= (const WindowGLFW&) -> WindowGLFW& = delete;
 
     WindowGLFW (WindowGLFW&&) = delete;
-    WindowGLFW& operator= (WindowGLFW&&) = delete;
+    auto operator= (WindowGLFW&&) -> WindowGLFW& = delete;
 
     [[nodiscard]] auto should_close() const -> bool override;
 

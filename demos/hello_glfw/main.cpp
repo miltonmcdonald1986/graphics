@@ -63,16 +63,16 @@ auto main() -> int
 
             // 3. Run game logic / ECS systems
 
-            for (uint32_t id : platform->get_all_window_ids())
+            for (uint32_t win_id : platform->get_all_window_ids())
             {
                 if (Expected<bool> should_close =
-                        platform->window_should_close (id))
+                        platform->window_should_close (win_id))
                 {
                     if (should_close.has_value())
                     {
                         if (should_close.value())
                         {
-                            platform->destroy_window (id);
+                            platform->destroy_window (win_id);
                         }
                     }
                     else
@@ -80,7 +80,7 @@ auto main() -> int
                         log_message (LogLevel::Warn,
                             format ("It's not clear whether or not window {} "
                                     "should be closed",
-                                id));
+                                win_id));
                     }
                 }
                 else
@@ -89,7 +89,7 @@ auto main() -> int
                     // platform->render_on_window (id);
 
                     //// 5. Swap buffers
-                    platform->swap_buffers (id);
+                    platform->swap_buffers (win_id);
                 }
             }
         }

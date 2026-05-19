@@ -3,7 +3,10 @@
 #include <algorithm>
 #include <cstdint>
 #include <format>
+#include <memory>
 #include <optional>
+#include <string>
+#include <vector>
 
 #include <graphics/core/diagnostic.hpp>
 #include <graphics/core/diagnostic_category.hpp>
@@ -39,18 +42,19 @@ struct Handle
     uint32_t gen{};
 };
 
-constexpr uint32_t INDEX_BITS = 16;
+static constexpr uint32_t INDEX_BITS = 16;
+static constexpr uint32_t INDEX_MASK = (1u << INDEX_BITS) - 1u;
 
 auto create_platform_default() -> unique_ptr<IPlatform>
 {
     return create_platform_glfw();
 }
 
-auto pack_handle (uint32_t id, uint32_t gen) -> uint32_t
+auto pack_handle (uint32_t index, uint32_t gen) -> uint32_t
 {
-    uint32_t packed = (gen << INDEX_BITS) | id;
+    uint32_t packed = (gen << INDEX_BITS) | index;
     log_diagnostic (DiagnosticCategory::Platform,
-        format ("packed (id,gen)=({},{}) to {}", id, gen, packed),
+        format ("packed (index,gen)=({},{}) to {}", index, gen, packed),
         LogLevel::Trace);
 
     return packed;
@@ -58,9 +62,9 @@ auto pack_handle (uint32_t id, uint32_t gen) -> uint32_t
 
 auto unpack_handle (uint32_t handle) -> Handle
 {
-    Handle unpacked{.id = handle & 0xFFFF, .gen = handle >> INDEX_BITS};
+    Handle unpacked{.id = handle & INDEX_MASK, .gen = handle >> INDEX_BITS};
     log_diagnostic (DiagnosticCategory::Platform,
-        format ("unpacked {} to (id,gen)=({},{})", handle, unpacked.id,
+        format ("unpacked {} to (index,gen)=({},{})", handle, unpacked.id,
             unpacked.gen),
         LogLevel::Trace);
 
@@ -84,7 +88,7 @@ IPlatform::~IPlatform() = default;
 
 auto IPlatform::create_window (const WindowDesc& desc) -> Expected<uint32_t>
 {
-    uint32_t id;
+    uint32_t win_id{};
 
     log_diagnostic (DiagnosticCategory::Platform, "Creating window",
         LogLevel::Debug);
@@ -94,24 +98,24 @@ auto IPlatform::create_window (const WindowDesc& desc) -> Expected<uint32_t>
 
     if (!free_list.empty())
     {
-        id = free_list.back();
+        win_id = free_list.back();
         free_list.pop_back();
 
         log_diagnostic (DiagnosticCategory::Platform,
-            format ("Re-using slot {}", id), LogLevel::Debug);
+            format ("Re-using slot {}", win_id), LogLevel::Debug);
     }
     else
     {
         // Otherwise grow the slot table
-        id = static_cast<uint32_t> (windows.size());
+        win_id = static_cast<uint32_t> (windows.size());
         windows.emplace_back(); // default Slot { nullptr, 0 }
 
         log_diagnostic (DiagnosticCategory::Platform,
-            format ("No free slots available. Creating slot {}", id),
+            format ("No free slots available. Creating slot {}", win_id),
             LogLevel::Debug);
     }
 
-    Slot& slot = windows[id];
+    Slot& slot = windows.at (win_id);
 
     // Backend-specific creation (GLFW, SDL2, Win32, etc.)
     slot.window = create_backend_window (desc);
@@ -119,17 +123,17 @@ auto IPlatform::create_window (const WindowDesc& desc) -> Expected<uint32_t>
     // If backend creation failed, restore slot to free list
     if (!slot.window)
     {
-        free_list.push_back (id);
+        free_list.push_back (win_id);
         return core::create_unexpected (core::DiagnosticCategory::Platform,
             "Failed to create backend window");
     }
 
     // Use the existing generation for this slot
     uint32_t gen = slot.generation;
-    uint32_t handle = pack_handle (id, gen);
+    uint32_t handle = pack_handle (win_id, gen);
 
     log_diagnostic (DiagnosticCategory::Platform,
-        format ("Created window with id {} and gen {}. Handle: {}", id, gen,
+        format ("Created window with id {} and gen {}. Handle: {}", win_id, gen,
             handle),
         LogLevel::Debug);
 
@@ -145,7 +149,7 @@ auto IPlatform::get_all_window_ids() const -> std::vector<uint32_t>
 
     for (uint32_t index = 0; index < windows.size(); ++index)
     {
-        const Slot& slot = windows[index];
+        const Slot& slot = windows.at (index);
 
         if (!slot.window)
             continue; // empty slot
@@ -156,9 +160,9 @@ auto IPlatform::get_all_window_ids() const -> std::vector<uint32_t>
     return result;
 }
 
-auto IPlatform::destroy_window (uint32_t id) -> void
+auto IPlatform::destroy_window (uint32_t win_id) -> void
 {
-    Handle handle{unpack_handle (id)};
+    Handle handle{unpack_handle (win_id)};
     auto& free_list = impl->m_free_list;
     auto& windows = impl->m_windows;
 
@@ -166,18 +170,18 @@ auto IPlatform::destroy_window (uint32_t id) -> void
     if (handle.id >= windows.size())
     {
         log_diagnostic (DiagnosticCategory::Platform,
-            format ("There is no slot with id {}", id), LogLevel::Warn);
+            format ("There is no slot with id {}", win_id), LogLevel::Warn);
 
         return;
     }
 
-    Slot& slot = windows[handle.id];
+    Slot& slot = windows.at (handle.id);
 
     // Validate slot
     if (!slot.window)
     {
         log_diagnostic (DiagnosticCategory::Platform,
-            format ("There is no window with id {}", id), LogLevel::Warn);
+            format ("There is no window with id {}", win_id), LogLevel::Warn);
 
         return;
     }
@@ -185,7 +189,7 @@ auto IPlatform::destroy_window (uint32_t id) -> void
     if (slot.generation != handle.gen)
     {
         log_diagnostic (DiagnosticCategory::Platform,
-            format ("Trying to destroy a window using a stale handle", id),
+            format ("Trying to destroy a window using a stale handle", win_id),
             LogLevel::Warn);
 
         return;
@@ -214,11 +218,11 @@ auto IPlatform::destroy_window (uint32_t id) -> void
     {
         std::string ids = "free ids: [";
         ids += " ";
-        ids += std::to_string (free_list[0]);
+        ids += std::to_string (free_list.front());
         for (int count = 1; count < free_list.size(); ++count)
         {
             ids += ", ";
-            ids += std::to_string (free_list[count]);
+            ids += std::to_string (free_list.at (count));
         }
         ids += " ]";
 
@@ -229,8 +233,8 @@ auto IPlatform::destroy_window (uint32_t id) -> void
 auto IPlatform::has_windows() const -> bool
 {
     auto& windows = impl->m_windows;
-    return std::any_of (windows.begin(), windows.end(),
-        [] (const Slot& slot) { return (slot.window != nullptr); });
+    return std::ranges::any_of (windows,
+        [] (const Slot& slot) -> bool { return (slot.window != nullptr); });
 }
 
 auto IPlatform::poll_events() const -> void { poll_backend_events(); }
@@ -249,13 +253,16 @@ auto IPlatform::swap_buffers (std::uint32_t window) const -> void
     }
 }
 
-auto IPlatform::window_should_close (std::uint32_t win_id) const -> Expected<bool>
+auto IPlatform::window_should_close (std::uint32_t win_id) const
+    -> Expected<bool>
 {
     auto& windows = impl->m_windows;
-    uint32_t raw_id = unpack_handle (win_id).id;
+    const uint32_t raw_id = unpack_handle (win_id).id;
     if (windows.size() <= raw_id)
+    {
         return core::create_unexpected (core::DiagnosticCategory::Platform,
             format ("There is no window with id {}", win_id), LogLevel::Warn);
+    }
 
     const std::unique_ptr<IWindow>& window =
         windows.at (unpack_handle (win_id).id).window;
