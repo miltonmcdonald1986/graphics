@@ -10,6 +10,7 @@
 #include <graphics/core/expected.hpp>
 #include <graphics/core/log_level.hpp>
 #include <graphics/window/i_window.hpp>
+#include <graphics/window/window_desc.hpp>
 
 #include "glfw_callbacks.hpp"
 #include <graphics_internal/window/window_glfw.hpp>
@@ -103,7 +104,7 @@ auto PlatformGLFW::create_backend_window (const window::WindowDesc& desc) const
 auto PlatformGLFW::destroy_backend_window (window::IWindow* window) const
     -> void
 {
-    if (WindowGLFW* window_glfw = static_cast<WindowGLFW*> (window))
+    if (auto* window_glfw = dynamic_cast<WindowGLFW*> (window))
     {
         if (GLFWwindow* glfw_window = window_glfw->get_glfw_window())
         {
@@ -129,7 +130,7 @@ auto PlatformGLFW::poll_backend_events() const -> void { glfwPollEvents(); }
 
 auto PlatformGLFW::swap_backend_buffers (window::IWindow* window) const -> void
 {
-    if (WindowGLFW* window_glfw = static_cast<WindowGLFW*> (window))
+    if (auto* window_glfw = dynamic_cast<WindowGLFW*> (window))
     {
         glfwSwapBuffers (window_glfw->get_glfw_window());
     }
@@ -143,7 +144,7 @@ auto PlatformGLFW::swap_backend_buffers (window::IWindow* window) const -> void
 auto PlatformGLFW::window_backend_should_close (window::IWindow* window) const
     -> Expected<bool>
 {
-    if (WindowGLFW* window_glfw = static_cast<WindowGLFW*> (window))
+    if (auto* window_glfw = dynamic_cast<WindowGLFW*> (window))
     {
         return glfwWindowShouldClose (window_glfw->get_glfw_window());
     }

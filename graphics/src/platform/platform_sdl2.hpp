@@ -19,8 +19,10 @@ class PlatformSDL2 final : public IPlatform
     PlatformSDL2 (PlatformSDL2&&) = delete;
     auto operator= (PlatformSDL2&&) -> PlatformSDL2& = delete;
 
-    auto create_backend_window (const window::WindowDesc& desc) const
-        -> std::unique_ptr<window::IWindow> override;
+  protected:
+    [[nodiscard]] auto create_backend_window (
+        const window::WindowDesc& desc
+    ) const -> std::unique_ptr<window::IWindow> override;
     auto destroy_backend_window (window::IWindow* window) const
         -> void override;
     auto poll_backend_events() const -> void override;

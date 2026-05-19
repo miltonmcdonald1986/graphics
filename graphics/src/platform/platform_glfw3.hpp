@@ -21,8 +21,10 @@ class PlatformGLFW final : public IPlatform
     PlatformGLFW (PlatformGLFW&&) = delete;
     auto operator= (PlatformGLFW&&) -> PlatformGLFW& = delete;
 
-    auto create_backend_window (const window::WindowDesc& desc) const
-        -> std::unique_ptr<window::IWindow> override;
+  protected:
+    [[nodiscard]] auto create_backend_window (
+        const window::WindowDesc& desc
+    ) const -> std::unique_ptr<window::IWindow> override;
 
     auto destroy_backend_window (window::IWindow* window) const
         -> void override;

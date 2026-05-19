@@ -2,6 +2,7 @@
 
 #include <cstdio>
 #include <memory>
+#include <string>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
@@ -10,6 +11,8 @@
 #include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/expected.hpp>
 #include <graphics/core/log_level.hpp>
+#include <graphics/window/i_window.hpp>
+#include <graphics/window/window_desc.hpp>
 
 using graphics::core::create_unexpected;
 using graphics::core::DiagnosticCategory;

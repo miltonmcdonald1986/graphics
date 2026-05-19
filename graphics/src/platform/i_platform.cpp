@@ -42,8 +42,8 @@ struct Handle
     uint32_t gen{};
 };
 
-static constexpr uint32_t INDEX_BITS = 16;
-static constexpr uint32_t INDEX_MASK = (1u << INDEX_BITS) - 1u;
+constexpr uint32_t INDEX_BITS = 16;
+constexpr uint32_t INDEX_MASK = (1U << INDEX_BITS) - 1U;
 
 auto create_platform_default() -> unique_ptr<IPlatform>
 {
@@ -152,7 +152,9 @@ auto IPlatform::get_all_window_ids() const -> std::vector<uint32_t>
         const Slot& slot = windows.at (index);
 
         if (!slot.window)
+        {
             continue; // empty slot
+        }
 
         result.push_back (pack_handle (index, slot.generation));
     }
