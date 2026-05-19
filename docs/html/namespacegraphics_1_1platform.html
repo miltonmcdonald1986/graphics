@@ -101,13 +101,6 @@ Classes</h2></td></tr>
 <tr class="memitem:IPlatform" id="r_IPlatform"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgraphics_1_1platform_1_1IPlatform.html">IPlatform</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for platform backends.  <a href="structgraphics_1_1platform_1_1IPlatform.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a7743d304b29903995700fbf29887bf77" id="r_a7743d304b29903995700fbf29887bf77"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7743d304b29903995700fbf29887bf77">PlatformPtr</a> = std::unique_ptr&lt;<a class="el" href="structgraphics_1_1platform_1_1IPlatform.html">IPlatform</a>&gt;</td></tr>
-<tr class="memdesc:a7743d304b29903995700fbf29887bf77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Owning pointer to an <a class="el" href="structgraphics_1_1platform_1_1IPlatform.html" title="Interface for platform backends.">IPlatform</a> implementation.  <br /></td></tr>
-<tr class="memitem:ae7d6b7d95a79977715dc5edf3285efe3" id="r_ae7d6b7d95a79977715dc5edf3285efe3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7d6b7d95a79977715dc5edf3285efe3">ExpectedPlatformPtr</a> = <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt;<a class="el" href="#a7743d304b29903995700fbf29887bf77">PlatformPtr</a>&gt;</td></tr>
-<tr class="memdesc:ae7d6b7d95a79977715dc5edf3285efe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expected result type for platform creation.  <br /></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a54007b07082dcd600a280c0c8d8e3c85" id="r_a54007b07082dcd600a280c0c8d8e3c85"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54007b07082dcd600a280c0c8d8e3c85">Backend</a> : std::uint8_t { <a class="el" href="#a54007b07082dcd600a280c0c8d8e3c85ab274032f1807b8cd2f7553d82555c73c">GLFW</a>
@@ -117,8 +110,8 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9ceb40fcca228eece16c8efe542dc1df" id="r_a9ceb40fcca228eece16c8efe542dc1df"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ceb40fcca228eece16c8efe542dc1df">create_platform</a> (std::optional&lt; <a class="el" href="#a54007b07082dcd600a280c0c8d8e3c85">Backend</a> &gt; o_backend=std::nullopt) -&gt; <a class="el" href="#ae7d6b7d95a79977715dc5edf3285efe3">ExpectedPlatformPtr</a></td></tr>
-<tr class="memdesc:a9ceb40fcca228eece16c8efe542dc1df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a platform backend instance.  <br /></td></tr>
+<tr class="memitem:a6c7612cadc4031f39193ed212390f4b8" id="r_a6c7612cadc4031f39193ed212390f4b8"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c7612cadc4031f39193ed212390f4b8">create_platform</a> (std::optional&lt; <a class="el" href="#a54007b07082dcd600a280c0c8d8e3c85">Backend</a> &gt; o_backend=std::nullopt) -&gt; std::unique_ptr&lt; <a class="el" href="structgraphics_1_1platform_1_1IPlatform.html">IPlatform</a> &gt;</td></tr>
+<tr class="memdesc:a6c7612cadc4031f39193ed212390f4b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a platform backend instance.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Platform abstraction layer of the graphics engine. </p>
@@ -154,42 +147,7 @@ Notes</h1>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacegraphics.html" title="Root namespace for the graphics engine.">graphics</a> </dd>
 <dd>
 <a class="el" href="namespacegraphics_1_1core.html" title="Core diagnostics, logging, and error-handling subsystem.">graphics::core</a> </dd></dl>
-</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="ae7d6b7d95a79977715dc5edf3285efe3" name="ae7d6b7d95a79977715dc5edf3285efe3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7d6b7d95a79977715dc5edf3285efe3">&#9670;&#160;</a></span>ExpectedPlatformPtr</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="#ae7d6b7d95a79977715dc5edf3285efe3">graphics::platform::ExpectedPlatformPtr</a> = <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt;<a class="el" href="#a7743d304b29903995700fbf29887bf77">PlatformPtr</a>&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Expected result type for platform creation. </p>
-<p><a class="el" href="#ae7d6b7d95a79977715dc5edf3285efe3" title="Expected result type for platform creation.">ExpectedPlatformPtr</a> represents either a valid <a class="el" href="#a7743d304b29903995700fbf29887bf77" title="Owning pointer to an IPlatform implementation.">PlatformPtr</a> on success or a Diagnostic describing the failure. </p>
-
-</div>
-</div>
-<a id="a7743d304b29903995700fbf29887bf77" name="a7743d304b29903995700fbf29887bf77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7743d304b29903995700fbf29887bf77">&#9670;&#160;</a></span>PlatformPtr</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="#a7743d304b29903995700fbf29887bf77">graphics::platform::PlatformPtr</a> = std::unique_ptr&lt;<a class="el" href="structgraphics_1_1platform_1_1IPlatform.html">IPlatform</a>&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Owning pointer to an <a class="el" href="structgraphics_1_1platform_1_1IPlatform.html" title="Interface for platform backends.">IPlatform</a> implementation. </p>
-<p><a class="el" href="#a7743d304b29903995700fbf29887bf77" title="Owning pointer to an IPlatform implementation.">PlatformPtr</a> is the standard handle type returned by platform initialization functions. It owns the underlying platform backend instance via std::unique_ptr. </p>
-
-</div>
-</div>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
 <a id="a54007b07082dcd600a280c0c8d8e3c85" name="a54007b07082dcd600a280c0c8d8e3c85"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a54007b07082dcd600a280c0c8d8e3c85">&#9670;&#160;</a></span>Backend</h2>
 
@@ -225,8 +183,8 @@ Notes</h1>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a9ceb40fcca228eece16c8efe542dc1df" name="a9ceb40fcca228eece16c8efe542dc1df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ceb40fcca228eece16c8efe542dc1df">&#9670;&#160;</a></span>create_platform()</h2>
+<a id="a6c7612cadc4031f39193ed212390f4b8" name="a6c7612cadc4031f39193ed212390f4b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c7612cadc4031f39193ed212390f4b8">&#9670;&#160;</a></span>create_platform()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -235,20 +193,20 @@ Notes</h1>
           <td class="memname">auto graphics::platform::create_platform </td>
           <td>(</td>
           <td class="paramtype">std::optional&lt; <a class="el" href="#a54007b07082dcd600a280c0c8d8e3c85">Backend</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>o_backend</em></span><span class="paramdefsep"> = </span><span class="paramdefval">std::nullopt</span></td><td>)</td>
-          <td> -&gt;  <a class="el" href="#ae7d6b7d95a79977715dc5edf3285efe3">ExpectedPlatformPtr</a></td>
+          <td> -&gt;  std::unique_ptr&lt; <a class="el" href="structgraphics_1_1platform_1_1IPlatform.html">IPlatform</a> &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Creates a platform backend instance. </p>
-<p>Attempts to construct an <a class="el" href="structgraphics_1_1platform_1_1IPlatform.html" title="Interface for platform backends.">IPlatform</a> implementation using the specified backend. If no backend is provided, the engine selects a default backend. On success, returns a <a class="el" href="#a7743d304b29903995700fbf29887bf77" title="Owning pointer to an IPlatform implementation.">PlatformPtr</a>. On failure, returns an Unexpected containing a Diagnostic.</p>
+<p>Attempts to construct an <a class="el" href="structgraphics_1_1platform_1_1IPlatform.html" title="Interface for platform backends.">IPlatform</a> implementation using the specified backend. If no backend is provided, the engine selects a default backend. On success, returns a PlatformPtr. On failure, returns an Unexpected containing a Diagnostic.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">o_backend</td><td>Optional backend selection. If std::nullopt is used, a default backend is chosen. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="#ae7d6b7d95a79977715dc5edf3285efe3" title="Expected result type for platform creation.">ExpectedPlatformPtr</a> containing either a valid <a class="el" href="#a7743d304b29903995700fbf29887bf77" title="Owning pointer to an IPlatform implementation.">PlatformPtr</a> or a Diagnostic describing the failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ExpectedPlatformPtr containing either a valid PlatformPtr or a Diagnostic describing the failure. </dd></dl>
 
 </div>
 </div>

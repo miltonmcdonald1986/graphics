@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['level_0',['level',['../structgraphics_1_1core_1_1Diagnostic.html#a50601df462f027fcd38df8dee3446fc4',1,'graphics::core::Diagnostic']]],
-  ['location_1',['location',['../structgraphics_1_1core_1_1Diagnostic.html#a6a58b9d085f1372047417a5109918b29',1,'graphics::core::Diagnostic']]]
+  ['fullscreen_0',['fullscreen',['../structgraphics_1_1window_1_1WindowDesc.html#adef144f2942d4ef5b40b3002163c95f8',1,'graphics::window::WindowDesc']]]
 ];

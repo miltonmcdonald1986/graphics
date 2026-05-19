@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['status_0',['Status',['../namespacegraphics_1_1core.html#a3fa03aa63837b909231d363a0c719b9e',1,'graphics::core']]]
+  ['unexpected_0',['Unexpected',['../namespacegraphics_1_1core.html#acc781da56f2a07c8c77d1f1025c2f11f',1,'graphics::core']]]
 ];

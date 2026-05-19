@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['level_0',['level',['../structgraphics_1_1core_1_1Diagnostic.html#a50601df462f027fcd38df8dee3446fc4',1,'graphics::core::Diagnostic']]],
-  ['location_1',['location',['../structgraphics_1_1core_1_1Diagnostic.html#a6a58b9d085f1372047417a5109918b29',1,'graphics::core::Diagnostic']]],
-  ['log_5fdiagnostic_2',['log_diagnostic',['../namespacegraphics_1_1core.html#ad8a00e712cec3107cf87aeb731f5bead',1,'graphics::core::log_diagnostic(const Diagnostic &amp;diagnostic) -&gt; void'],['../namespacegraphics_1_1core.html#ae77b6d6c21bd12f3b27adb35bf19dcf8',1,'graphics::core::log_diagnostic(DiagnosticCategory category, const std::string &amp;message, LogLevel level=LogLevel::Error, std::source_location location=std::source_location::current()) -&gt; void']]],
-  ['log_5fmessage_3',['log_message',['../namespacegraphics_1_1core.html#ad153273421c20e281e4a98321a350d10',1,'graphics::core']]],
-  ['logging_4',['Logging',['../namespacegraphics_1_1core.html#autotoc_md2',1,'']]],
-  ['loglevel_5',['LogLevel',['../namespacegraphics_1_1core.html#ac6a2e0d6ea98e362d789a9dbb965a06d',1,'graphics::core']]]
+  ['info_0',['Info',['../namespacegraphics_1_1core.html#ac6a2e0d6ea98e362d789a9dbb965a06da4059b0251f66a18cb56f544728796875',1,'graphics::core']]],
+  ['interface_1',['Interface',['../namespacegraphics_1_1platform.html#autotoc_md6',1,'Platform Interface'],['../namespacegraphics_1_1window.html#autotoc_md11',1,'Window Interface']]],
+  ['iplatform_2',['IPlatform',['../structgraphics_1_1platform_1_1IPlatform.html',1,'graphics::platform::IPlatform'],['../structgraphics_1_1platform_1_1IPlatform.html#ae17b3ac241073130956ccd078cd0d884',1,'graphics::platform::IPlatform::IPlatform()']]],
+  ['iwindow_3',['IWindow',['../structgraphics_1_1window_1_1IWindow.html',1,'graphics::window']]]
 ];

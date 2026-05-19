@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['unexpected_0',['Unexpected',['../namespacegraphics_1_1core.html#acc781da56f2a07c8c77d1f1025c2f11f',1,'graphics::core']]],
-  ['unknown_1',['Unknown',['../namespacegraphics_1_1core.html#a7a2a1416f5ec4e432afe8fe5667a9622a88183b946cc5f0e8c96b2e66e1c74a7e',1,'graphics::core']]]
+  ['title_0',['title',['../structgraphics_1_1window_1_1WindowDesc.html#a1a079762d156a82cef7e50647bb055af',1,'graphics::window::WindowDesc']]],
+  ['trace_1',['Trace',['../namespacegraphics_1_1core.html#ac6a2e0d6ea98e362d789a9dbb965a06dadd4ec0ac4e58f7c32a01244ae91150b1',1,'graphics::core']]]
 ];

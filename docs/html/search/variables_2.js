@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['message_0',['message',['../structgraphics_1_1core_1_1Diagnostic.html#a394cb90ce1eb013b3a354d00ae19dd58',1,'graphics::core::Diagnostic']]]
+  ['height_0',['height',['../structgraphics_1_1window_1_1WindowDesc.html#ad7a1e656998e6e0e4b86fa0c4dfb02f8',1,'graphics::window::WindowDesc']]]
 ];
