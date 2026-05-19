@@ -249,7 +249,8 @@ auto IPlatform::swap_buffers (std::uint32_t window) const -> void
     }
 }
 
-auto IPlatform::window_should_close (std::uint32_t win_id) const -> Expected<bool>
+auto IPlatform::window_should_close (std::uint32_t win_id) const
+    -> Expected<bool>
 {
     auto& windows = impl->m_windows;
     uint32_t raw_id = unpack_handle (win_id).id;
