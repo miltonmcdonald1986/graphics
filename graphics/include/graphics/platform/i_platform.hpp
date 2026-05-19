@@ -33,7 +33,7 @@ struct IPlatform
         -> core::Expected<std::uint32_t>;
 
     /// \brief Destroy a previously created window.
-    /// \param id Window ID to destroy.
+    /// \param win_id Window ID to destroy.
     auto destroy_window (std::uint32_t win_id) -> void;
 
     /// \brief Retrieve all currently active window IDs.
@@ -52,7 +52,7 @@ struct IPlatform
     auto swap_buffers (std::uint32_t window) const -> void;
 
     /// \brief Query whether the specified window should close.
-    /// \param window Window ID.
+    /// \param win_id Window ID.
     /// \return True if the window requested closure.
     [[nodiscard]] auto window_should_close (std::uint32_t win_id) const
         -> core::Expected<bool>;
@@ -65,7 +65,7 @@ struct IPlatform
     /// \param desc Window creation parameters.
     /// \return Newly created backend window instance.
     [[nodiscard]] virtual auto create_backend_window (
-        const window::WindowDesc&
+        const window::WindowDesc& desc
     ) const -> std::unique_ptr<window::IWindow> = 0;
 
     /// \brief Destroy a backend-specific window.
