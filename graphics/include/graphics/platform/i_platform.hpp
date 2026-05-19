@@ -64,8 +64,9 @@ struct IPlatform
     /// \brief Create a backend-specific window.
     /// \param desc Window creation parameters.
     /// \return Newly created backend window instance.
-    [[nodiscard]] virtual auto create_backend_window (const window::WindowDesc&) const
-        -> std::unique_ptr<window::IWindow> = 0;
+    [[nodiscard]] virtual auto create_backend_window (
+        const window::WindowDesc&
+    ) const -> std::unique_ptr<window::IWindow> = 0;
 
     /// \brief Destroy a backend-specific window.
     /// \param window Pointer to the backend window to destroy.
