@@ -1,5 +1,7 @@
 #include <internal/window/window_sdl2.hpp>
 
+#include <cstdint>
+
 #include <SDL2/SDL_video.h>
 
 #include <graphics/window/window_desc.hpp>

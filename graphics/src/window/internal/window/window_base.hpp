@@ -9,9 +9,9 @@ namespace graphics::window
 struct WindowBase : public IWindow
 {
   public:
-    virtual ~WindowBase () override = default;
+    ~WindowBase () override = default;
 
-    [[nodiscard]] auto should_close() const -> bool override final;
+    [[nodiscard]] auto should_close() const -> bool final;
 
   private:
     bool m_should_close{false};

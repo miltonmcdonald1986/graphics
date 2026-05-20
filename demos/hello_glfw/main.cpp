@@ -8,6 +8,7 @@
 #include <graphics/core/logging.hpp>
 #include <graphics/platform/backend.hpp>
 #include <graphics/platform/i_platform.hpp>
+#include <graphics/window/position.hpp>
 #include <graphics/window/window_desc.hpp>
 
 using graphics::core::Expected;
@@ -16,6 +17,7 @@ using graphics::core::LogLevel;
 using graphics::platform::Backend;
 using graphics::platform::create_platform;
 using graphics::platform::IPlatform;
+using graphics::window::Position;
 using graphics::window::WindowDesc;
 using std::format;
 using std::uint32_t;
@@ -32,11 +34,14 @@ auto main() -> int
             return 1;
         }
 
+        const int posX{100};
+        const int posY{100};
+        const Position position{ .x = posX, .y = posY };
         const int width = 800;
         const int height = 600;
         WindowDesc desc{.width = width,
             .height = height,
-            .position = {100, 100},
+            .position = position,
             .title = "Window1",
             .fullscreen = false};
 
@@ -47,6 +52,8 @@ auto main() -> int
             return 1;
         }
 
+        desc.position.x += 50;
+        desc.position.y += 50;
         desc.title = "Window2";
         const Expected<uint32_t> win2 = platform->create_window (desc);
         if (!win2)

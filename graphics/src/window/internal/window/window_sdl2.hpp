@@ -1,7 +1,7 @@
 #ifndef GRAPHICS_WINDOW_INTERNAL_WINDOW_SDL2_HPP
 #define GRAPHICS_WINDOW_INTERNAL_WINDOW_SDL2_HPP
 
-#include <graphics/window/i_window.hpp>
+#include <internal/window/window_base.hpp>
 
 #include <SDL2/SDL_video.h>
 
@@ -10,7 +10,7 @@
 namespace graphics::window
 {
 
-class WindowSDL2 final : public IWindow
+class WindowSDL2 final : public WindowBase
 {
   public:
     explicit WindowSDL2 (const WindowDesc& desc);
