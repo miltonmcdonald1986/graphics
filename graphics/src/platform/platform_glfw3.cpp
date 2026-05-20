@@ -1,4 +1,4 @@
-#include "platform_glfw3.hpp"
+#include "internal/platform_glfw3.hpp"
 
 #include <cstdio>
 #include <memory>
@@ -12,8 +12,8 @@
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
-#include "glfw_callbacks.hpp"
-#include <graphics_internal/window/window_glfw.hpp>
+#include "internal/glfw_callbacks.hpp"
+#include "internal/window_glfw.hpp"
 
 using graphics::core::create_unexpected;
 using graphics::core::DiagnosticCategory;

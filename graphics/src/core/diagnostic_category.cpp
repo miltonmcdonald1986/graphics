@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include <graphics_internal/core/diagnostic_category.hpp>
+#include "internal/diagnostic_category.hpp"
 
 namespace graphics::core
 {

@@ -4,7 +4,7 @@
 
 #include <graphics/core/log_level.hpp>
 
-#include <graphics_internal/core/i_logger.hpp>
+#include "internal/i_logger.hpp"
 
 namespace graphics::core
 {
