@@ -20,8 +20,8 @@ using graphics::core::DiagnosticCategory;
 using graphics::core::Expected;
 using graphics::core::log_diagnostic;
 using graphics::core::LogLevel;
-using graphics::window::WindowGLFW3;
 using graphics::window::IWindow;
+using graphics::window::WindowGLFW3;
 using std::make_unique;
 using std::unique_ptr;
 
