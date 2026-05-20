@@ -1,8 +1,8 @@
-#include "internal/i_logger.hpp"
+#include <internal/core/i_logger.hpp>
 
 #include <memory>
 
-#include "internal/spdlog_logger.hpp"
+#include <internal/core/spdlog_logger.hpp>
 
 namespace graphics::core
 {

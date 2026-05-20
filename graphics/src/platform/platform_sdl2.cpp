@@ -1,4 +1,4 @@
-#include "internal/platform_sdl2.hpp"
+#include <internal/platform/platform_sdl2.hpp>
 
 #include <cstdio>
 #include <memory>

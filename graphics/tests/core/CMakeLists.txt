@@ -15,7 +15,7 @@ if(graphics_ENABLE_TESTING)
 
     target_include_directories(graphics_core_tests
     PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../src
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../src/core
     )
 
     add_test(NAME graphics_core_tests COMMAND graphics_core_tests)

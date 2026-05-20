@@ -8,7 +8,27 @@
 #include <graphics/core/log_level.hpp>
 #include <graphics/core/logging.hpp>
 
-#include "internal/diagnostic_category.hpp"
+using graphics::core::DiagnosticCategory;
+
+namespace
+{
+
+auto translate_diagnostic_category_to_string (DiagnosticCategory category)
+    -> std::string
+{
+    switch (category)
+    {
+    case DiagnosticCategory::Platform:
+        return "Platform";
+    case DiagnosticCategory::Core:
+        return "Core";
+    case DiagnosticCategory::Unknown:
+    default:
+        return "Unknown";
+    }
+}
+
+} // namespace
 
 namespace graphics::core
 {

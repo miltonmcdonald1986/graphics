@@ -16,9 +16,9 @@
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
-#include "internal/platform_glfw3.hpp"
-#include "internal/platform_sdl2.hpp"
-#include "internal/slot.hpp"
+#include <internal/platform/platform_glfw3.hpp>
+#include <internal/platform/platform_sdl2.hpp>
+#include <internal/platform/slot.hpp>
 
 namespace
 {

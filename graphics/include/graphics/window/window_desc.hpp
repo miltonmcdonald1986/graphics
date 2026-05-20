@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "position.hpp"
+
 namespace graphics::window
 {
 
@@ -18,6 +20,9 @@ struct WindowDesc
 
     /// @brief Height of the window in pixels.
     int height{};
+
+    /// @brief Initial position of the window on the screen.
+    Position position{};
 
     /// @brief Title text displayed in the window's title bar.
     std::string title;
