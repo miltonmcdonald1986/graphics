@@ -36,7 +36,7 @@ auto main() -> int
 
         const int posX{100};
         const int posY{100};
-        const Position position{ .x = posX, .y = posY };
+        const Position position{.x = posX, .y = posY};
         const int width = 800;
         const int height = 600;
         WindowDesc desc{.width = width,

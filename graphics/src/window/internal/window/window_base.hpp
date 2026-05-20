@@ -9,7 +9,7 @@ namespace graphics::window
 struct WindowBase : public IWindow
 {
   public:
-    ~WindowBase () override = default;
+    ~WindowBase() override = default;
 
     [[nodiscard]] auto should_close() const -> bool final;
 
