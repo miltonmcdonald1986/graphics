@@ -52,8 +52,9 @@ auto main() -> int
             return 1;
         }
 
-        desc.position.x += 50;
-        desc.position.y += 50;
+        const int delta_pos = 50;
+        desc.position.x += delta_pos;
+        desc.position.y += delta_pos;
         desc.title = "Window2";
         const Expected<uint32_t> win2 = platform->create_window (desc);
         if (!win2)
