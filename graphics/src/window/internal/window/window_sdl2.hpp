@@ -1,0 +1,34 @@
+#ifndef GRAPHICS_WINDOW_INTERNAL_WINDOW_SDL2_HPP
+#define GRAPHICS_WINDOW_INTERNAL_WINDOW_SDL2_HPP
+
+#include <graphics/window/i_window.hpp>
+
+#include <SDL2/SDL_video.h>
+
+#include <graphics/window/window_desc.hpp>
+
+namespace graphics::window
+{
+
+class WindowSDL2 final : public IWindow
+{
+  public:
+    explicit WindowSDL2 (const WindowDesc& desc);
+    ~WindowSDL2() override;
+
+    WindowSDL2 (const WindowSDL2&) = delete;
+    auto operator= (const WindowSDL2&) -> WindowSDL2& = delete;
+
+    WindowSDL2 (WindowSDL2&&) = delete;
+    auto operator= (WindowSDL2&&) -> WindowSDL2& = delete;
+
+    [[nodiscard]] auto get_sdl2_window() const -> SDL_Window*;
+    [[nodiscard]] auto is_initialized() const -> bool;
+
+  private:
+    SDL_Window* m_window{nullptr};
+};
+
+} // namespace graphics::window
+
+#endif // GRAPHICS_WINDOW_INTERNAL_WINDOW_SDL2_HPP

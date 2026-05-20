@@ -36,6 +36,7 @@ auto main() -> int
         const int height = 600;
         WindowDesc desc{.width = width,
             .height = height,
+            .position = {100, 100},
             .title = "Window1",
             .fullscreen = false};
 

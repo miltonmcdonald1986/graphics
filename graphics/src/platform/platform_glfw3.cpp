@@ -1,4 +1,4 @@
-#include "internal/platform_glfw3.hpp"
+#include <internal/platform/platform_glfw3.hpp>
 
 #include <cstdio>
 #include <memory>
@@ -12,16 +12,16 @@
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
-#include "internal/glfw_callbacks.hpp"
-#include "internal/window_glfw.hpp"
+#include <internal/platform/glfw_callbacks.hpp>
+#include <internal/window/window_glfw3.hpp>
 
 using graphics::core::create_unexpected;
 using graphics::core::DiagnosticCategory;
 using graphics::core::Expected;
 using graphics::core::log_diagnostic;
 using graphics::core::LogLevel;
+using graphics::window::WindowGLFW3;
 using graphics::window::IWindow;
-using graphics::window::WindowGLFW;
 using std::make_unique;
 using std::unique_ptr;
 
@@ -89,7 +89,7 @@ PlatformGLFW::~PlatformGLFW()
 auto PlatformGLFW::create_backend_window (const window::WindowDesc& desc) const
     -> unique_ptr<IWindow>
 {
-    auto window = make_unique<WindowGLFW> (desc);
+    auto window = make_unique<WindowGLFW3> (desc);
     if (!window->is_initialized())
     {
         log_diagnostic (DiagnosticCategory::Platform,
@@ -104,7 +104,7 @@ auto PlatformGLFW::create_backend_window (const window::WindowDesc& desc) const
 auto PlatformGLFW::destroy_backend_window (window::IWindow* window) const
     -> void
 {
-    if (auto* window_glfw = dynamic_cast<WindowGLFW*> (window))
+    if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
     {
         if (GLFWwindow* glfw_window = window_glfw->get_glfw_window())
         {
@@ -130,7 +130,7 @@ auto PlatformGLFW::poll_backend_events() const -> void { glfwPollEvents(); }
 
 auto PlatformGLFW::swap_backend_buffers (window::IWindow* window) const -> void
 {
-    if (auto* window_glfw = dynamic_cast<WindowGLFW*> (window))
+    if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
     {
         glfwSwapBuffers (window_glfw->get_glfw_window());
     }
@@ -144,7 +144,7 @@ auto PlatformGLFW::swap_backend_buffers (window::IWindow* window) const -> void
 auto PlatformGLFW::window_backend_should_close (window::IWindow* window) const
     -> Expected<bool>
 {
-    if (auto* window_glfw = dynamic_cast<WindowGLFW*> (window))
+    if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
     {
         return glfwWindowShouldClose (window_glfw->get_glfw_window());
     }

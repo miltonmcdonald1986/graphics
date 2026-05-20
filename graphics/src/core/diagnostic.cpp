@@ -8,7 +8,7 @@
 #include <graphics/core/log_level.hpp>
 #include <graphics/core/logging.hpp>
 
-#include "internal/diagnostic_category.hpp"
+#include <internal/core/diagnostic_category.hpp>
 
 namespace graphics::core
 {

@@ -2,8 +2,6 @@
 
 #include <string>
 
-#include "internal/diagnostic_category.hpp"
-
 namespace graphics::core
 {
 
