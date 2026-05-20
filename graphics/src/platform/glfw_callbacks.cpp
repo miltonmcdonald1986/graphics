@@ -1,4 +1,4 @@
-#include "glfw_callbacks.hpp"
+#include "internal/glfw_callbacks.hpp"
 
 #include <format>
 

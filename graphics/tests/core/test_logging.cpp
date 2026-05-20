@@ -12,7 +12,7 @@
 
 #include <graphics/core/log_level.hpp>
 
-#include <graphics_internal/core/i_logger.hpp>
+#include <core/internal/i_logger.hpp>
 
 using graphics::core::get_logger;
 using graphics::core::ILogger;

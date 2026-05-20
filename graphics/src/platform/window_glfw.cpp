@@ -1,4 +1,4 @@
-#include <graphics_internal/window/window_glfw.hpp>
+#include "internal/window_glfw.hpp"
 
 #include <GLFW/glfw3.h>
 
