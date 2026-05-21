@@ -8,7 +8,7 @@ var annotated_dup =
         [ "IPlatform", "structgraphics_1_1platform_1_1IPlatform.html", "structgraphics_1_1platform_1_1IPlatform" ]
       ] ],
       [ "window", "namespacegraphics_1_1window.html", [
-        [ "IWindow", "structgraphics_1_1window_1_1IWindow.html", "structgraphics_1_1window_1_1IWindow" ],
+        [ "IWindow", "structgraphics_1_1window_1_1IWindow.html", null ],
         [ "Position", "structgraphics_1_1window_1_1Position.html", "structgraphics_1_1window_1_1Position" ],
         [ "WindowDesc", "structgraphics_1_1window_1_1WindowDesc.html", "structgraphics_1_1window_1_1WindowDesc" ]
       ] ]

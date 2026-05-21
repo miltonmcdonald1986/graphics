@@ -89,7 +89,7 @@ $(function(){initNavTree('structgraphics_1_1window_1_1IWindow.html','','structgr
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">graphics::window::IWindow Struct Reference<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+  <div class="headertitle"><div class="title">graphics::window::IWindow Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -97,46 +97,10 @@ $(function(){initNavTree('structgraphics_1_1window_1_1IWindow.html','','structgr
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="i__window_8hpp_source.html">i_window.hpp</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a3fd815167d2a9859c20ffdaeaffa210d" id="r_a3fd815167d2a9859c20ffdaeaffa210d"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fd815167d2a9859c20ffdaeaffa210d">should_close</a> () const -&gt; bool=0</td></tr>
-<tr class="memdesc:a3fd815167d2a9859c20ffdaeaffa210d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the window has received a request to close.  <br /></td></tr>
-</table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface representing a platform window. </p>
 <p>This abstract base class defines the minimal API required for window backends. Implementations provide backend‑specific behavior for querying window state, handling close requests, and integrating with the platform. </p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a3fd815167d2a9859c20ffdaeaffa210d" name="a3fd815167d2a9859c20ffdaeaffa210d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fd815167d2a9859c20ffdaeaffa210d">&#9670;&#160;</a></span>should_close()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual auto graphics::window::IWindow::should_close </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const -&gt;  bool</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Indicates whether the window has received a request to close. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if the window should close, false otherwise.</dd></dl>
-<p>This reports backend‑specific close requests (e.g., user clicking the close button, OS shutdown events, or platform‑specific window events). Implementations must not block; they should simply return the current close state. </p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>graphics/include/graphics/window/<a class="el" href="i__window_8hpp_source.html">i_window.hpp</a></li>
 </ul>
 </div><!-- contents -->

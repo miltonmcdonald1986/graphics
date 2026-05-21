@@ -88,8 +88,6 @@ var NAVTREEINDEX0 =
 "structgraphics_1_1platform_1_1IPlatform.html#ae4102cf0367672491170dd382b0aabd4":[1,0,0,1,0,7],
 "structgraphics_1_1window_1_1IWindow.html":[0,0,0,2,0],
 "structgraphics_1_1window_1_1IWindow.html":[1,0,0,2,0],
-"structgraphics_1_1window_1_1IWindow.html#a3fd815167d2a9859c20ffdaeaffa210d":[0,0,0,2,0,0],
-"structgraphics_1_1window_1_1IWindow.html#a3fd815167d2a9859c20ffdaeaffa210d":[1,0,0,2,0,0],
 "structgraphics_1_1window_1_1Position.html":[0,0,0,2,1],
 "structgraphics_1_1window_1_1Position.html":[1,0,0,2,1],
 "structgraphics_1_1window_1_1Position.html#a91d55fa50a62d3dcb67f4fd4a66f9045":[0,0,0,2,1,0],
