@@ -4,22 +4,29 @@
 #include <cstdint>
 #include <format>
 #include <memory>
+#include <string>
+#include <vector>
+
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_video.h>
 
 #include <graphics/core/diagnostic.hpp>
 #include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/expected.hpp>
+#include <graphics/core/log_level.hpp>
 #include <graphics/platform/i_platform.hpp>
 #include <graphics/window/window_desc.hpp>
+#include <graphics/window/i_window.hpp>
+
+#include "internal/platform/slot.hpp"
 
 using graphics::core::DiagnosticCategory;
 using graphics::core::Expected;
 using graphics::core::log_diagnostic;
 using graphics::core::LogLevel;
-using graphics::platform::IPlatform;
 using graphics::window::WindowDesc;
 using std::format;
 using std::uint32_t;
-using std::unique_ptr;
 using std::ranges::any_of;
 
 namespace

@@ -6,6 +6,8 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_video.h>
 
 #include <graphics/core/diagnostic.hpp>
 #include <graphics/core/diagnostic_category.hpp>
@@ -130,7 +132,7 @@ auto PlatformSDL2::destroy_backend_window (IWindow* window) const -> void
 auto PlatformSDL2::poll_backend_events() -> void
 {
     SDL_Event event;
-    while (SDL_PollEvent (&event))
+    while (SDL_PollEvent (&event) == 1)
     {
         switch (event.type)
         {
@@ -139,9 +141,9 @@ auto PlatformSDL2::poll_backend_events() -> void
             log_diagnostic (DiagnosticCategory::Platform,
                 "Received SDL_QUIT event", LogLevel::Info);
             // Global quit. Tell all windows to close
-            for (auto id : get_all_window_ids())
+            for (auto win_id : get_all_window_ids())
             {
-                set_window_should_close (id, true);
+                set_window_should_close (win_id, true);
             }
             break;
         }
@@ -150,10 +152,10 @@ auto PlatformSDL2::poll_backend_events() -> void
             if (event.window.event == SDL_WINDOWEVENT_CLOSE)
             {
                 // Find the specific window and mark it
-                for (auto id : get_all_window_ids())
+                for (auto win_id : get_all_window_ids())
                 {
                     if (auto* window =
-                            dynamic_cast<WindowSDL2*> (get_window_ptr (id)))
+                            dynamic_cast<WindowSDL2*> (get_window_ptr (win_id)))
                     {
                         if (SDL_GetWindowID (window->get_sdl2_window()) ==
                             event.window.windowID)
@@ -180,7 +182,7 @@ auto PlatformSDL2::set_backend_window_should_close (window::IWindow* window,
 {
     if (auto* window_sdl2 = dynamic_cast<WindowSDL2*> (window))
     {
-        window_sdl2->set_should_close (true);
+        window_sdl2->set_should_close (should_close);
     }
     else
     {
