@@ -102,38 +102,23 @@ $(function(){initNavTree('structgraphics_1_1platform_1_1IPlatform.html','','stru
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a17ed2b75cb01e616930e00aaf96a6aaa" id="r_a17ed2b75cb01e616930e00aaf96a6aaa"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17ed2b75cb01e616930e00aaf96a6aaa">~IPlatform</a> ()</td></tr>
 <tr class="memdesc:a17ed2b75cb01e616930e00aaf96a6aaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for platform backends.  <br /></td></tr>
-<tr class="memitem:a8c4b8839c2c3606644191c79f4a1393a" id="r_a8c4b8839c2c3606644191c79f4a1393a"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c4b8839c2c3606644191c79f4a1393a">create_window</a> (const <a class="el" href="structgraphics_1_1window_1_1WindowDesc.html">window::WindowDesc</a> &amp;desc) -&gt; <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt; std::uint32_t &gt;</td></tr>
-<tr class="memdesc:a8c4b8839c2c3606644191c79f4a1393a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new window using the backend implementation.  <br /></td></tr>
-<tr class="memitem:acc8ebd500943ecfb527d0360382d4b0c" id="r_acc8ebd500943ecfb527d0360382d4b0c"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc8ebd500943ecfb527d0360382d4b0c">destroy_window</a> (std::uint32_t win_id) -&gt; void</td></tr>
-<tr class="memdesc:acc8ebd500943ecfb527d0360382d4b0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a previously created window.  <br /></td></tr>
-<tr class="memitem:a1df74b6435c9061069476a3caff82371" id="r_a1df74b6435c9061069476a3caff82371"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1df74b6435c9061069476a3caff82371">get_all_window_ids</a> () const -&gt; std::vector&lt; std::uint32_t &gt;</td></tr>
-<tr class="memdesc:a1df74b6435c9061069476a3caff82371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve all currently active window IDs.  <br /></td></tr>
-<tr class="memitem:a44e4c671a355ddaf2f9524ff8b7a3372" id="r_a44e4c671a355ddaf2f9524ff8b7a3372"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44e4c671a355ddaf2f9524ff8b7a3372">has_windows</a> () const -&gt; bool</td></tr>
-<tr class="memdesc:a44e4c671a355ddaf2f9524ff8b7a3372"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether any windows are currently active.  <br /></td></tr>
-<tr class="memitem:abb0e7f620619e81f998d3c7733f9a387" id="r_abb0e7f620619e81f998d3c7733f9a387"><td class="memItemLeft" align="right" valign="top"><a id="abb0e7f620619e81f998d3c7733f9a387" name="abb0e7f620619e81f998d3c7733f9a387"></a>
-auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_events</b> () const -&gt; void</td></tr>
-<tr class="memdesc:abb0e7f620619e81f998d3c7733f9a387"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll backend-specific events (input, window messages, etc.). <br /></td></tr>
-<tr class="memitem:adc3f0860cfcab349fb9aa5ed12749b1f" id="r_adc3f0860cfcab349fb9aa5ed12749b1f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc3f0860cfcab349fb9aa5ed12749b1f">swap_buffers</a> (std::uint32_t window) const -&gt; void</td></tr>
-<tr class="memdesc:adc3f0860cfcab349fb9aa5ed12749b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap buffers for the specified window.  <br /></td></tr>
-<tr class="memitem:aacecd19e0b7f426d72b5f7aa935bbe30" id="r_aacecd19e0b7f426d72b5f7aa935bbe30"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aacecd19e0b7f426d72b5f7aa935bbe30">window_should_close</a> (std::uint32_t win_id) const -&gt; <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt; bool &gt;</td></tr>
-<tr class="memdesc:aacecd19e0b7f426d72b5f7aa935bbe30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query whether the specified window should close.  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae17b3ac241073130956ccd078cd0d884" id="r_ae17b3ac241073130956ccd078cd0d884"><td class="memItemLeft" align="right" valign="top"><a id="ae17b3ac241073130956ccd078cd0d884" name="ae17b3ac241073130956ccd078cd0d884"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>IPlatform</b> ()</td></tr>
-<tr class="memdesc:ae17b3ac241073130956ccd078cd0d884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the platform interface. <br /></td></tr>
-<tr class="memitem:a385a4fb724552a70339e9b5181ae3f4d" id="r_a385a4fb724552a70339e9b5181ae3f4d"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a385a4fb724552a70339e9b5181ae3f4d">create_backend_window</a> (const <a class="el" href="structgraphics_1_1window_1_1WindowDesc.html">window::WindowDesc</a> &amp;desc) const -&gt; std::unique_ptr&lt; <a class="el" href="structgraphics_1_1window_1_1IWindow.html">window::IWindow</a> &gt;=0</td></tr>
-<tr class="memdesc:a385a4fb724552a70339e9b5181ae3f4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a backend-specific window.  <br /></td></tr>
-<tr class="memitem:adfc6adf93c48245492aa893843c31f36" id="r_adfc6adf93c48245492aa893843c31f36"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfc6adf93c48245492aa893843c31f36">destroy_backend_window</a> (<a class="el" href="structgraphics_1_1window_1_1IWindow.html">window::IWindow</a> *window) const -&gt; void=0</td></tr>
-<tr class="memdesc:adfc6adf93c48245492aa893843c31f36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a backend-specific window.  <br /></td></tr>
-<tr class="memitem:a0fb2149a7d52c26b35a2687e64a7506d" id="r_a0fb2149a7d52c26b35a2687e64a7506d"><td class="memItemLeft" align="right" valign="top"><a id="a0fb2149a7d52c26b35a2687e64a7506d" name="a0fb2149a7d52c26b35a2687e64a7506d"></a>
-virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_events</b> () const -&gt; void=0</td></tr>
-<tr class="memdesc:a0fb2149a7d52c26b35a2687e64a7506d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll backend-specific events. <br /></td></tr>
-<tr class="memitem:ad72e415e2c4bbf9efacc3c206605982a" id="r_ad72e415e2c4bbf9efacc3c206605982a"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad72e415e2c4bbf9efacc3c206605982a">swap_backend_buffers</a> (<a class="el" href="structgraphics_1_1window_1_1IWindow.html">window::IWindow</a> *window) const -&gt; void=0</td></tr>
-<tr class="memdesc:ad72e415e2c4bbf9efacc3c206605982a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap buffers for a backend-specific window.  <br /></td></tr>
-<tr class="memitem:a66be29b4c26341021370d05ed8b41c7e" id="r_a66be29b4c26341021370d05ed8b41c7e"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66be29b4c26341021370d05ed8b41c7e">window_backend_should_close</a> (<a class="el" href="structgraphics_1_1window_1_1IWindow.html">window::IWindow</a> *window) const -&gt; <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt; bool &gt;=0</td></tr>
-<tr class="memdesc:a66be29b4c26341021370d05ed8b41c7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query whether a backend-specific window should close.  <br /></td></tr>
+<tr class="memitem:a45c1a64b81eca54936a77354e3f0bb78" id="r_a45c1a64b81eca54936a77354e3f0bb78"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45c1a64b81eca54936a77354e3f0bb78">create_window</a> (const <a class="el" href="structgraphics_1_1window_1_1WindowDesc.html">window::WindowDesc</a> &amp;desc) -&gt; <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt; std::uint32_t &gt;=0</td></tr>
+<tr class="memdesc:a45c1a64b81eca54936a77354e3f0bb78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new window using the backend implementation.  <br /></td></tr>
+<tr class="memitem:a9784e7130953349f0503be0d16c8669f" id="r_a9784e7130953349f0503be0d16c8669f"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9784e7130953349f0503be0d16c8669f">destroy_window</a> (std::uint32_t win_id) -&gt; void=0</td></tr>
+<tr class="memdesc:a9784e7130953349f0503be0d16c8669f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a previously created window.  <br /></td></tr>
+<tr class="memitem:a6b0a7b3806f2a90780f8ba8bb3e46e36" id="r_a6b0a7b3806f2a90780f8ba8bb3e46e36"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b0a7b3806f2a90780f8ba8bb3e46e36">get_all_window_ids</a> () const -&gt; std::vector&lt; std::uint32_t &gt;=0</td></tr>
+<tr class="memdesc:a6b0a7b3806f2a90780f8ba8bb3e46e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve all currently active window IDs.  <br /></td></tr>
+<tr class="memitem:a7be4c9f140c2d07df49aed6dec8c7b98" id="r_a7be4c9f140c2d07df49aed6dec8c7b98"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7be4c9f140c2d07df49aed6dec8c7b98">has_windows</a> () const -&gt; bool=0</td></tr>
+<tr class="memdesc:a7be4c9f140c2d07df49aed6dec8c7b98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether any windows are currently active.  <br /></td></tr>
+<tr class="memitem:a5db91de577cbc35dd6b8ff4a2cf6dd16" id="r_a5db91de577cbc35dd6b8ff4a2cf6dd16"><td class="memItemLeft" align="right" valign="top"><a id="a5db91de577cbc35dd6b8ff4a2cf6dd16" name="a5db91de577cbc35dd6b8ff4a2cf6dd16"></a>
+virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_events</b> () -&gt; void=0</td></tr>
+<tr class="memdesc:a5db91de577cbc35dd6b8ff4a2cf6dd16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll backend-specific events (input, window messages, etc.). <br /></td></tr>
+<tr class="memitem:a55d01aac954d8a34c8ee6268db07b31d" id="r_a55d01aac954d8a34c8ee6268db07b31d"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55d01aac954d8a34c8ee6268db07b31d">set_window_should_close</a> (std::uint32_t win_id, bool should_close) -&gt; void=0</td></tr>
+<tr class="memdesc:a55d01aac954d8a34c8ee6268db07b31d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the close request state for a window.  <br /></td></tr>
+<tr class="memitem:ae4102cf0367672491170dd382b0aabd4" id="r_ae4102cf0367672491170dd382b0aabd4"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4102cf0367672491170dd382b0aabd4">swap_buffers</a> (std::uint32_t window) const -&gt; void=0</td></tr>
+<tr class="memdesc:ae4102cf0367672491170dd382b0aabd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap buffers for the specified window.  <br /></td></tr>
+<tr class="memitem:a7f4c85f54e235cb965815975fcdeee9b" id="r_a7f4c85f54e235cb965815975fcdeee9b"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f4c85f54e235cb965815975fcdeee9b">window_should_close</a> (std::uint32_t win_id) const -&gt; <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt; bool &gt;=0</td></tr>
+<tr class="memdesc:a7f4c85f54e235cb965815975fcdeee9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query whether the specified window should close.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for platform backends. </p>
@@ -168,8 +153,8 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a385a4fb724552a70339e9b5181ae3f4d" name="a385a4fb724552a70339e9b5181ae3f4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a385a4fb724552a70339e9b5181ae3f4d">&#9670;&#160;</a></span>create_backend_window()</h2>
+<a id="a45c1a64b81eca54936a77354e3f0bb78" name="a45c1a64b81eca54936a77354e3f0bb78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c1a64b81eca54936a77354e3f0bb78">&#9670;&#160;</a></span>create_window()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,43 +163,17 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual auto graphics::platform::IPlatform::create_backend_window </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structgraphics_1_1window_1_1WindowDesc.html">window::WindowDesc</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>desc</em></span></td><td>)</td>
-          <td> const -&gt;  std::unique_ptr&lt; <a class="el" href="structgraphics_1_1window_1_1IWindow.html">window::IWindow</a> &gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel protected">protected</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Create a backend-specific window. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">desc</td><td>Window creation parameters. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Newly created backend window instance. </dd></dl>
-
-</div>
-</div>
-<a id="a8c4b8839c2c3606644191c79f4a1393a" name="a8c4b8839c2c3606644191c79f4a1393a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c4b8839c2c3606644191c79f4a1393a">&#9670;&#160;</a></span>create_window()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto graphics::platform::IPlatform::create_window </td>
+          <td class="memname">virtual auto graphics::platform::IPlatform::create_window </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structgraphics_1_1window_1_1WindowDesc.html">window::WindowDesc</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>desc</em></span></td><td>)</td>
           <td> -&gt;  <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt; std::uint32_t &gt;</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Create a new window using the backend implementation. </p>
@@ -228,8 +187,8 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
 
 </div>
 </div>
-<a id="adfc6adf93c48245492aa893843c31f36" name="adfc6adf93c48245492aa893843c31f36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfc6adf93c48245492aa893843c31f36">&#9670;&#160;</a></span>destroy_backend_window()</h2>
+<a id="a9784e7130953349f0503be0d16c8669f" name="a9784e7130953349f0503be0d16c8669f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9784e7130953349f0503be0d16c8669f">&#9670;&#160;</a></span>destroy_window()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -238,42 +197,17 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual auto graphics::platform::IPlatform::destroy_backend_window </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structgraphics_1_1window_1_1IWindow.html">window::IWindow</a> *</td>          <td class="paramname"><span class="paramname"><em>window</em></span></td><td>)</td>
-          <td> const -&gt;  void</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Destroy a backend-specific window. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">window</td><td>Pointer to the backend window to destroy. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="acc8ebd500943ecfb527d0360382d4b0c" name="acc8ebd500943ecfb527d0360382d4b0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc8ebd500943ecfb527d0360382d4b0c">&#9670;&#160;</a></span>destroy_window()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto graphics::platform::IPlatform::destroy_window </td>
+          <td class="memname">virtual auto graphics::platform::IPlatform::destroy_window </td>
           <td>(</td>
           <td class="paramtype">std::uint32_t</td>          <td class="paramname"><span class="paramname"><em>win_id</em></span></td><td>)</td>
           <td> -&gt;  void</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Destroy a previously created window. </p>
@@ -286,8 +220,8 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
 
 </div>
 </div>
-<a id="a1df74b6435c9061069476a3caff82371" name="a1df74b6435c9061069476a3caff82371"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1df74b6435c9061069476a3caff82371">&#9670;&#160;</a></span>get_all_window_ids()</h2>
+<a id="a6b0a7b3806f2a90780f8ba8bb3e46e36" name="a6b0a7b3806f2a90780f8ba8bb3e46e36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b0a7b3806f2a90780f8ba8bb3e46e36">&#9670;&#160;</a></span>get_all_window_ids()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,7 +230,7 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto graphics::platform::IPlatform::get_all_window_ids </td>
+          <td class="memname">virtual auto graphics::platform::IPlatform::get_all_window_ids </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const -&gt;  std::vector&lt; std::uint32_t &gt;</td>
@@ -304,7 +238,7 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -314,8 +248,8 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
 
 </div>
 </div>
-<a id="a44e4c671a355ddaf2f9524ff8b7a3372" name="a44e4c671a355ddaf2f9524ff8b7a3372"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44e4c671a355ddaf2f9524ff8b7a3372">&#9670;&#160;</a></span>has_windows()</h2>
+<a id="a7be4c9f140c2d07df49aed6dec8c7b98" name="a7be4c9f140c2d07df49aed6dec8c7b98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7be4c9f140c2d07df49aed6dec8c7b98">&#9670;&#160;</a></span>has_windows()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -324,7 +258,7 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto graphics::platform::IPlatform::has_windows </td>
+          <td class="memname">virtual auto graphics::platform::IPlatform::has_windows </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const -&gt;  bool</td>
@@ -332,7 +266,7 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -342,8 +276,8 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
 
 </div>
 </div>
-<a id="ad72e415e2c4bbf9efacc3c206605982a" name="ad72e415e2c4bbf9efacc3c206605982a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad72e415e2c4bbf9efacc3c206605982a">&#9670;&#160;</a></span>swap_backend_buffers()</h2>
+<a id="a55d01aac954d8a34c8ee6268db07b31d" name="a55d01aac954d8a34c8ee6268db07b31d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55d01aac954d8a34c8ee6268db07b31d">&#9670;&#160;</a></span>set_window_should_close()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -352,42 +286,55 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual auto graphics::platform::IPlatform::swap_backend_buffers </td>
+          <td class="memname">virtual auto graphics::platform::IPlatform::set_window_should_close </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structgraphics_1_1window_1_1IWindow.html">window::IWindow</a> *</td>          <td class="paramname"><span class="paramname"><em>window</em></span></td><td>)</td>
-          <td> const -&gt;  void</td>
+          <td class="paramtype">std::uint32_t</td>          <td class="paramname"><span class="paramname"><em>win_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>should_close</em></span>&#160;) -&gt;  void</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Swap buffers for a backend-specific window. </p>
+<p>Set the close request state for a window. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">window</td><td>Pointer to the backend window. </td></tr>
+    <tr><td class="paramname">win_id</td><td>Window ID. </td></tr>
+    <tr><td class="paramname">should_close</td><td>True to request the window to close, false to clear the request. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="adc3f0860cfcab349fb9aa5ed12749b1f" name="adc3f0860cfcab349fb9aa5ed12749b1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc3f0860cfcab349fb9aa5ed12749b1f">&#9670;&#160;</a></span>swap_buffers()</h2>
+<a id="ae4102cf0367672491170dd382b0aabd4" name="ae4102cf0367672491170dd382b0aabd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4102cf0367672491170dd382b0aabd4">&#9670;&#160;</a></span>swap_buffers()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto graphics::platform::IPlatform::swap_buffers </td>
+          <td class="memname">virtual auto graphics::platform::IPlatform::swap_buffers </td>
           <td>(</td>
           <td class="paramtype">std::uint32_t</td>          <td class="paramname"><span class="paramname"><em>window</em></span></td><td>)</td>
           <td> const -&gt;  void</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Swap buffers for the specified window. </p>
@@ -400,8 +347,8 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
 
 </div>
 </div>
-<a id="a66be29b4c26341021370d05ed8b41c7e" name="a66be29b4c26341021370d05ed8b41c7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66be29b4c26341021370d05ed8b41c7e">&#9670;&#160;</a></span>window_backend_should_close()</h2>
+<a id="a7f4c85f54e235cb965815975fcdeee9b" name="a7f4c85f54e235cb965815975fcdeee9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f4c85f54e235cb965815975fcdeee9b">&#9670;&#160;</a></span>window_should_close()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -410,41 +357,7 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual auto graphics::platform::IPlatform::window_backend_should_close </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structgraphics_1_1window_1_1IWindow.html">window::IWindow</a> *</td>          <td class="paramname"><span class="paramname"><em>window</em></span></td><td>)</td>
-          <td> const -&gt;  <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt; bool &gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Query whether a backend-specific window should close. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">window</td><td>Pointer to the backend window. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the window requested closure. </dd></dl>
-
-</div>
-</div>
-<a id="aacecd19e0b7f426d72b5f7aa935bbe30" name="aacecd19e0b7f426d72b5f7aa935bbe30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacecd19e0b7f426d72b5f7aa935bbe30">&#9670;&#160;</a></span>window_should_close()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto graphics::platform::IPlatform::window_should_close </td>
+          <td class="memname">virtual auto graphics::platform::IPlatform::window_should_close </td>
           <td>(</td>
           <td class="paramtype">std::uint32_t</td>          <td class="paramname"><span class="paramname"><em>win_id</em></span></td><td>)</td>
           <td> const -&gt;  <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt; bool &gt;</td>
@@ -452,7 +365,7 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_backend_
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
