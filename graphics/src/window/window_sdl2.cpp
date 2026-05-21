@@ -52,4 +52,6 @@ auto WindowSDL2::set_should_close (bool should_close) -> void
     m_should_close = should_close;
 }
 
+auto WindowSDL2::should_close() const -> bool { return m_should_close; }
+
 } // namespace graphics::window
