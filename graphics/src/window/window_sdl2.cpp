@@ -47,4 +47,9 @@ auto WindowSDL2::is_initialized() const -> bool
     return (m_window != nullptr);
 }
 
+auto WindowSDL2::set_should_close (bool should_close) -> void
+{
+    m_should_close = should_close;
+}
+
 } // namespace graphics::window

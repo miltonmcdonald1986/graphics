@@ -24,6 +24,7 @@ class WindowSDL2 final : public WindowBase
 
     [[nodiscard]] auto get_sdl2_window() const -> SDL_Window*;
     [[nodiscard]] auto is_initialized() const -> bool;
+    auto set_should_close (bool should_close) -> void;
 
   private:
     SDL_Window* m_window{nullptr};

@@ -3,12 +3,12 @@
 
 #include <GLFW/glfw3.h>
 
-#include <graphics/platform/i_platform.hpp>
+#include "platform_base.hpp"
 
 namespace graphics::platform
 {
 
-class PlatformGLFW final : public IPlatform
+class PlatformGLFW final : public PlatformBase
 {
 
   public:
@@ -25,14 +25,12 @@ class PlatformGLFW final : public IPlatform
     [[nodiscard]] auto create_backend_window (
         const window::WindowDesc& desc
     ) const -> std::unique_ptr<window::IWindow> override;
-
     auto destroy_backend_window (window::IWindow* window) const
         -> void override;
-
-    auto poll_backend_events() const -> void override;
-
+    auto poll_backend_events() -> void override;
+    auto set_backend_window_should_close (window::IWindow* window,
+        bool should_close) -> void override;
     auto swap_backend_buffers (window::IWindow* window) const -> void override;
-
     auto window_backend_should_close (window::IWindow* window) const
         -> core::Expected<bool> override;
 

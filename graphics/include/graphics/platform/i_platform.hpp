@@ -29,70 +29,41 @@ struct IPlatform
     /// \brief Create a new window using the backend implementation.
     /// \param desc Window creation parameters.
     /// \return Window ID on success, or a Diagnostic on failure.
-    auto create_window (const window::WindowDesc& desc)
-        -> core::Expected<std::uint32_t>;
+    virtual auto create_window (const window::WindowDesc& desc)
+        -> core::Expected<std::uint32_t> = 0;
 
     /// \brief Destroy a previously created window.
     /// \param win_id Window ID to destroy.
-    auto destroy_window (std::uint32_t win_id) -> void;
+    virtual auto destroy_window (std::uint32_t win_id) -> void = 0;
 
     /// \brief Retrieve all currently active window IDs.
     /// \return Vector of valid window IDs.
-    [[nodiscard]] auto get_all_window_ids() const -> std::vector<std::uint32_t>;
+    [[nodiscard]] virtual auto get_all_window_ids() const
+        -> std::vector<std::uint32_t> = 0;
 
     /// \brief Check whether any windows are currently active.
     /// \return True if at least one window exists.
-    [[nodiscard]] auto has_windows() const -> bool;
+    [[nodiscard]] virtual auto has_windows() const -> bool = 0;
 
     /// \brief Poll backend-specific events (input, window messages, etc.).
-    auto poll_events() const -> void;
+    virtual auto poll_events() -> void = 0;
+
+    /// \brief Set the close request state for a window.
+    /// \param win_id Window ID.
+    /// \param should_close True to request the window to close, false to clear
+    ///                     the request.
+    virtual auto set_window_should_close (std::uint32_t win_id,
+        bool should_close) -> void = 0;
 
     /// \brief Swap buffers for the specified window.
     /// \param window Window ID.
-    auto swap_buffers (std::uint32_t window) const -> void;
+    virtual auto swap_buffers (std::uint32_t window) const -> void = 0;
 
     /// \brief Query whether the specified window should close.
     /// \param win_id Window ID.
     /// \return True if the window requested closure.
-    [[nodiscard]] auto window_should_close (std::uint32_t win_id) const
-        -> core::Expected<bool>;
-
-  protected:
-    /// \brief Construct the platform interface.
-    IPlatform();
-
-    /// \brief Create a backend-specific window.
-    /// \param desc Window creation parameters.
-    /// \return Newly created backend window instance.
-    [[nodiscard]] virtual auto create_backend_window (
-        const window::WindowDesc& desc
-    ) const -> std::unique_ptr<window::IWindow> = 0;
-
-    /// \brief Destroy a backend-specific window.
-    /// \param window Pointer to the backend window to destroy.
-    virtual auto destroy_backend_window (window::IWindow* window) const
-        -> void = 0;
-
-    /// \brief Poll backend-specific events.
-    virtual auto poll_backend_events() const -> void = 0;
-
-    /// \brief Swap buffers for a backend-specific window.
-    /// \param window Pointer to the backend window.
-    virtual auto swap_backend_buffers (window::IWindow* window) const
-        -> void = 0;
-
-    /// \brief Query whether a backend-specific window should close.
-    /// \param window Pointer to the backend window.
-    /// \return True if the window requested closure.
-    virtual auto window_backend_should_close (window::IWindow* window) const
+    [[nodiscard]] virtual auto window_should_close (std::uint32_t win_id) const
         -> core::Expected<bool> = 0;
-
-  private:
-    /// \brief Internal implementation details (PIMPL).
-    struct Impl;
-
-    /// \brief Pointer to internal implementation.
-    std::unique_ptr<Impl> impl;
 };
 
 /// \brief Creates a platform backend instance.

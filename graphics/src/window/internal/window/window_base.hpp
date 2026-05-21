@@ -13,7 +13,7 @@ struct WindowBase : public IWindow
 
     [[nodiscard]] auto should_close() const -> bool final;
 
-  private:
+  protected:
     bool m_should_close{false};
 };
 
