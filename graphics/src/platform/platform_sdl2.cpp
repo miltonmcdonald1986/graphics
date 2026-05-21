@@ -189,8 +189,7 @@ auto PlatformSDL2::set_backend_window_should_close (window::IWindow* window,
     }
 }
 
-auto PlatformSDL2::swap_backend_buffers (window::IWindow* window) const
-    -> void
+auto PlatformSDL2::swap_backend_buffers (window::IWindow* window) const -> void
 {
     if (auto* window_sdl2 = dynamic_cast<WindowSDL2*> (window))
     {
