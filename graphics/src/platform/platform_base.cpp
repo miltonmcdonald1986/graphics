@@ -15,8 +15,8 @@
 #include <graphics/core/expected.hpp>
 #include <graphics/core/log_level.hpp>
 #include <graphics/platform/i_platform.hpp>
-#include <graphics/window/window_desc.hpp>
 #include <graphics/window/i_window.hpp>
+#include <graphics/window/window_desc.hpp>
 
 #include "internal/platform/slot.hpp"
 
