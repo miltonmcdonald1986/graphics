@@ -27,7 +27,7 @@ auto main() -> int
 {
     try
     {
-        unique_ptr<IPlatform> platform = create_platform (Backend::GLFW);
+        unique_ptr<IPlatform> platform = create_platform (Backend::SDL2);
         if (!platform)
         {
             log_message (LogLevel::Error, "Failed to initialize GLFW backend");

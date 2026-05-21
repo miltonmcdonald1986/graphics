@@ -126,7 +126,22 @@ auto PlatformGLFW::destroy_backend_window (window::IWindow* window) const
     }
 }
 
-auto PlatformGLFW::poll_backend_events() const -> void { glfwPollEvents(); }
+auto PlatformGLFW::poll_backend_events() -> void { glfwPollEvents(); }
+
+auto PlatformGLFW::set_backend_window_should_close (window::IWindow* window,
+    bool should_close) -> void
+{
+    if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
+    {
+        glfwSetWindowShouldClose (window_glfw->get_glfw_window(),
+            should_close ? GLFW_TRUE : GLFW_FALSE);
+    }
+    else
+    {
+        log_diagnostic (DiagnosticCategory::Platform,
+            "Failed to cast window to WindowGLFW", LogLevel::Warn);
+    }
+}
 
 auto PlatformGLFW::swap_backend_buffers (window::IWindow* window) const -> void
 {

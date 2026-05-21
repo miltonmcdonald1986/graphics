@@ -10,11 +10,6 @@ struct WindowBase : public IWindow
 {
   public:
     ~WindowBase() override = default;
-
-    [[nodiscard]] auto should_close() const -> bool final;
-
-  private:
-    bool m_should_close{false};
 };
 
 } // namespace graphics::window
