@@ -59,7 +59,7 @@ struct PlatformBase : public IPlatform
 
   private:
     auto acquire_slot() -> std::uint32_t;
-    auto create_backend_window_into (Slot& slot, const WindowDesc& desc)
+    auto create_backend_window_into (Slot& slot, const window::WindowDesc& desc)
         -> bool;
     auto release_slot (std::uint32_t win_id) -> void;
 
