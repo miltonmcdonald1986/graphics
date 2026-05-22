@@ -7,7 +7,9 @@ var namespacegraphics_1_1core =
     [ "DiagnosticCategory", "namespacegraphics_1_1core.html#a7a2a1416f5ec4e432afe8fe5667a9622", [
       [ "Core", "namespacegraphics_1_1core.html#a7a2a1416f5ec4e432afe8fe5667a9622a83168e6cb289d732cc78427b51f93153", null ],
       [ "Platform", "namespacegraphics_1_1core.html#a7a2a1416f5ec4e432afe8fe5667a9622a419f3742e6de8e0ec4b22cce005e7630", null ],
-      [ "Unknown", "namespacegraphics_1_1core.html#a7a2a1416f5ec4e432afe8fe5667a9622a88183b946cc5f0e8c96b2e66e1c74a7e", null ]
+      [ "Window", "namespacegraphics_1_1core.html#a7a2a1416f5ec4e432afe8fe5667a9622ac89686a387d2b12b3c729ce35a0bcb5b", null ],
+      [ "Unknown", "namespacegraphics_1_1core.html#a7a2a1416f5ec4e432afe8fe5667a9622a88183b946cc5f0e8c96b2e66e1c74a7e", null ],
+      [ "Count", "namespacegraphics_1_1core.html#a7a2a1416f5ec4e432afe8fe5667a9622ae93f994f01c537c4e2f7d8528c3eb5e9", null ]
     ] ],
     [ "LogLevel", "namespacegraphics_1_1core.html#ac6a2e0d6ea98e362d789a9dbb965a06d", [
       [ "Trace", "namespacegraphics_1_1core.html#ac6a2e0d6ea98e362d789a9dbb965a06dadd4ec0ac4e58f7c32a01244ae91150b1", null ],
@@ -18,8 +20,8 @@ var namespacegraphics_1_1core =
       [ "Critical", "namespacegraphics_1_1core.html#ac6a2e0d6ea98e362d789a9dbb965a06da278d01e5af56273bae1bb99a98b370cd", null ]
     ] ],
     [ "create_unexpected", "namespacegraphics_1_1core.html#a207ad4d97c62794ec6f8767ff62b37f9", null ],
-    [ "create_unexpected", "namespacegraphics_1_1core.html#ade98b8dfb23ded391c7f2e39ae46ee56", null ],
+    [ "create_unexpected", "namespacegraphics_1_1core.html#a3219e23d9b54034d18d6012ce478caf2", null ],
     [ "log_diagnostic", "namespacegraphics_1_1core.html#ad8a00e712cec3107cf87aeb731f5bead", null ],
     [ "log_diagnostic", "namespacegraphics_1_1core.html#ae77b6d6c21bd12f3b27adb35bf19dcf8", null ],
-    [ "log_message", "namespacegraphics_1_1core.html#ad153273421c20e281e4a98321a350d10", null ]
+    [ "log_message", "namespacegraphics_1_1core.html#af3c0c2c3221797cd13d2e58a6169d1f3", null ]
 ];

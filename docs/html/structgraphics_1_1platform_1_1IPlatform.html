@@ -100,8 +100,8 @@ $(function(){initNavTree('structgraphics_1_1platform_1_1IPlatform.html','','stru
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a17ed2b75cb01e616930e00aaf96a6aaa" id="r_a17ed2b75cb01e616930e00aaf96a6aaa"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17ed2b75cb01e616930e00aaf96a6aaa">~IPlatform</a> ()</td></tr>
-<tr class="memdesc:a17ed2b75cb01e616930e00aaf96a6aaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for platform backends.  <br /></td></tr>
+<tr class="memitem:aaef8bde9579c934c1ea632f3752bb566" id="r_aaef8bde9579c934c1ea632f3752bb566"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaef8bde9579c934c1ea632f3752bb566">~IPlatform</a> ()=default</td></tr>
+<tr class="memdesc:aaef8bde9579c934c1ea632f3752bb566"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for platform backends.  <br /></td></tr>
 <tr class="memitem:a45c1a64b81eca54936a77354e3f0bb78" id="r_a45c1a64b81eca54936a77354e3f0bb78"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45c1a64b81eca54936a77354e3f0bb78">create_window</a> (const <a class="el" href="structgraphics_1_1window_1_1WindowDesc.html">window::WindowDesc</a> &amp;desc) -&gt; <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt; std::uint32_t &gt;=0</td></tr>
 <tr class="memdesc:a45c1a64b81eca54936a77354e3f0bb78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new window using the backend implementation.  <br /></td></tr>
 <tr class="memitem:a9784e7130953349f0503be0d16c8669f" id="r_a9784e7130953349f0503be0d16c8669f"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9784e7130953349f0503be0d16c8669f">destroy_window</a> (std::uint32_t win_id) -&gt; void=0</td></tr>
@@ -124,8 +124,8 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_events</
 <div class="textblock"><p>Interface for platform backends. </p>
 <p>Defines the minimal API required for platform initialization, shutdown, and window/event management. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a17ed2b75cb01e616930e00aaf96a6aaa" name="a17ed2b75cb01e616930e00aaf96a6aaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17ed2b75cb01e616930e00aaf96a6aaa">&#9670;&#160;</a></span>~IPlatform()</h2>
+<a id="aaef8bde9579c934c1ea632f3752bb566" name="aaef8bde9579c934c1ea632f3752bb566"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaef8bde9579c934c1ea632f3752bb566">&#9670;&#160;</a></span>~IPlatform()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -142,7 +142,7 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_events</
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

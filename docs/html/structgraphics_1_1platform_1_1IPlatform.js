@@ -1,6 +1,6 @@
 var structgraphics_1_1platform_1_1IPlatform =
 [
-    [ "~IPlatform", "structgraphics_1_1platform_1_1IPlatform.html#a17ed2b75cb01e616930e00aaf96a6aaa", null ],
+    [ "~IPlatform", "structgraphics_1_1platform_1_1IPlatform.html#aaef8bde9579c934c1ea632f3752bb566", null ],
     [ "create_window", "structgraphics_1_1platform_1_1IPlatform.html#a45c1a64b81eca54936a77354e3f0bb78", null ],
     [ "destroy_window", "structgraphics_1_1platform_1_1IPlatform.html#a9784e7130953349f0503be0d16c8669f", null ],
     [ "get_all_window_ids", "structgraphics_1_1platform_1_1IPlatform.html#a6b0a7b3806f2a90780f8ba8bb3e46e36", null ],
