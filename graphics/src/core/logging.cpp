@@ -14,7 +14,7 @@ namespace graphics::core
 
 auto log_message (LogLevel level, string message) -> void
 {
-    get_logger()->log (level, move(message));
+    get_logger()->log (level, move (message));
 }
 
 } // namespace graphics::core

@@ -14,8 +14,8 @@ using spdlog::level::debug;
 #else
 using spdlog::level::err;
 #endif
-using spdlog::level::level_enum;
 using spdlog::stdout_color_mt;
+using spdlog::level::level_enum;
 using std::string_view;
 
 namespace graphics::core

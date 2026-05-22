@@ -48,8 +48,7 @@ auto log_diagnostic (const Diagnostic& diagnostic) -> void
                 "Filename:  {}\n"
                 "Line:      {}\n"
                 "Message:   {}\n",
-            enum_name (diagnostic.level),
-            enum_name (diagnostic.category),
+            enum_name (diagnostic.level), enum_name (diagnostic.category),
             extract_function_name (diagnostic.location.function_name()),
             path (diagnostic.location.file_name()).filename().string(),
             diagnostic.location.line(), diagnostic.message));
