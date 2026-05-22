@@ -29,7 +29,7 @@ enum class DiagnosticCategory : std::uint8_t
     Core,     ///< Core engine subsystem.
     Platform, ///< Platform subsystem.
     Window,   ///< Window management subsystem.
-    Unknown,   ///< Unclassified or unspecified subsystem.
+    Unknown,  ///< Unclassified or unspecified subsystem.
     Count     ///< Sentinel value representing the number of categories.
 };
 

@@ -30,7 +30,7 @@ auto create_unexpected (DiagnosticCategory category,
     const Diagnostic diagnostic{.category = category,
         .level = level,
         .location = location,
-        .message = move(message)};
+        .message = move (message)};
 
     return create_unexpected (diagnostic);
 }
