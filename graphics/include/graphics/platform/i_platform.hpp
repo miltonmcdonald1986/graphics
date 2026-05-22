@@ -24,7 +24,7 @@ struct IPlatform
     ///
     /// Defines the minimal API required for platform initialization,
     /// shutdown, and window/event management.
-    virtual ~IPlatform();
+    virtual ~IPlatform() = default;
 
     /// \brief Create a new window using the backend implementation.
     /// \param desc Window creation parameters.

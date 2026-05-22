@@ -17,7 +17,7 @@ namespace graphics::core
 ///
 /// \param level Severity level of the message.
 /// \param message Human-readable text to be logged.
-auto log_message (LogLevel level, const std::string& message) -> void;
+auto log_message (LogLevel level, std::string message) -> void;
 
 } // namespace graphics::core
 

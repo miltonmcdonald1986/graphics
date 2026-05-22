@@ -67,7 +67,7 @@ auto create_unexpected (const Diagnostic& diagnostic) -> Unexpected;
 /// \see Diagnostic
 /// \see Expected
 auto create_unexpected (DiagnosticCategory category,
-    const std::string& message,
+    std::string message,
     LogLevel level = LogLevel::Error,
     std::source_location location = std::source_location::current())
     -> Unexpected;

@@ -4,12 +4,14 @@
 
 #include <internal/core/spdlog_logger.hpp>
 
+using std::make_shared;
+
 namespace graphics::core
 {
 
 auto get_logger() -> LoggerPtr&
 {
-    static LoggerPtr instance = std::make_shared<SpdlogLogger>();
+    static LoggerPtr instance = make_shared<SpdlogLogger>();
     return instance;
 }
 

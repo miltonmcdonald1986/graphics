@@ -4,6 +4,7 @@
   "dependencies": [
     "glfw3",
     "gtest",
+    "magic-enum",
     "sdl2",
     "spdlog"
   ]

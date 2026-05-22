@@ -18,7 +18,8 @@ namespace graphics::core
 /// architectural layers of the engine.
 ///
 /// - `Core` - Diagnostics originating from core engine logic.
-/// - `Platform` - Diagnostics from platform or windowing backends.
+/// - `Platform` - Diagnostics from platform backends.
+/// - `Window` - Diagnostics from window management subsystems.
 /// - `Unknown` - Diagnostics that cannot be attributed to a specific subsystem.
 ///
 /// \see Diagnostic
@@ -26,8 +27,10 @@ namespace graphics::core
 enum class DiagnosticCategory : std::uint8_t
 {
     Core,     ///< Core engine subsystem.
-    Platform, ///< Platform or windowing subsystem.
-    Unknown   ///< Unclassified or unspecified subsystem.
+    Platform, ///< Platform subsystem.
+    Window,   ///< Window management subsystem.
+    Unknown,   ///< Unclassified or unspecified subsystem.
+    Count     ///< Sentinel value representing the number of categories.
 };
 
 } // namespace graphics::core
