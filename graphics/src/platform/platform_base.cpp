@@ -183,7 +183,8 @@ auto PlatformBase::acquire_slot() -> std::uint32_t
     return win_id;
 }
 
-auto PlatformBase::get_slot_from_handle (const Handle& handle) const -> const Slot*
+auto PlatformBase::get_slot_from_handle (const Handle& handle) const
+    -> const Slot*
 {
     if (handle.id >= m_windows.size())
     {
@@ -212,17 +213,17 @@ auto PlatformBase::log_free_list() const -> void
         return;
     }
 
-        string ids = "free ids: [";
-        ids += " ";
-        ids += to_string (m_free_list.front());
-        for (int count = 1; count < m_free_list.size(); ++count)
-        {
-            ids += ", ";
-            ids += to_string (m_free_list.at (count));
-        }
-        ids += " ]";
+    string ids = "free ids: [";
+    ids += " ";
+    ids += to_string (m_free_list.front());
+    for (int count = 1; count < m_free_list.size(); ++count)
+    {
+        ids += ", ";
+        ids += to_string (m_free_list.at (count));
+    }
+    ids += " ]";
 
-        log_diagnostic (Platform, ids, Debug);
+    log_diagnostic (Platform, ids, Debug);
 }
 
 auto PlatformBase::release_slot (uint32_t win_id, ReleaseMode mode) -> void
