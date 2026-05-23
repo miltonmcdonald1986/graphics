@@ -226,7 +226,9 @@ auto PlatformBase::set_window_should_close (uint32_t win_id, bool should_close)
     -> void
 {
     if (auto* ptr = get_window_ptr (win_id))
+    {
         return set_backend_window_should_close (ptr, should_close);
+    }
 
     log_diagnostic (Platform, "Invalid window handle; cannot set close flag",
         Warn);
@@ -235,7 +237,10 @@ auto PlatformBase::set_window_should_close (uint32_t win_id, bool should_close)
 auto PlatformBase::swap_buffers (uint32_t win_id) const -> void
 {
     if (auto* ptr = get_window_ptr (win_id))
-        return swap_backend_buffers (ptr);
+    {
+        swap_backend_buffers (ptr);
+        return;
+    }
 
     log_diagnostic (Platform, "Invalid window handle; cannot swap buffers",
         Warn);
@@ -244,7 +249,9 @@ auto PlatformBase::swap_buffers (uint32_t win_id) const -> void
 auto PlatformBase::window_should_close (uint32_t win_id) const -> Expected<bool>
 {
     if (auto* ptr = get_window_ptr (win_id))
+    {
         return window_backend_should_close (ptr);
+    }
 
     return create_unexpected (Platform,
         "Invalid window handle; cannot check if window should close", Warn);

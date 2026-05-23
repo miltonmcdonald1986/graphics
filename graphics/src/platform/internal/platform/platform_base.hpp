@@ -33,7 +33,7 @@ struct PlatformBase : public IPlatform
     auto set_window_should_close (std::uint32_t win_id, bool should_close)
         -> void final;
 
-    auto swap_buffers (std::uint32_t window) const -> void final;
+    auto swap_buffers (std::uint32_t win_id) const -> void final;
 
     [[nodiscard]] auto window_should_close (std::uint32_t win_id) const
         -> core::Expected<bool> final;

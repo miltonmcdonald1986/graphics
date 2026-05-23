@@ -1,7 +1,6 @@
 #include <internal/platform/glfw_callbacks.hpp>
 
 #include <format>
-#include <string_view>
 
 #include <graphics/core/diagnostic.hpp>
 #include <graphics/core/diagnostic_category.hpp>

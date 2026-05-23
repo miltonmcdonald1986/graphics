@@ -3,7 +3,9 @@
 #include <filesystem>
 #include <format>
 #include <source_location>
+#include <string>
 #include <string_view>
+#include <utility>
 
 #include <magic_enum/magic_enum.hpp>
 
@@ -13,6 +15,7 @@
 
 using magic_enum::enum_name;
 using std::format;
+using std::move;
 using std::source_location;
 using std::string;
 using std::string_view;
@@ -28,11 +31,15 @@ auto extract_function_name (string_view full) -> string_view
 {
     // Remove argument list: "foo::bar(int)" → "foo::bar"
     if (auto pos = full.find ('('); pos != string_view::npos)
+    {
         full = full.substr (0, pos);
+    }
 
     // Remove return type: "void foo::bar" → "foo::bar"
     if (auto pos = full.rfind (' '); pos != string_view::npos)
+    {
         full = full.substr (pos + 1);
+    }
 
     return full;
 }

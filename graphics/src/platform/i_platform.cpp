@@ -8,7 +8,6 @@
 #include <internal/platform/platform_glfw3.hpp>
 #include <internal/platform/platform_sdl2.hpp>
 
-using graphics::platform::create_platform_glfw;
 using graphics::platform::IPlatform;
 using std::unique_ptr;
 

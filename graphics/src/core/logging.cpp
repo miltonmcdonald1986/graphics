@@ -1,6 +1,7 @@
 #include <graphics/core/logging.hpp>
 
 #include <string>
+#include <utility>
 
 #include <graphics/core/log_level.hpp>
 

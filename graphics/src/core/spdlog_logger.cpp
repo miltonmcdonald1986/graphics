@@ -25,9 +25,13 @@ SpdlogLogger::SpdlogLogger()
 {
     constexpr const char* logger_name = "graphics";
     if (auto existing = get (logger_name))
+    {
         m_logger = existing;
+    }
     else
+    {
         m_logger = stdout_color_mt (logger_name);
+    }
 
 #ifdef _DEBUG
     m_logger->set_level (debug);

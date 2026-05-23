@@ -56,8 +56,8 @@ struct IPlatform
         bool should_close) -> void = 0;
 
     /// \brief Swap buffers for the specified window.
-    /// \param window Window ID.
-    virtual auto swap_buffers (std::uint32_t window) const -> void = 0;
+    /// \param win_id Window ID.
+    virtual auto swap_buffers (std::uint32_t win_id) const -> void = 0;
 
     /// \brief Query whether the specified window should close.
     /// \param win_id Window ID.
