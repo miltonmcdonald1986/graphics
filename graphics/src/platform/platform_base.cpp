@@ -23,6 +23,8 @@ using graphics::core::DiagnosticCategory::Platform;
 using graphics::core::LogLevel::Debug;
 using graphics::core::LogLevel::Trace;
 using graphics::core::LogLevel::Warn;
+using graphics::platform::ReleaseMode::AfterDestroy;
+using graphics::platform::ReleaseMode::AfterFailedCreate;
 using graphics::window::IWindow;
 using graphics::window::WindowDesc;
 using std::format;
@@ -35,40 +37,6 @@ using std::ranges::any_of;
 namespace graphics::platform
 {
 
-namespace
-{
-
-struct Handle
-{
-    uint32_t id{};
-    uint32_t gen{};
-};
-
-constexpr uint32_t INDEX_BITS = 16;
-constexpr uint32_t INDEX_MASK = (1U << INDEX_BITS) - 1U;
-
-auto pack_handle (uint32_t index, uint32_t gen) -> uint32_t
-{
-    uint32_t packed = (gen << INDEX_BITS) | index;
-    log_diagnostic (Platform,
-        format ("packed (index,gen)=({},{}) to {}", index, gen, packed), Trace);
-
-    return packed;
-}
-
-auto unpack_handle (uint32_t handle) -> Handle
-{
-    Handle unpacked{.id = handle & INDEX_MASK, .gen = handle >> INDEX_BITS};
-    log_diagnostic (Platform,
-        format ("unpacked {} to (index,gen)=({},{})", handle, unpacked.id,
-            unpacked.gen),
-        Trace);
-
-    return unpacked;
-}
-
-} // namespace
-
 auto PlatformBase::create_window (const WindowDesc& desc) -> Expected<uint32_t>
 {
     log_diagnostic (Platform, "Creating window", Debug);
@@ -78,9 +46,10 @@ auto PlatformBase::create_window (const WindowDesc& desc) -> Expected<uint32_t>
     Slot& slot = m_windows.at (win_id);
 
     // Step 2: Backend creation
-    if (!create_backend_window_into (slot, desc))
+    slot.window = create_backend_window (desc);
+    if (!slot.window)
     {
-        release_slot (win_id);
+        release_slot (win_id, AfterFailedCreate);
         return create_unexpected (Platform, "Failed to create backend window");
     }
 
@@ -97,69 +66,22 @@ auto PlatformBase::create_window (const WindowDesc& desc) -> Expected<uint32_t>
 
 auto PlatformBase::destroy_window (uint32_t win_id) -> void
 {
+    // Step 1: Unpack handle
     Handle handle{unpack_handle (win_id)};
-
-    // Bounds check
-    if (handle.id >= m_windows.size())
+    const Slot* slot = get_slot_from_handle (handle);
+    if (!slot)
     {
-        log_diagnostic (Platform,
-            format ("There is no slot with id {}", win_id), Warn);
-
-        return;
-    }
-
-    Slot& slot = m_windows.at (handle.id);
-
-    // Validate slot
-    if (!slot.window)
-    {
-        log_diagnostic (Platform,
-            format ("There is no window with id {}", win_id), Warn);
-
-        return;
-    }
-
-    if (slot.generation != handle.gen)
-    {
-        log_diagnostic (Platform,
-            format ("Trying to destroy a window with stale handle {}", win_id),
+        log_diagnostic (Platform, format ("Invalid window handle {}", win_id),
             Warn);
 
         return;
     }
 
-    // Backend-specific destruction
-    destroy_backend_window (slot.window.get());
+    // Step 2: Backend destruction
+    destroy_backend_window (slot->window.get());
 
-    // Clear the unique_ptr
-    slot.window.reset();
-
-    // Bump generation to invalidate old handles
-    slot.generation++;
-    log_diagnostic (Platform,
-        format ("Bumping generation to {} to invalidate old handles",
-            slot.generation),
-        Debug);
-
-    // Add slot back to free list
-    m_free_list.push_back (handle.id);
-    log_diagnostic (Platform, format ("Slot {} is now free", handle.id), Debug);
-
-    // Generate free list string for diagnostic purposes.
-    if (!m_free_list.empty())
-    {
-        string ids = "free ids: [";
-        ids += " ";
-        ids += to_string (m_free_list.front());
-        for (int count = 1; count < m_free_list.size(); ++count)
-        {
-            ids += ", ";
-            ids += to_string (m_free_list.at (count));
-        }
-        ids += " ]";
-
-        log_diagnostic (Platform, ids, Debug);
-    }
+    // Step 3: Release slot
+    release_slot (handle.id, AfterDestroy);
 }
 
 auto PlatformBase::get_all_window_ids() const -> vector<uint32_t>
@@ -169,14 +91,8 @@ auto PlatformBase::get_all_window_ids() const -> vector<uint32_t>
 
     for (uint32_t index = 0; index < m_windows.size(); ++index)
     {
-        const Slot& slot = m_windows.at (index);
-
-        if (!slot.window)
-        {
-            continue; // empty slot
-        }
-
-        result.push_back (pack_handle (index, slot.generation));
+        if (m_windows.at(index).window)
+            result.push_back (pack_handle (index, m_windows.at(index).generation));
     }
 
     return result;
@@ -184,34 +100,15 @@ auto PlatformBase::get_all_window_ids() const -> vector<uint32_t>
 
 auto PlatformBase::get_window_ptr (uint32_t window_id) const -> IWindow*
 {
-    const auto handle = unpack_handle (window_id);
-    if (handle.id >= m_windows.size())
+    if (auto* slot = get_slot_from_handle (unpack_handle (window_id)))
     {
-        log_diagnostic (Platform,
-            format ("Unpacked handle id {} is out of bounds", handle.id));
-
-        return nullptr;
+        return slot->window.get();
     }
 
-    const Slot& slot = m_windows.at (handle.id);
-    if (slot.generation != handle.gen)
-    {
-        log_diagnostic (Platform,
-            format ("Stale handle: expected gen {}, got gen {}",
-                slot.generation, handle.gen));
+    log_diagnostic (Platform,
+        format ("Invalid or stale window handle {}", window_id), Warn);
 
-        return nullptr;
-    }
-
-    if (!slot.window)
-    {
-        log_diagnostic (Platform,
-            format ("No window exists at slot id {}", handle.id), Warn);
-
-        return nullptr;
-    }
-
-    return slot.window.get();
+    return nullptr;
 }
 
 auto PlatformBase::has_windows() const -> bool
@@ -282,16 +179,63 @@ auto PlatformBase::acquire_slot() -> std::uint32_t
     return win_id;
 }
 
-auto PlatformBase::create_backend_window_into (Slot& slot,
-    const WindowDesc& desc) -> bool
+auto PlatformBase::get_slot_from_handle (const Handle& handle) const -> const Slot*
 {
-    slot.window = create_backend_window (desc);
-    return static_cast<bool> (slot.window);
+    if (handle.id >= m_windows.size())
+        return nullptr;
+
+    const Slot& slot = m_windows[handle.id];
+    if (!slot.window)
+        return nullptr;
+
+    if (slot.generation != handle.gen)
+        return nullptr;
+
+    return &slot;
 }
 
-auto PlatformBase::release_slot (std::uint32_t win_id) -> void
+auto PlatformBase::log_free_list() const -> void
 {
-    m_free_list.push_back (win_id);
+    if (m_free_list.empty())
+    {
+        log_diagnostic (Platform, "free ids: [ ]", Debug);
+        return;
+    }
+
+        string ids = "free ids: [";
+        ids += " ";
+        ids += to_string (m_free_list.front());
+        for (int count = 1; count < m_free_list.size(); ++count)
+        {
+            ids += ", ";
+            ids += to_string (m_free_list.at (count));
+        }
+        ids += " ]";
+
+        log_diagnostic (Platform, ids, Debug);
+}
+
+auto PlatformBase::release_slot (uint32_t id, ReleaseMode mode) -> void
+{
+    Slot& slot = m_windows[id];
+
+    // Clear the window pointer (safe even if nullptr)
+    slot.window.reset();
+
+    if (mode == AfterDestroy)
+    {
+        slot.generation++;
+        log_diagnostic (Platform,
+            format ("Bumping generation to {} to invalidate old handles",
+                slot.generation),
+            Debug);
+    }
+
+    // Return slot to free list
+    m_free_list.push_back (id);
+    log_diagnostic (Platform, format ("Slot {} is now free", id), Debug);
+
+    log_free_list();
 }
 
 } // namespace graphics::platform
