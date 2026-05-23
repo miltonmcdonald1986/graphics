@@ -234,7 +234,7 @@ auto PlatformBase::release_slot (uint32_t win_id, ReleaseMode mode) -> void
         return;
     }
 
-    Slot& slot = m_windows[win_id];
+    Slot& slot = m_windows.at(win_id);
 
     // Clear the window pointer (safe even if nullptr)
     slot.window.reset();
