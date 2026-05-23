@@ -61,7 +61,8 @@ struct PlatformBase : public IPlatform
 
   private:
     auto acquire_slot() -> std::uint32_t;
-    [[nodiscard]] auto get_slot_from_handle (const Handle& handle) const -> const Slot*;
+    [[nodiscard]] auto get_slot_from_handle (const Handle& handle) const
+        -> const Slot*;
     auto log_free_list() const -> void;
     auto release_slot (std::uint32_t win_id, ReleaseMode mode) -> void;
 
