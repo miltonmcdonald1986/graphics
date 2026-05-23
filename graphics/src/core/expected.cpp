@@ -3,13 +3,11 @@
 #include <expected>
 #include <source_location>
 #include <string>
-#include <utility>
 
 #include <graphics/core/diagnostic.hpp>
 #include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/log_level.hpp>
 
-using std::move;
 using std::source_location;
 using std::string;
 using std::unexpected;
@@ -24,14 +22,14 @@ auto create_unexpected (const Diagnostic& diagnostic) -> Unexpected
 }
 
 auto create_unexpected (DiagnosticCategory category,
-    string message,
+    const string& message,
     LogLevel level,
     source_location location) -> Unexpected
 {
     const Diagnostic diagnostic{.category = category,
         .level = level,
         .location = location,
-        .message = move (message)};
+        .message = message};
 
     return create_unexpected (diagnostic);
 }
