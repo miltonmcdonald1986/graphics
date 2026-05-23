@@ -15,7 +15,6 @@
 
 using magic_enum::enum_name;
 using std::format;
-using std::move;
 using std::source_location;
 using std::string;
 using std::string_view;

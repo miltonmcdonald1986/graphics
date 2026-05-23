@@ -3,6 +3,7 @@
 #include <expected>
 #include <source_location>
 #include <string>
+#include <utility>
 
 #include <graphics/core/diagnostic.hpp>
 #include <graphics/core/diagnostic_category.hpp>

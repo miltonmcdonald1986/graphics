@@ -227,7 +227,8 @@ auto PlatformBase::set_window_should_close (uint32_t win_id, bool should_close)
 {
     if (auto* ptr = get_window_ptr (win_id))
     {
-        return set_backend_window_should_close (ptr, should_close);
+        set_backend_window_should_close (ptr, should_close);
+        return;
     }
 
     log_diagnostic (Platform, "Invalid window handle; cannot set close flag",
