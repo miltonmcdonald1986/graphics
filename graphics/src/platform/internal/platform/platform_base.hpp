@@ -5,6 +5,8 @@
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
+#include <internal/platform/handle.hpp>
+#include <internal/platform/release_mode.hpp>
 #include <internal/platform/slot.hpp>
 
 namespace graphics::platform
@@ -59,9 +61,10 @@ struct PlatformBase : public IPlatform
 
   private:
     auto acquire_slot() -> std::uint32_t;
-    auto create_backend_window_into (Slot& slot, const window::WindowDesc& desc)
-        -> bool;
-    auto release_slot (std::uint32_t win_id) -> void;
+    [[nodiscard]] auto get_slot_from_handle (const Handle& handle) const
+        -> const Slot*;
+    auto log_free_list() const -> void;
+    auto release_slot (std::uint32_t win_id, ReleaseMode mode) -> void;
 
     std::vector<std::uint32_t> m_free_list;
     std::vector<Slot> m_windows;
