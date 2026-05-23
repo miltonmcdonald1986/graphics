@@ -7,6 +7,6 @@ var structgraphics_1_1platform_1_1IPlatform =
     [ "has_windows", "structgraphics_1_1platform_1_1IPlatform.html#a7be4c9f140c2d07df49aed6dec8c7b98", null ],
     [ "poll_events", "structgraphics_1_1platform_1_1IPlatform.html#a5db91de577cbc35dd6b8ff4a2cf6dd16", null ],
     [ "set_window_should_close", "structgraphics_1_1platform_1_1IPlatform.html#a55d01aac954d8a34c8ee6268db07b31d", null ],
-    [ "swap_buffers", "structgraphics_1_1platform_1_1IPlatform.html#ae4102cf0367672491170dd382b0aabd4", null ],
+    [ "swap_buffers", "structgraphics_1_1platform_1_1IPlatform.html#ac4df2856531571c4a83822a813d0d47b", null ],
     [ "window_should_close", "structgraphics_1_1platform_1_1IPlatform.html#a7f4c85f54e235cb965815975fcdeee9b", null ]
 ];

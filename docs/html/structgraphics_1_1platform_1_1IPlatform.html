@@ -115,8 +115,8 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_events</
 <tr class="memdesc:a5db91de577cbc35dd6b8ff4a2cf6dd16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll backend-specific events (input, window messages, etc.). <br /></td></tr>
 <tr class="memitem:a55d01aac954d8a34c8ee6268db07b31d" id="r_a55d01aac954d8a34c8ee6268db07b31d"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55d01aac954d8a34c8ee6268db07b31d">set_window_should_close</a> (std::uint32_t win_id, bool should_close) -&gt; void=0</td></tr>
 <tr class="memdesc:a55d01aac954d8a34c8ee6268db07b31d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the close request state for a window.  <br /></td></tr>
-<tr class="memitem:ae4102cf0367672491170dd382b0aabd4" id="r_ae4102cf0367672491170dd382b0aabd4"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4102cf0367672491170dd382b0aabd4">swap_buffers</a> (std::uint32_t window) const -&gt; void=0</td></tr>
-<tr class="memdesc:ae4102cf0367672491170dd382b0aabd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap buffers for the specified window.  <br /></td></tr>
+<tr class="memitem:ac4df2856531571c4a83822a813d0d47b" id="r_ac4df2856531571c4a83822a813d0d47b"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4df2856531571c4a83822a813d0d47b">swap_buffers</a> (std::uint32_t win_id) const -&gt; void=0</td></tr>
+<tr class="memdesc:ac4df2856531571c4a83822a813d0d47b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap buffers for the specified window.  <br /></td></tr>
 <tr class="memitem:a7f4c85f54e235cb965815975fcdeee9b" id="r_a7f4c85f54e235cb965815975fcdeee9b"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f4c85f54e235cb965815975fcdeee9b">window_should_close</a> (std::uint32_t win_id) const -&gt; <a class="el" href="namespacegraphics_1_1core.html#a48e08e09adbb85854b33b361442f2272">core::Expected</a>&lt; bool &gt;=0</td></tr>
 <tr class="memdesc:a7f4c85f54e235cb965815975fcdeee9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query whether the specified window should close.  <br /></td></tr>
 </table>
@@ -314,8 +314,8 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_events</
 
 </div>
 </div>
-<a id="ae4102cf0367672491170dd382b0aabd4" name="ae4102cf0367672491170dd382b0aabd4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4102cf0367672491170dd382b0aabd4">&#9670;&#160;</a></span>swap_buffers()</h2>
+<a id="ac4df2856531571c4a83822a813d0d47b" name="ac4df2856531571c4a83822a813d0d47b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4df2856531571c4a83822a813d0d47b">&#9670;&#160;</a></span>swap_buffers()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -326,7 +326,7 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_events</
         <tr>
           <td class="memname">virtual auto graphics::platform::IPlatform::swap_buffers </td>
           <td>(</td>
-          <td class="paramtype">std::uint32_t</td>          <td class="paramname"><span class="paramname"><em>window</em></span></td><td>)</td>
+          <td class="paramtype">std::uint32_t</td>          <td class="paramname"><span class="paramname"><em>win_id</em></span></td><td>)</td>
           <td> const -&gt;  void</td>
         </tr>
       </table>
@@ -340,7 +340,7 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_events</
 <p>Swap buffers for the specified window. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">window</td><td>Window ID. </td></tr>
+    <tr><td class="paramname">win_id</td><td>Window ID. </td></tr>
   </table>
   </dd>
 </dl>
