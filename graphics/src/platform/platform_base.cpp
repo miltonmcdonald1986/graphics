@@ -191,7 +191,7 @@ auto PlatformBase::get_slot_from_handle (const Handle& handle) const
         return nullptr;
     }
 
-    const Slot& slot = m_windows.at(handle.id);
+    const Slot& slot = m_windows.at (handle.id);
     if (!slot.window)
     {
         return nullptr;
