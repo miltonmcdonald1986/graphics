@@ -142,8 +142,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:ae77b6d6c21bd12f3b27adb35bf19dcf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a diagnostic message using explicit components.  <br /></td></tr>
 <tr class="memitem:a207ad4d97c62794ec6f8767ff62b37f9" id="r_a207ad4d97c62794ec6f8767ff62b37f9"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a207ad4d97c62794ec6f8767ff62b37f9">create_unexpected</a> (const <a class="el" href="structgraphics_1_1core_1_1Diagnostic.html">Diagnostic</a> &amp;diagnostic) -&gt; <a class="el" href="#acc781da56f2a07c8c77d1f1025c2f11f">Unexpected</a></td></tr>
 <tr class="memdesc:a207ad4d97c62794ec6f8767ff62b37f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an <span class="tt"><a class="el" href="#acc781da56f2a07c8c77d1f1025c2f11f" title="Convenience alias for unexpected diagnostic results.">Unexpected</a></span> value from an existing diagnostic.  <br /></td></tr>
-<tr class="memitem:a3219e23d9b54034d18d6012ce478caf2" id="r_a3219e23d9b54034d18d6012ce478caf2"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3219e23d9b54034d18d6012ce478caf2">create_unexpected</a> (<a class="el" href="#a7a2a1416f5ec4e432afe8fe5667a9622">DiagnosticCategory</a> category, std::string message, <a class="el" href="#ac6a2e0d6ea98e362d789a9dbb965a06d">LogLevel</a> level=<a class="el" href="#ac6a2e0d6ea98e362d789a9dbb965a06da902b0d55fddef6f8d651fe1035b7d4bd">LogLevel::Error</a>, std::source_location location=std::source_location::current()) -&gt; <a class="el" href="#acc781da56f2a07c8c77d1f1025c2f11f">Unexpected</a></td></tr>
-<tr class="memdesc:a3219e23d9b54034d18d6012ce478caf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an <span class="tt"><a class="el" href="#acc781da56f2a07c8c77d1f1025c2f11f" title="Convenience alias for unexpected diagnostic results.">Unexpected</a></span> value from diagnostic components.  <br /></td></tr>
+<tr class="memitem:ade98b8dfb23ded391c7f2e39ae46ee56" id="r_ade98b8dfb23ded391c7f2e39ae46ee56"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade98b8dfb23ded391c7f2e39ae46ee56">create_unexpected</a> (<a class="el" href="#a7a2a1416f5ec4e432afe8fe5667a9622">DiagnosticCategory</a> category, const std::string &amp;message, <a class="el" href="#ac6a2e0d6ea98e362d789a9dbb965a06d">LogLevel</a> level=<a class="el" href="#ac6a2e0d6ea98e362d789a9dbb965a06da902b0d55fddef6f8d651fe1035b7d4bd">LogLevel::Error</a>, std::source_location location=std::source_location::current()) -&gt; <a class="el" href="#acc781da56f2a07c8c77d1f1025c2f11f">Unexpected</a></td></tr>
+<tr class="memdesc:ade98b8dfb23ded391c7f2e39ae46ee56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an <span class="tt"><a class="el" href="#acc781da56f2a07c8c77d1f1025c2f11f" title="Convenience alias for unexpected diagnostic results.">Unexpected</a></span> value from diagnostic components.  <br /></td></tr>
 <tr class="memitem:ad153273421c20e281e4a98321a350d10" id="r_ad153273421c20e281e4a98321a350d10"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad153273421c20e281e4a98321a350d10">log_message</a> (<a class="el" href="#ac6a2e0d6ea98e362d789a9dbb965a06d">LogLevel</a> level, const std::string &amp;message) -&gt; void</td></tr>
 <tr class="memdesc:ad153273421c20e281e4a98321a350d10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits a formatted log message at the given severity level.  <br /></td></tr>
 </table>
@@ -378,8 +378,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a3219e23d9b54034d18d6012ce478caf2" name="a3219e23d9b54034d18d6012ce478caf2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3219e23d9b54034d18d6012ce478caf2">&#9670;&#160;</a></span>create_unexpected() <span class="overload">[2/2]</span></h2>
+<a id="ade98b8dfb23ded391c7f2e39ae46ee56" name="ade98b8dfb23ded391c7f2e39ae46ee56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade98b8dfb23ded391c7f2e39ae46ee56">&#9670;&#160;</a></span>create_unexpected() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -392,7 +392,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>message</em></span>, </td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

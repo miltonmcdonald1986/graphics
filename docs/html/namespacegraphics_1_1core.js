@@ -20,7 +20,7 @@ var namespacegraphics_1_1core =
       [ "Critical", "namespacegraphics_1_1core.html#ac6a2e0d6ea98e362d789a9dbb965a06da278d01e5af56273bae1bb99a98b370cd", null ]
     ] ],
     [ "create_unexpected", "namespacegraphics_1_1core.html#a207ad4d97c62794ec6f8767ff62b37f9", null ],
-    [ "create_unexpected", "namespacegraphics_1_1core.html#a3219e23d9b54034d18d6012ce478caf2", null ],
+    [ "create_unexpected", "namespacegraphics_1_1core.html#ade98b8dfb23ded391c7f2e39ae46ee56", null ],
     [ "log_diagnostic", "namespacegraphics_1_1core.html#ad8a00e712cec3107cf87aeb731f5bead", null ],
     [ "log_diagnostic", "namespacegraphics_1_1core.html#ae77b6d6c21bd12f3b27adb35bf19dcf8", null ],
     [ "log_message", "namespacegraphics_1_1core.html#ad153273421c20e281e4a98321a350d10", null ]
