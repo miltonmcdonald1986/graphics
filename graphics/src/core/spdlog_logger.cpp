@@ -4,48 +4,47 @@
 
 #include <spdlog/common.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/spdlog.h>
 
 #include <graphics/core/log_level.hpp>
+
+using spdlog::get;
+#ifdef _DEBUG
+using spdlog::level::debug;
+#else
+using spdlog::level::err;
+#endif
+using spdlog::stdout_color_mt;
+using spdlog::level::level_enum;
+using std::string_view;
 
 namespace graphics::core
 {
 
 SpdlogLogger::SpdlogLogger()
 {
-    m_logger = spdlog::stdout_color_mt ("graphics");
+    constexpr const char* logger_name = "graphics";
+    if (auto existing = get (logger_name))
+    {
+        m_logger = existing;
+    }
+    else
+    {
+        m_logger = stdout_color_mt (logger_name);
+    }
 
 #ifdef _DEBUG
-    m_logger->set_level (spdlog::level::debug);
+    m_logger->set_level (debug);
 #else
-    m_logger->set_level (spdlog::level::err);
+    m_logger->set_level (err);
 #endif
 
     m_logger->set_pattern ("%v");
 }
 
-auto SpdlogLogger::log (LogLevel level, std::string_view message) -> void
+auto SpdlogLogger::log (LogLevel level, string_view message) -> void
 {
-    switch (level)
-    {
-    case LogLevel::Trace:
-        m_logger->trace (message);
-        break;
-    case LogLevel::Debug:
-        m_logger->debug (message);
-        break;
-    case LogLevel::Info:
-        m_logger->info (message);
-        break;
-    case LogLevel::Warn:
-        m_logger->warn (message);
-        break;
-    case LogLevel::Error:
-        m_logger->error (message);
-        break;
-    case LogLevel::Critical:
-        m_logger->critical (message);
-        break;
-    }
+    m_logger->log (static_cast<level_enum> (level), message);
 }
 
 } // namespace graphics::core

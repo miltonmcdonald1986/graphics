@@ -8,19 +8,23 @@
 #include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/log_level.hpp>
 
+using std::source_location;
+using std::string;
+using std::unexpected;
+
 namespace graphics::core
 {
 
 auto create_unexpected (const Diagnostic& diagnostic) -> Unexpected
 {
-    core::log_diagnostic (diagnostic);
-    return std::unexpected (diagnostic);
+    log_diagnostic (diagnostic);
+    return unexpected (diagnostic);
 }
 
 auto create_unexpected (DiagnosticCategory category,
-    const std::string& message,
+    const string& message,
     LogLevel level,
-    std::source_location location) -> Unexpected
+    source_location location) -> Unexpected
 {
     const Diagnostic diagnostic{.category = category,
         .level = level,

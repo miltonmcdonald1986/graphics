@@ -3,6 +3,7 @@
 
 #include <graphics/platform/i_platform.hpp>
 #include <graphics/window/i_window.hpp>
+#include <graphics/window/window_desc.hpp>
 
 #include <internal/platform/slot.hpp>
 
@@ -32,7 +33,7 @@ struct PlatformBase : public IPlatform
     auto set_window_should_close (std::uint32_t win_id, bool should_close)
         -> void final;
 
-    auto swap_buffers (std::uint32_t window) const -> void final;
+    auto swap_buffers (std::uint32_t win_id) const -> void final;
 
     [[nodiscard]] auto window_should_close (std::uint32_t win_id) const
         -> core::Expected<bool> final;
@@ -57,6 +58,11 @@ struct PlatformBase : public IPlatform
         -> core::Expected<bool> = 0;
 
   private:
+    auto acquire_slot() -> std::uint32_t;
+    auto create_backend_window_into (Slot& slot, const window::WindowDesc& desc)
+        -> bool;
+    auto release_slot (std::uint32_t win_id) -> void;
+
     std::vector<std::uint32_t> m_free_list;
     std::vector<Slot> m_windows;
 };
