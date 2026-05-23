@@ -14,6 +14,8 @@
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
+#include "internal/platform/handle.hpp"
+#include "internal/platform/release_mode.hpp"
 #include "internal/platform/slot.hpp"
 
 using graphics::core::create_unexpected;
@@ -21,7 +23,6 @@ using graphics::core::Expected;
 using graphics::core::log_diagnostic;
 using graphics::core::DiagnosticCategory::Platform;
 using graphics::core::LogLevel::Debug;
-using graphics::core::LogLevel::Trace;
 using graphics::core::LogLevel::Warn;
 using graphics::platform::ReleaseMode::AfterDestroy;
 using graphics::platform::ReleaseMode::AfterFailedCreate;
@@ -67,9 +68,9 @@ auto PlatformBase::create_window (const WindowDesc& desc) -> Expected<uint32_t>
 auto PlatformBase::destroy_window (uint32_t win_id) -> void
 {
     // Step 1: Unpack handle
-    Handle handle{unpack_handle (win_id)};
+    const Handle handle{unpack_handle (win_id)};
     const Slot* slot = get_slot_from_handle (handle);
-    if (!slot)
+    if (slot == nullptr)
     {
         log_diagnostic (Platform, format ("Invalid window handle {}", win_id),
             Warn);
@@ -91,8 +92,11 @@ auto PlatformBase::get_all_window_ids() const -> vector<uint32_t>
 
     for (uint32_t index = 0; index < m_windows.size(); ++index)
     {
-        if (m_windows.at(index).window)
-            result.push_back (pack_handle (index, m_windows.at(index).generation));
+        if (m_windows.at (index).window)
+        {
+            result.push_back (pack_handle (index,
+                m_windows.at (index).generation));
+        }
     }
 
     return result;
@@ -100,7 +104,7 @@ auto PlatformBase::get_all_window_ids() const -> vector<uint32_t>
 
 auto PlatformBase::get_window_ptr (uint32_t window_id) const -> IWindow*
 {
-    if (auto* slot = get_slot_from_handle (unpack_handle (window_id)))
+    if (const auto* slot = get_slot_from_handle (unpack_handle (window_id)))
     {
         return slot->window.get();
     }
@@ -182,14 +186,20 @@ auto PlatformBase::acquire_slot() -> std::uint32_t
 auto PlatformBase::get_slot_from_handle (const Handle& handle) const -> const Slot*
 {
     if (handle.id >= m_windows.size())
+    {
         return nullptr;
+    }
 
-    const Slot& slot = m_windows[handle.id];
+    const Slot& slot = m_windows.at(handle.id);
     if (!slot.window)
+    {
         return nullptr;
+    }
 
     if (slot.generation != handle.gen)
+    {
         return nullptr;
+    }
 
     return &slot;
 }
@@ -215,9 +225,15 @@ auto PlatformBase::log_free_list() const -> void
         log_diagnostic (Platform, ids, Debug);
 }
 
-auto PlatformBase::release_slot (uint32_t id, ReleaseMode mode) -> void
+auto PlatformBase::release_slot (uint32_t win_id, ReleaseMode mode) -> void
 {
-    Slot& slot = m_windows[id];
+    if (win_id >= m_windows.size())
+    {
+        log_diagnostic (Platform, format ("Invalid slot id {}", win_id), Warn);
+        return;
+    }
+
+    Slot& slot = m_windows[win_id];
 
     // Clear the window pointer (safe even if nullptr)
     slot.window.reset();
@@ -232,8 +248,8 @@ auto PlatformBase::release_slot (uint32_t id, ReleaseMode mode) -> void
     }
 
     // Return slot to free list
-    m_free_list.push_back (id);
-    log_diagnostic (Platform, format ("Slot {} is now free", id), Debug);
+    m_free_list.push_back (win_id);
+    log_diagnostic (Platform, format ("Slot {} is now free", win_id), Debug);
 
     log_free_list();
 }

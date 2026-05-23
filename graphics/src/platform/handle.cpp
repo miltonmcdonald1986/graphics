@@ -1,5 +1,6 @@
 #include <internal/platform/handle.hpp>
 
+#include <cstdint>
 #include <format>
 
 #include <graphics/core/diagnostic.hpp>
@@ -10,6 +11,7 @@ using graphics::core::log_diagnostic;
 using graphics::core::DiagnosticCategory::Platform;
 using graphics::core::LogLevel::Trace;
 using std::format;
+using std::uint32_t;
 
 namespace graphics::platform
 {
