@@ -23,5 +23,5 @@ var namespacegraphics_1_1core =
     [ "create_unexpected", "namespacegraphics_1_1core.html#a3219e23d9b54034d18d6012ce478caf2", null ],
     [ "log_diagnostic", "namespacegraphics_1_1core.html#ad8a00e712cec3107cf87aeb731f5bead", null ],
     [ "log_diagnostic", "namespacegraphics_1_1core.html#ae77b6d6c21bd12f3b27adb35bf19dcf8", null ],
-    [ "log_message", "namespacegraphics_1_1core.html#af3c0c2c3221797cd13d2e58a6169d1f3", null ]
+    [ "log_message", "namespacegraphics_1_1core.html#ad153273421c20e281e4a98321a350d10", null ]
 ];
