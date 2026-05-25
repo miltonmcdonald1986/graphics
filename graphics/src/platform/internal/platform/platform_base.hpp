@@ -41,22 +41,22 @@ struct PlatformBase : public IPlatform
         -> core::Expected<bool> final;
 
   protected:
-    [[nodiscard]] virtual auto create_backend_window (
+    [[nodiscard]] virtual auto backend_create_window (
         const window::WindowDesc& desc
     ) const -> std::unique_ptr<window::IWindow> = 0;
 
-    virtual auto destroy_backend_window (window::IWindow* window) const
+    virtual auto backend_destroy_window (window::IWindow* window) const
         -> void = 0;
 
-    virtual auto poll_backend_events() -> void = 0;
+    virtual auto backend_poll_events() -> void = 0;
 
-    virtual auto set_backend_window_should_close (window::IWindow* window,
+    virtual auto backend_set_window_should_close (window::IWindow* window,
         bool should_close) -> void = 0;
 
-    virtual auto swap_backend_buffers (window::IWindow* window) const
+    virtual auto backend_swap_buffers (window::IWindow* window) const
         -> void = 0;
 
-    virtual auto window_backend_should_close (window::IWindow* window) const
+    virtual auto backend_window_should_close (window::IWindow* window) const
         -> core::Expected<bool> = 0;
 
   private:

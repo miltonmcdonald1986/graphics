@@ -47,7 +47,7 @@ auto PlatformBase::create_window (const WindowDesc& desc) -> Expected<uint32_t>
     Slot& slot = m_windows.at (win_id);
 
     // Step 2: Backend creation
-    slot.window = create_backend_window (desc);
+    slot.window = backend_create_window (desc);
     if (!slot.window)
     {
         release_slot (win_id, AfterFailedCreate);
@@ -79,7 +79,7 @@ auto PlatformBase::destroy_window (uint32_t win_id) -> void
     }
 
     // Step 2: Backend destruction
-    destroy_backend_window (slot->window.get());
+    backend_destroy_window (slot->window.get());
 
     // Step 3: Release slot
     release_slot (handle.id, AfterDestroy);
@@ -121,14 +121,14 @@ auto PlatformBase::has_windows() const -> bool
         [] (const Slot& slot) -> bool { return (slot.window != nullptr); });
 }
 
-auto PlatformBase::poll_events() -> void { poll_backend_events(); }
+auto PlatformBase::poll_events() -> void { backend_poll_events(); }
 
 auto PlatformBase::set_window_should_close (uint32_t win_id, bool should_close)
     -> void
 {
     if (auto* ptr = get_window_ptr (win_id))
     {
-        set_backend_window_should_close (ptr, should_close);
+        backend_set_window_should_close (ptr, should_close);
         return;
     }
 
@@ -140,7 +140,7 @@ auto PlatformBase::swap_buffers (uint32_t win_id) const -> void
 {
     if (auto* ptr = get_window_ptr (win_id))
     {
-        swap_backend_buffers (ptr);
+        backend_swap_buffers (ptr);
         return;
     }
 
@@ -152,7 +152,7 @@ auto PlatformBase::window_should_close (uint32_t win_id) const -> Expected<bool>
 {
     if (auto* ptr = get_window_ptr (win_id))
     {
-        return window_backend_should_close (ptr);
+        return backend_window_should_close (ptr);
     }
 
     return create_unexpected (Platform,

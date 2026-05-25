@@ -90,7 +90,7 @@ PlatformSDL2::~PlatformSDL2()
     }
 }
 
-auto PlatformSDL2::create_backend_window (const WindowDesc& desc) const
+auto PlatformSDL2::backend_create_window (const WindowDesc& desc) const
     -> unique_ptr<IWindow>
 {
     auto window = make_unique<WindowSDL2> (desc);
@@ -105,7 +105,7 @@ auto PlatformSDL2::create_backend_window (const WindowDesc& desc) const
     return window;
 }
 
-auto PlatformSDL2::destroy_backend_window (IWindow* window) const -> void
+auto PlatformSDL2::backend_destroy_window (IWindow* window) const -> void
 {
     if (auto* window_sdl = dynamic_cast<WindowSDL2*> (window))
     {
@@ -129,7 +129,7 @@ auto PlatformSDL2::destroy_backend_window (IWindow* window) const -> void
     }
 }
 
-auto PlatformSDL2::poll_backend_events() -> void
+auto PlatformSDL2::backend_poll_events() -> void
 {
     SDL_Event event;
     while (SDL_PollEvent (&event) == 1)
@@ -177,7 +177,7 @@ auto PlatformSDL2::poll_backend_events() -> void
     }
 }
 
-auto PlatformSDL2::set_backend_window_should_close (window::IWindow* window,
+auto PlatformSDL2::backend_set_window_should_close (window::IWindow* window,
     bool should_close) -> void
 {
     if (auto* window_sdl2 = dynamic_cast<WindowSDL2*> (window))
@@ -191,7 +191,7 @@ auto PlatformSDL2::set_backend_window_should_close (window::IWindow* window,
     }
 }
 
-auto PlatformSDL2::swap_backend_buffers (window::IWindow* window) const -> void
+auto PlatformSDL2::backend_swap_buffers (window::IWindow* window) const -> void
 {
     if (auto* window_sdl2 = dynamic_cast<WindowSDL2*> (window))
     {
@@ -204,7 +204,7 @@ auto PlatformSDL2::swap_backend_buffers (window::IWindow* window) const -> void
     }
 }
 
-auto PlatformSDL2::window_backend_should_close (IWindow* window) const
+auto PlatformSDL2::backend_window_should_close (IWindow* window) const
     -> Expected<bool>
 {
     if (auto* window_sdl2 = dynamic_cast<WindowSDL2*> (window))

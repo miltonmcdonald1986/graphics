@@ -86,7 +86,7 @@ PlatformGLFW::~PlatformGLFW()
     }
 }
 
-auto PlatformGLFW::create_backend_window (const window::WindowDesc& desc) const
+auto PlatformGLFW::backend_create_window (const window::WindowDesc& desc) const
     -> unique_ptr<IWindow>
 {
     auto window = make_unique<WindowGLFW3> (desc);
@@ -101,7 +101,7 @@ auto PlatformGLFW::create_backend_window (const window::WindowDesc& desc) const
     return window;
 }
 
-auto PlatformGLFW::destroy_backend_window (window::IWindow* window) const
+auto PlatformGLFW::backend_destroy_window (window::IWindow* window) const
     -> void
 {
     if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
@@ -126,9 +126,9 @@ auto PlatformGLFW::destroy_backend_window (window::IWindow* window) const
     }
 }
 
-auto PlatformGLFW::poll_backend_events() -> void { glfwPollEvents(); }
+auto PlatformGLFW::backend_poll_events() -> void { glfwPollEvents(); }
 
-auto PlatformGLFW::set_backend_window_should_close (window::IWindow* window,
+auto PlatformGLFW::backend_set_window_should_close (window::IWindow* window,
     bool should_close) -> void
 {
     if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
@@ -143,7 +143,7 @@ auto PlatformGLFW::set_backend_window_should_close (window::IWindow* window,
     }
 }
 
-auto PlatformGLFW::swap_backend_buffers (window::IWindow* window) const -> void
+auto PlatformGLFW::backend_swap_buffers (window::IWindow* window) const -> void
 {
     if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
     {
@@ -156,7 +156,7 @@ auto PlatformGLFW::swap_backend_buffers (window::IWindow* window) const -> void
     }
 }
 
-auto PlatformGLFW::window_backend_should_close (window::IWindow* window) const
+auto PlatformGLFW::backend_window_should_close (window::IWindow* window) const
     -> Expected<bool>
 {
     if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
