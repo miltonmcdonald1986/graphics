@@ -6,7 +6,7 @@ namespace graphics::platform
 
 struct Slot
 {
-    std::unique_ptr<window::IWindow> window{nullptr};
+    std::unique_ptr<window::IWindow> window{ nullptr };
     std::uint32_t generation = 0;
 };
 

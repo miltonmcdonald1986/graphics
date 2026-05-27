@@ -22,11 +22,9 @@ class PlatformSDL2 final : public PlatformBase
     auto operator= (PlatformSDL2&&) -> PlatformSDL2& = delete;
 
   protected:
-    [[nodiscard]] auto backend_create_window (
-        const window::WindowDesc& desc
-    ) -> std::unique_ptr<window::IWindow> final;
-    auto backend_destroy_window (window::IWindow* window) const
-        -> void final;
+    [[nodiscard]] auto backend_create_window (const window::WindowDesc& desc)
+        -> std::unique_ptr<window::IWindow> final;
+    auto backend_destroy_window (window::IWindow* window) const -> void final;
     auto backend_make_context_current (window::IWindow* window) const
         -> core::Status final;
     auto backend_poll_events() -> void final;
