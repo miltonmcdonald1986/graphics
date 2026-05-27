@@ -110,6 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6b0a7b3806f2a90780f8ba8bb3e46e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve all currently active window IDs.  <br /></td></tr>
 <tr class="memitem:a7be4c9f140c2d07df49aed6dec8c7b98" id="r_a7be4c9f140c2d07df49aed6dec8c7b98"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7be4c9f140c2d07df49aed6dec8c7b98">has_windows</a> () const -&gt; bool=0</td></tr>
 <tr class="memdesc:a7be4c9f140c2d07df49aed6dec8c7b98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether any windows are currently active.  <br /></td></tr>
+<tr class="memitem:a914e084e5f43c935f363e0b94919d5d8" id="r_a914e084e5f43c935f363e0b94919d5d8"><td class="memItemLeft" align="right" valign="top">virtual auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a914e084e5f43c935f363e0b94919d5d8">make_context_current</a> (std::uint32_t win_id) const -&gt; <a class="el" href="namespacegraphics_1_1core.html#a3fa03aa63837b909231d363a0c719b9e">core::Status</a>=0</td></tr>
+<tr class="memdesc:a914e084e5f43c935f363e0b94919d5d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the OpenGL context for the given window ID current.  <br /></td></tr>
 <tr class="memitem:a5db91de577cbc35dd6b8ff4a2cf6dd16" id="r_a5db91de577cbc35dd6b8ff4a2cf6dd16"><td class="memItemLeft" align="right" valign="top"><a id="a5db91de577cbc35dd6b8ff4a2cf6dd16" name="a5db91de577cbc35dd6b8ff4a2cf6dd16"></a>
 virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_events</b> () -&gt; void=0</td></tr>
 <tr class="memdesc:a5db91de577cbc35dd6b8ff4a2cf6dd16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll backend-specific events (input, window messages, etc.). <br /></td></tr>
@@ -273,6 +275,40 @@ virtual auto&#160;</td><td class="memItemRight" valign="bottom"><b>poll_events</
 
 <p>Check whether any windows are currently active. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if at least one window exists. </dd></dl>
+
+</div>
+</div>
+<a id="a914e084e5f43c935f363e0b94919d5d8" name="a914e084e5f43c935f363e0b94919d5d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a914e084e5f43c935f363e0b94919d5d8">&#9670;&#160;</a></span>make_context_current()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual auto graphics::platform::IPlatform::make_context_current </td>
+          <td>(</td>
+          <td class="paramtype">std::uint32_t</td>          <td class="paramname"><span class="paramname"><em>win_id</em></span></td><td>)</td>
+          <td> const -&gt;  <a class="el" href="namespacegraphics_1_1core.html#a3fa03aa63837b909231d363a0c719b9e">core::Status</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Makes the OpenGL context for the given window ID current. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">win_id</td><td>Window ID whose context should be made current. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Status indicating success or failure. </dd></dl>
 
 </div>
 </div>
