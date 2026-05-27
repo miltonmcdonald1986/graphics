@@ -159,7 +159,7 @@ auto PlatformGLFW::backend_make_context_current (window::IWindow* window) const
         glfwMakeContextCurrent (window_glfw->get_glfw_window());
         return {};
     }
-    
+
     return create_unexpected (Platform, "Failed to cast window to WindowGLFW");
 }
 
