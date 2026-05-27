@@ -2,7 +2,7 @@
 #define GRAPHICS_INTERNAL_PLATFORM_GL_INCLUDES_HPP
 
 #define GLFW_INCLUDE_NONE
-#include <GL/gl3w.h>	// IWYU pragma: export
-#include <GLFW/glfw3.h>	// IWYU pragma: export
+#include <GL/gl3w.h>    // IWYU pragma: export
+#include <GLFW/glfw3.h> // IWYU pragma: export
 
 #endif // GRAPHICS_INTERNAL_PLATFORM_GL_INCLUDES_HPP
