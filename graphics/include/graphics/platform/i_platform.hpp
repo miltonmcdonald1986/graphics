@@ -45,6 +45,11 @@ struct IPlatform
     /// \return True if at least one window exists.
     [[nodiscard]] virtual auto has_windows() const -> bool = 0;
 
+    /// \brief Makes the OpenGL context for the given window ID current.
+    /// \param win_id Window ID whose context should be made current.
+    virtual auto make_context_current (std::uint32_t win_id) const
+        -> core::Status = 0;
+
     /// \brief Poll backend-specific events (input, window messages, etc.).
     virtual auto poll_events() -> void = 0;
 

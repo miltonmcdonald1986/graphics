@@ -30,6 +30,9 @@ struct PlatformBase : public IPlatform
 
     [[nodiscard]] auto has_windows() const -> bool final;
 
+    auto make_context_current (std::uint32_t win_id) const
+        -> core::Status final;
+
     auto poll_events() -> void final;
 
     auto set_window_should_close (std::uint32_t win_id, bool should_close)
@@ -43,10 +46,13 @@ struct PlatformBase : public IPlatform
   protected:
     [[nodiscard]] virtual auto backend_create_window (
         const window::WindowDesc& desc
-    ) const -> std::unique_ptr<window::IWindow> = 0;
+    ) -> std::unique_ptr<window::IWindow> = 0;
 
     virtual auto backend_destroy_window (window::IWindow* window) const
         -> void = 0;
+
+    virtual auto backend_make_context_current (window::IWindow* window) const
+        -> core::Status = 0;
 
     virtual auto backend_poll_events() -> void = 0;
 

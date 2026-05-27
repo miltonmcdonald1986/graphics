@@ -2,8 +2,10 @@
   "name": "graphics",
   "version": "0.0.0",
   "dependencies": [
+    "gl3w",
     "glfw3",
     "gtest",
+    "imgui",
     "magic-enum",
     "sdl2",
     "spdlog"

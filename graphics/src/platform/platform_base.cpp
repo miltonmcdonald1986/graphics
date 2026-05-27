@@ -21,6 +21,7 @@
 using graphics::core::create_unexpected;
 using graphics::core::Expected;
 using graphics::core::log_diagnostic;
+using graphics::core::Status;
 using graphics::core::DiagnosticCategory::Platform;
 using graphics::core::LogLevel::Debug;
 using graphics::core::LogLevel::Warn;
@@ -68,7 +69,7 @@ auto PlatformBase::create_window (const WindowDesc& desc) -> Expected<uint32_t>
 auto PlatformBase::destroy_window (uint32_t win_id) -> void
 {
     // Step 1: Unpack handle
-    const Handle handle{unpack_handle (win_id)};
+    const Handle handle{ unpack_handle (win_id) };
     const Slot* slot = get_slot_from_handle (handle);
     if (slot == nullptr)
     {
@@ -119,6 +120,28 @@ auto PlatformBase::has_windows() const -> bool
 {
     return any_of (m_windows,
         [] (const Slot& slot) -> bool { return (slot.window != nullptr); });
+}
+
+auto PlatformBase::make_context_current (std::uint32_t win_id) const -> Status
+{
+    if (auto* ptr = get_window_ptr (win_id))
+    {
+        auto status = backend_make_context_current (ptr);
+        if (status.has_value())
+        {
+            log_diagnostic (Platform,
+                format ("Window {} is current context", win_id), Debug);
+
+            return status;
+        }
+        else
+            return create_unexpected (Platform,
+                format ("Failed to make context current for window {}",
+                    win_id));
+    }
+
+    return create_unexpected (Platform,
+        "Invalid window handle; cannot make context current");
 }
 
 auto PlatformBase::poll_events() -> void { backend_poll_events(); }

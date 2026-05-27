@@ -2,12 +2,15 @@ add_library(graphics)
 
 target_compile_features(graphics PUBLIC cxx_std_23)
 
+find_package(gl3w CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(magic_enum CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(SDL2 CONFIG REQUIRED)
+
 target_link_libraries(graphics 
     PRIVATE 
+        unofficial::gl3w::gl3w        
         glfw 
         magic_enum::magic_enum
         $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
