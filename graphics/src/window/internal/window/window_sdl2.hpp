@@ -13,7 +13,7 @@ namespace graphics::window
 class WindowSDL2 final : public WindowBase
 {
   public:
-    explicit WindowSDL2 (const WindowDesc& desc);
+    WindowSDL2 (const WindowDesc& desc, SDL_GLContext shared_context);
     ~WindowSDL2() override;
 
     WindowSDL2 (const WindowSDL2&) = delete;
@@ -22,14 +22,16 @@ class WindowSDL2 final : public WindowBase
     WindowSDL2 (WindowSDL2&&) = delete;
     auto operator= (WindowSDL2&&) -> WindowSDL2& = delete;
 
+    [[nodiscard]] auto get_context() const -> SDL_GLContext;
     [[nodiscard]] auto get_sdl2_window() const -> SDL_Window*;
     [[nodiscard]] auto is_initialized() const -> bool;
     auto set_should_close (bool should_close) -> void;
     [[nodiscard]] auto should_close() const -> bool;
 
   private:
-    bool m_should_close{false};
-    SDL_Window* m_window{nullptr};
+    bool m_should_close{ false };
+    SDL_GLContext m_context{ nullptr };
+    SDL_Window* m_window{ nullptr };
 };
 
 } // namespace graphics::window

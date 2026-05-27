@@ -1,9 +1,9 @@
 #ifndef GRAPHICS_PLATFORM_PLATFORM_GLFW3_HPP
 #define GRAPHICS_PLATFORM_PLATFORM_GLFW3_HPP
 
-#include <GLFW/glfw3.h>
-
 #include "platform_base.hpp"
+
+#include "gl_includes.hpp"
 
 namespace graphics::platform
 {
@@ -13,7 +13,7 @@ class PlatformGLFW final : public PlatformBase
 
   public:
     PlatformGLFW();
-    ~PlatformGLFW() override;
+    ~PlatformGLFW() final;
 
     PlatformGLFW (const PlatformGLFW&) = delete;
     auto operator= (const PlatformGLFW&) -> PlatformGLFW& = delete;
@@ -22,20 +22,22 @@ class PlatformGLFW final : public PlatformBase
     auto operator= (PlatformGLFW&&) -> PlatformGLFW& = delete;
 
   protected:
-    [[nodiscard]] auto create_backend_window (
-        const window::WindowDesc& desc
-    ) const -> std::unique_ptr<window::IWindow> override;
-    auto destroy_backend_window (window::IWindow* window) const
-        -> void override;
-    auto poll_backend_events() -> void override;
-    auto set_backend_window_should_close (window::IWindow* window,
-        bool should_close) -> void override;
-    auto swap_backend_buffers (window::IWindow* window) const -> void override;
-    auto window_backend_should_close (window::IWindow* window) const
-        -> core::Expected<bool> override;
+    [[nodiscard]] auto backend_create_window (const window::WindowDesc& desc)
+        -> std::unique_ptr<window::IWindow> final;
+    auto backend_destroy_window (window::IWindow* window) const -> void final;
+    auto backend_make_context_current (window::IWindow* window) const
+        -> core::Status final;
+    auto backend_poll_events() -> void final;
+    auto backend_set_window_should_close (window::IWindow* window,
+        bool should_close) -> void final;
+    auto backend_swap_buffers (window::IWindow* window) const -> void final;
+    auto backend_window_should_close (window::IWindow* window) const
+        -> core::Expected<bool> final;
 
   private:
-    bool m_initialized = false;
+    bool m_gl_loaded{ false };
+    bool m_initialized{ false };
+    GLFWwindow* m_master_context{ nullptr };
 };
 
 auto create_platform_glfw() -> std::unique_ptr<PlatformGLFW>;

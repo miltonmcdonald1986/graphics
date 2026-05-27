@@ -1,18 +1,18 @@
 #include <internal/window/window_glfw3.hpp>
 
-#include <GLFW/glfw3.h>
-
 #include <graphics/window/window_desc.hpp>
+
+#include <internal/platform/gl_includes.hpp>
 
 namespace graphics::window
 {
 
-WindowGLFW3::WindowGLFW3 (const WindowDesc& desc)
+WindowGLFW3::WindowGLFW3 (const WindowDesc& desc, GLFWwindow* shared_context)
     : m_window (glfwCreateWindow (desc.width,
           desc.height,
           desc.title.c_str(),
           desc.fullscreen ? glfwGetPrimaryMonitor() : nullptr,
-          nullptr))
+          shared_context))
 {
 }
 

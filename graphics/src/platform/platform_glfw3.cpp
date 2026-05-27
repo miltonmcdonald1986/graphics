@@ -3,23 +3,23 @@
 #include <cstdio>
 #include <memory>
 
-#include <GLFW/glfw3.h>
-
 #include <graphics/core/diagnostic.hpp>
 #include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/expected.hpp>
 #include <graphics/core/log_level.hpp>
+#include <graphics/core/status.hpp>
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
+#include <internal/platform/gl_includes.hpp>
 #include <internal/platform/glfw_callbacks.hpp>
 #include <internal/window/window_glfw3.hpp>
 
 using graphics::core::create_unexpected;
-using graphics::core::DiagnosticCategory;
 using graphics::core::Expected;
 using graphics::core::log_diagnostic;
 using graphics::core::LogLevel;
+using graphics::core::DiagnosticCategory::Platform;
 using graphics::window::IWindow;
 using graphics::window::WindowGLFW3;
 using std::make_unique;
@@ -36,8 +36,7 @@ auto create_platform_glfw() -> unique_ptr<PlatformGLFW>
     }
     catch (...)
     {
-        log_diagnostic (DiagnosticCategory::Platform,
-            "Failed to create GLFW platform");
+        log_diagnostic (Platform, "Failed to create GLFW platform");
 
         return nullptr;
     }
@@ -49,15 +48,17 @@ PlatformGLFW::PlatformGLFW()
 
     if (glfwInit() == GLFW_TRUE)
     {
-        log_diagnostic (DiagnosticCategory::Platform, "Initialized GLFW",
-            LogLevel::Info);
+        log_diagnostic (Platform, "Initialized GLFW", LogLevel::Info);
+
+        glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         m_initialized = true;
     }
     else
     {
-        log_diagnostic (DiagnosticCategory::Platform,
-            "Failed to initialize GLFW", LogLevel::Error);
+        log_diagnostic (Platform, "Failed to initialize GLFW", LogLevel::Error);
 
         m_initialized = false;
     }
@@ -69,14 +70,13 @@ PlatformGLFW::~PlatformGLFW()
     {
         if (m_initialized)
         {
-            log_diagnostic (DiagnosticCategory::Platform, "Shutting fown GLFW",
-                LogLevel::Info);
+            log_diagnostic (Platform, "Shutting fown GLFW", LogLevel::Info);
 
             glfwTerminate();
         }
         else
         {
-            log_diagnostic (DiagnosticCategory::Platform,
+            log_diagnostic (Platform,
                 "GLFW is not initialized; skipping shutdown", LogLevel::Warn);
         }
     }
@@ -86,22 +86,48 @@ PlatformGLFW::~PlatformGLFW()
     }
 }
 
-auto PlatformGLFW::create_backend_window (const window::WindowDesc& desc) const
+auto PlatformGLFW::backend_create_window (const window::WindowDesc& desc)
     -> unique_ptr<IWindow>
 {
-    auto window = make_unique<WindowGLFW3> (desc);
+    GLFWwindow* shared_context = m_master_context;
+    auto window = make_unique<WindowGLFW3> (desc, shared_context);
     if (!window->is_initialized())
     {
-        log_diagnostic (DiagnosticCategory::Platform,
-            "Window is not initialized");
+        log_diagnostic (Platform, "Window is not initialized");
 
         return nullptr;
+    }
+
+    GLFWwindow* glfw_window = window->get_glfw_window();
+
+    if (m_master_context == nullptr)
+    {
+        m_master_context = glfw_window;
+
+        if (!backend_make_context_current (window.get()))
+        {
+            log_diagnostic (Platform,
+                "Failed to make master context current for window");
+
+            return nullptr;
+        }
+
+        if (!m_gl_loaded)
+        {
+            if (gl3wInit() != 0)
+            {
+                log_diagnostic (Platform, "Failed to initialize gl3w");
+                return nullptr;
+            }
+
+            m_gl_loaded = true;
+        }
     }
 
     return window;
 }
 
-auto PlatformGLFW::destroy_backend_window (window::IWindow* window) const
+auto PlatformGLFW::backend_destroy_window (window::IWindow* window) const
     -> void
 {
     if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
@@ -112,23 +138,35 @@ auto PlatformGLFW::destroy_backend_window (window::IWindow* window) const
         }
         else
         {
-            log_diagnostic (DiagnosticCategory::Platform,
+            log_diagnostic (Platform,
                 "Attempting to destroy a nonexistant GLFWwindow",
                 LogLevel::Warn);
         }
     }
     else
     {
-        log_diagnostic (DiagnosticCategory::Platform,
+        log_diagnostic (Platform,
             "Either the desired window does not exist or it is not "
             "a GLFW window",
             LogLevel::Warn);
     }
 }
 
-auto PlatformGLFW::poll_backend_events() -> void { glfwPollEvents(); }
+auto PlatformGLFW::backend_make_context_current (window::IWindow* window) const
+    -> core::Status
+{
+    if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
+    {
+        glfwMakeContextCurrent (window_glfw->get_glfw_window());
+        return {};
+    }
 
-auto PlatformGLFW::set_backend_window_should_close (window::IWindow* window,
+    return create_unexpected (Platform, "Failed to cast window to WindowGLFW");
+}
+
+auto PlatformGLFW::backend_poll_events() -> void { glfwPollEvents(); }
+
+auto PlatformGLFW::backend_set_window_should_close (window::IWindow* window,
     bool should_close) -> void
 {
     if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
@@ -138,12 +176,12 @@ auto PlatformGLFW::set_backend_window_should_close (window::IWindow* window,
     }
     else
     {
-        log_diagnostic (DiagnosticCategory::Platform,
-            "Failed to cast window to WindowGLFW", LogLevel::Warn);
+        log_diagnostic (Platform, "Failed to cast window to WindowGLFW",
+            LogLevel::Warn);
     }
 }
 
-auto PlatformGLFW::swap_backend_buffers (window::IWindow* window) const -> void
+auto PlatformGLFW::backend_swap_buffers (window::IWindow* window) const -> void
 {
     if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
     {
@@ -151,12 +189,12 @@ auto PlatformGLFW::swap_backend_buffers (window::IWindow* window) const -> void
     }
     else
     {
-        log_diagnostic (DiagnosticCategory::Platform,
-            "Failed to cast window to WindowGLFW", LogLevel::Warn);
+        log_diagnostic (Platform, "Failed to cast window to WindowGLFW",
+            LogLevel::Warn);
     }
 }
 
-auto PlatformGLFW::window_backend_should_close (window::IWindow* window) const
+auto PlatformGLFW::backend_window_should_close (window::IWindow* window) const
     -> Expected<bool>
 {
     if (auto* window_glfw = dynamic_cast<WindowGLFW3*> (window))
@@ -164,8 +202,8 @@ auto PlatformGLFW::window_backend_should_close (window::IWindow* window) const
         return glfwWindowShouldClose (window_glfw->get_glfw_window());
     }
 
-    return create_unexpected (DiagnosticCategory::Platform,
-        "Failed to cast window to WindowGLFW", LogLevel::Warn);
+    return create_unexpected (Platform, "Failed to cast window to WindowGLFW",
+        LogLevel::Warn);
 }
 
 } // namespace graphics::platform

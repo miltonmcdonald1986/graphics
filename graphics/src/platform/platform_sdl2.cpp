@@ -13,16 +13,18 @@
 #include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/expected.hpp>
 #include <graphics/core/log_level.hpp>
+#include <graphics/core/status.hpp>
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
+#include <internal/platform/gl_includes.hpp>
 #include <internal/window/window_sdl2.hpp>
 
 using graphics::core::create_unexpected;
-using graphics::core::DiagnosticCategory;
 using graphics::core::Expected;
 using graphics::core::log_diagnostic;
 using graphics::core::LogLevel;
+using graphics::core::DiagnosticCategory::Platform;
 using graphics::window::IWindow;
 using graphics::window::WindowDesc;
 using graphics::window::WindowSDL2;
@@ -41,8 +43,7 @@ auto create_platform_sdl2() -> unique_ptr<PlatformSDL2>
     }
     catch (...)
     {
-        log_diagnostic (DiagnosticCategory::Platform,
-            "Failed to create SDL2 platform");
+        log_diagnostic (Platform, "Failed to create SDL2 platform");
 
         return nullptr;
     }
@@ -52,14 +53,18 @@ PlatformSDL2::PlatformSDL2()
 {
     if (SDL_Init (SDL_INIT_VIDEO) == 0)
     {
-        log_diagnostic (DiagnosticCategory::Platform, "Initialized SDL2",
-            LogLevel::Info);
+        log_diagnostic (Platform, "Initialized SDL2", LogLevel::Info);
+
+        SDL_GL_SetAttribute (SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute (SDL_GL_CONTEXT_MINOR_VERSION, 3);
+        SDL_GL_SetAttribute (SDL_GL_CONTEXT_PROFILE_MASK,
+            SDL_GL_CONTEXT_PROFILE_CORE);
 
         m_initialized = true;
     }
     else
     {
-        log_diagnostic (DiagnosticCategory::Platform,
+        log_diagnostic (Platform,
             string ("Failed to initialize SDL2: ") + SDL_GetError(),
             LogLevel::Error);
 
@@ -73,14 +78,13 @@ PlatformSDL2::~PlatformSDL2()
     {
         if (m_initialized)
         {
-            log_diagnostic (DiagnosticCategory::Platform, "Shutting down SDL2",
-                LogLevel::Info);
+            log_diagnostic (Platform, "Shutting down SDL2", LogLevel::Info);
 
             SDL_Quit();
         }
         else
         {
-            log_diagnostic (DiagnosticCategory::Platform,
+            log_diagnostic (Platform,
                 "SDL2 is not initialized; skipping shutdown", LogLevel::Warn);
         }
     }
@@ -90,22 +94,48 @@ PlatformSDL2::~PlatformSDL2()
     }
 }
 
-auto PlatformSDL2::create_backend_window (const WindowDesc& desc) const
+auto PlatformSDL2::backend_create_window (const WindowDesc& desc)
     -> unique_ptr<IWindow>
 {
-    auto window = make_unique<WindowSDL2> (desc);
+    SDL_GLContext share = m_master_context;
+
+    auto window = make_unique<WindowSDL2> (desc, share);
     if (!window->is_initialized())
     {
-        log_diagnostic (DiagnosticCategory::Platform,
-            "Window is not initialized");
-
+        log_diagnostic (Platform, "Window is not initialized");
         return nullptr;
+    }
+
+    SDL_GLContext context = window->get_context();
+
+    if (m_master_context == nullptr)
+    {
+        m_master_context = context;
+
+        if (!backend_make_context_current (window.get()))
+        {
+            log_diagnostic (Platform,
+                "Failed to make master context current for window");
+
+            return nullptr;
+        }
+
+        if (!m_gl_loaded)
+        {
+            if (gl3wInit() != 0)
+            {
+                log_diagnostic (Platform, "Failed to initialize gl3w");
+                return nullptr;
+            }
+
+            m_gl_loaded = true;
+        }
     }
 
     return window;
 }
 
-auto PlatformSDL2::destroy_backend_window (IWindow* window) const -> void
+auto PlatformSDL2::backend_destroy_window (IWindow* window) const -> void
 {
     if (auto* window_sdl = dynamic_cast<WindowSDL2*> (window))
     {
@@ -115,21 +145,46 @@ auto PlatformSDL2::destroy_backend_window (IWindow* window) const -> void
         }
         else
         {
-            log_diagnostic (DiagnosticCategory::Platform,
+            log_diagnostic (Platform,
                 "Attempting to destroy a nonexistent SDL_Window",
+                LogLevel::Warn);
+        }
+
+        if (SDL_GLContext context = window_sdl->get_context())
+        {
+            SDL_GL_DeleteContext (context);
+        }
+        else
+        {
+            log_diagnostic (Platform,
+                "Attempting to delete a nonexistent SDL_GLContext",
                 LogLevel::Warn);
         }
     }
     else
     {
-        log_diagnostic (DiagnosticCategory::Platform,
+        log_diagnostic (Platform,
             "Either the desired window does not exist or it is not an SDL2 "
             "window",
             LogLevel::Warn);
     }
 }
 
-auto PlatformSDL2::poll_backend_events() -> void
+auto PlatformSDL2::backend_make_context_current (window::IWindow* window) const
+    -> core::Status
+{
+    if (auto* window_sdl2 = dynamic_cast<WindowSDL2*> (window))
+    {
+        SDL_GL_MakeCurrent (window_sdl2->get_sdl2_window(),
+            window_sdl2->get_context());
+
+        return {};
+    }
+
+    return create_unexpected (Platform, "Failed to cast window to WindowSDL2");
+}
+
+auto PlatformSDL2::backend_poll_events() -> void
 {
     SDL_Event event;
     while (SDL_PollEvent (&event) == 1)
@@ -138,8 +193,8 @@ auto PlatformSDL2::poll_backend_events() -> void
         {
         case SDL_QUIT:
         {
-            log_diagnostic (DiagnosticCategory::Platform,
-                "Received SDL_QUIT event", LogLevel::Info);
+            log_diagnostic (Platform, "Received SDL_QUIT event",
+                LogLevel::Info);
             // Global quit. Tell all windows to close
             for (auto win_id : get_all_window_ids())
             {
@@ -177,7 +232,7 @@ auto PlatformSDL2::poll_backend_events() -> void
     }
 }
 
-auto PlatformSDL2::set_backend_window_should_close (window::IWindow* window,
+auto PlatformSDL2::backend_set_window_should_close (window::IWindow* window,
     bool should_close) -> void
 {
     if (auto* window_sdl2 = dynamic_cast<WindowSDL2*> (window))
@@ -186,12 +241,12 @@ auto PlatformSDL2::set_backend_window_should_close (window::IWindow* window,
     }
     else
     {
-        log_diagnostic (DiagnosticCategory::Platform,
-            "Failed to cast window to WindowSDL2", LogLevel::Warn);
+        log_diagnostic (Platform, "Failed to cast window to WindowSDL2",
+            LogLevel::Warn);
     }
 }
 
-auto PlatformSDL2::swap_backend_buffers (window::IWindow* window) const -> void
+auto PlatformSDL2::backend_swap_buffers (window::IWindow* window) const -> void
 {
     if (auto* window_sdl2 = dynamic_cast<WindowSDL2*> (window))
     {
@@ -199,12 +254,12 @@ auto PlatformSDL2::swap_backend_buffers (window::IWindow* window) const -> void
     }
     else
     {
-        log_diagnostic (DiagnosticCategory::Platform,
-            "Failed to cast window to WindowSDL2", LogLevel::Warn);
+        log_diagnostic (Platform, "Failed to cast window to WindowSDL2",
+            LogLevel::Warn);
     }
 }
 
-auto PlatformSDL2::window_backend_should_close (IWindow* window) const
+auto PlatformSDL2::backend_window_should_close (IWindow* window) const
     -> Expected<bool>
 {
     if (auto* window_sdl2 = dynamic_cast<WindowSDL2*> (window))
@@ -212,8 +267,8 @@ auto PlatformSDL2::window_backend_should_close (IWindow* window) const
         return window_sdl2->should_close();
     }
 
-    return create_unexpected (DiagnosticCategory::Platform,
-        "Failed to cast window to WindowSDL2", LogLevel::Warn);
+    return create_unexpected (Platform, "Failed to cast window to WindowSDL2",
+        LogLevel::Warn);
 }
 
 } // namespace graphics::platform

@@ -3,4 +3,8 @@ ExcludeHeaderFilterRegex: 'external/.*,build/.*'
 HeaderFilterRegex: '.*'
 WarningsAsErrors: '*'
 CheckOptions:
-    cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor: 'true'
+  - key: cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor
+    value: 'true'
+  - key: misc-include-cleaner.IgnoreHeaders
+    value: '.*gl_includes\.hpp'
+

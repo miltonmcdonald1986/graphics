@@ -34,16 +34,16 @@ auto main() -> int
             return 1;
         }
 
-        const int posX{100};
-        const int posY{100};
-        const Position position{.x = posX, .y = posY};
+        const int posX{ 100 };
+        const int posY{ 100 };
+        const Position position{ .x = posX, .y = posY };
         const int width = 800;
         const int height = 600;
-        WindowDesc desc{.width = width,
+        WindowDesc desc{ .width = width,
             .height = height,
             .position = position,
             .title = "Window1",
-            .fullscreen = false};
+            .fullscreen = false };
 
         const Expected<uint32_t> win1 = platform->create_window (desc);
         if (!win1)

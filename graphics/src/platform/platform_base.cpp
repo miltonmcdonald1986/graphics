@@ -11,6 +11,7 @@
 #include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/expected.hpp>
 #include <graphics/core/log_level.hpp>
+#include <graphics/core/status.hpp>
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
@@ -21,6 +22,7 @@
 using graphics::core::create_unexpected;
 using graphics::core::Expected;
 using graphics::core::log_diagnostic;
+using graphics::core::Status;
 using graphics::core::DiagnosticCategory::Platform;
 using graphics::core::LogLevel::Debug;
 using graphics::core::LogLevel::Warn;
@@ -47,7 +49,7 @@ auto PlatformBase::create_window (const WindowDesc& desc) -> Expected<uint32_t>
     Slot& slot = m_windows.at (win_id);
 
     // Step 2: Backend creation
-    slot.window = create_backend_window (desc);
+    slot.window = backend_create_window (desc);
     if (!slot.window)
     {
         release_slot (win_id, AfterFailedCreate);
@@ -68,7 +70,7 @@ auto PlatformBase::create_window (const WindowDesc& desc) -> Expected<uint32_t>
 auto PlatformBase::destroy_window (uint32_t win_id) -> void
 {
     // Step 1: Unpack handle
-    const Handle handle{unpack_handle (win_id)};
+    const Handle handle{ unpack_handle (win_id) };
     const Slot* slot = get_slot_from_handle (handle);
     if (slot == nullptr)
     {
@@ -79,7 +81,7 @@ auto PlatformBase::destroy_window (uint32_t win_id) -> void
     }
 
     // Step 2: Backend destruction
-    destroy_backend_window (slot->window.get());
+    backend_destroy_window (slot->window.get());
 
     // Step 3: Release slot
     release_slot (handle.id, AfterDestroy);
@@ -121,14 +123,35 @@ auto PlatformBase::has_windows() const -> bool
         [] (const Slot& slot) -> bool { return (slot.window != nullptr); });
 }
 
-auto PlatformBase::poll_events() -> void { poll_backend_events(); }
+auto PlatformBase::make_context_current (std::uint32_t win_id) const -> Status
+{
+    if (auto* ptr = get_window_ptr (win_id))
+    {
+        auto status = backend_make_context_current (ptr);
+        if (status.has_value())
+        {
+            log_diagnostic (Platform,
+                format ("Window {} is current context", win_id), Debug);
+
+            return status;
+        }
+
+        return create_unexpected (Platform,
+            format ("Failed to make context current for window {}", win_id));
+    }
+
+    return create_unexpected (Platform,
+        "Invalid window handle; cannot make context current");
+}
+
+auto PlatformBase::poll_events() -> void { backend_poll_events(); }
 
 auto PlatformBase::set_window_should_close (uint32_t win_id, bool should_close)
     -> void
 {
     if (auto* ptr = get_window_ptr (win_id))
     {
-        set_backend_window_should_close (ptr, should_close);
+        backend_set_window_should_close (ptr, should_close);
         return;
     }
 
@@ -140,7 +163,7 @@ auto PlatformBase::swap_buffers (uint32_t win_id) const -> void
 {
     if (auto* ptr = get_window_ptr (win_id))
     {
-        swap_backend_buffers (ptr);
+        backend_swap_buffers (ptr);
         return;
     }
 
@@ -152,7 +175,7 @@ auto PlatformBase::window_should_close (uint32_t win_id) const -> Expected<bool>
 {
     if (auto* ptr = get_window_ptr (win_id))
     {
-        return window_backend_should_close (ptr);
+        return backend_window_should_close (ptr);
     }
 
     return create_unexpected (Platform,
