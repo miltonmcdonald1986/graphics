@@ -47,6 +47,7 @@ struct IPlatform
 
     /// \brief Makes the OpenGL context for the given window ID current.
     /// \param win_id Window ID whose context should be made current.
+    /// \return Status indicating success or failure.
     virtual auto make_context_current (std::uint32_t win_id) const
         -> core::Status = 0;
 
