@@ -180,11 +180,8 @@ auto PlatformSDL2::backend_make_context_current (window::IWindow* window) const
 
         return {};
     }
-    else
-    {
-        return create_unexpected (Platform,
-            "Failed to cast window to WindowSDL2");
-    }
+
+    return create_unexpected (Platform, "Failed to cast window to WindowSDL2");
 }
 
 auto PlatformSDL2::backend_poll_events() -> void
