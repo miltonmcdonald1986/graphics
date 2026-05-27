@@ -11,6 +11,7 @@
 #include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/expected.hpp>
 #include <graphics/core/log_level.hpp>
+#include <graphics/core/status.hpp>
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
@@ -134,10 +135,9 @@ auto PlatformBase::make_context_current (std::uint32_t win_id) const -> Status
 
             return status;
         }
-        else
-            return create_unexpected (Platform,
-                format ("Failed to make context current for window {}",
-                    win_id));
+
+        return create_unexpected (Platform,
+            format ("Failed to make context current for window {}", win_id));
     }
 
     return create_unexpected (Platform,

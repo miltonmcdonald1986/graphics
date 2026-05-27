@@ -111,7 +111,13 @@ auto PlatformSDL2::backend_create_window (const WindowDesc& desc)
     {
         m_master_context = context;
 
-        backend_make_context_current (window.get());
+        if (!backend_make_context_current (window.get()))
+        {
+            log_diagnostic (Platform,
+                "Failed to make master context current for window");
+            
+            return nullptr;
+        }
 
         if (!m_gl_loaded)
         {

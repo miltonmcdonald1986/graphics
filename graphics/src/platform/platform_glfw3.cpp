@@ -99,11 +99,17 @@ auto PlatformGLFW::backend_create_window (const window::WindowDesc& desc)
 
     GLFWwindow* glfw_window = window->get_glfw_window();
 
-    if (!m_master_context)
+    if (m_master_context == nullptr)
     {
         m_master_context = glfw_window;
 
-        backend_make_context_current (window.get());
+        if (!backend_make_context_current (window.get()))
+        {
+            log_diagnostic (Platform,
+                "Failed to make master context current for window");
+
+            return nullptr;
+        }
 
         if (!m_gl_loaded)
         {

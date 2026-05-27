@@ -30,7 +30,7 @@ struct PlatformBase : public IPlatform
 
     [[nodiscard]] auto has_windows() const -> bool final;
 
-    auto make_context_current (std::uint32_t win_id) const
+    [[nodiscard]] auto make_context_current (std::uint32_t win_id) const
         -> core::Status final;
 
     auto poll_events() -> void final;
