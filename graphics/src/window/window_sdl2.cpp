@@ -36,10 +36,12 @@ WindowSDL2::WindowSDL2 (const WindowDesc& desc, SDL_GLContext shared_context)
           desc.height,
           make_sdl_window_flags (desc)))
 {
-    if (!m_window)
+    if (m_window == nullptr)
+    {
         return;
+    }
 
-    if (shared_context)
+    if (shared_context != nullptr)
     {
         SDL_GL_SetAttribute (SDL_GL_SHARE_WITH_CURRENT_CONTEXT, 1);
     }

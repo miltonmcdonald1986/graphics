@@ -13,6 +13,7 @@
 #include <graphics/core/diagnostic_category.hpp>
 #include <graphics/core/expected.hpp>
 #include <graphics/core/log_level.hpp>
+#include <graphics/core/status.hpp>
 #include <graphics/window/i_window.hpp>
 #include <graphics/window/window_desc.hpp>
 
@@ -107,7 +108,7 @@ auto PlatformSDL2::backend_create_window (const WindowDesc& desc)
 
     SDL_GLContext context = window->get_context();
 
-    if (!m_master_context)
+    if (m_master_context == nullptr)
     {
         m_master_context = context;
 
