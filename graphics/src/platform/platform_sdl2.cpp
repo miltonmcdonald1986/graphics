@@ -116,7 +116,7 @@ auto PlatformSDL2::backend_create_window (const WindowDesc& desc)
         {
             log_diagnostic (Platform,
                 "Failed to make master context current for window");
-            
+
             return nullptr;
         }
 
