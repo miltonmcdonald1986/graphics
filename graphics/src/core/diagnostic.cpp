@@ -64,10 +64,10 @@ auto log_diagnostic (DiagnosticCategory category,
     LogLevel level,
     source_location location) -> void
 {
-    const Diagnostic diagnostic{.category = category,
+    const Diagnostic diagnostic{ .category = category,
         .level = level,
         .location = location,
-        .message = message};
+        .message = message };
 
     log_diagnostic (diagnostic);
 }

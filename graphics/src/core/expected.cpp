@@ -26,10 +26,10 @@ auto create_unexpected (DiagnosticCategory category,
     LogLevel level,
     source_location location) -> Unexpected
 {
-    const Diagnostic diagnostic{.category = category,
+    const Diagnostic diagnostic{ .category = category,
         .level = level,
         .location = location,
-        .message = message};
+        .message = message };
 
     return create_unexpected (diagnostic);
 }

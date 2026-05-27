@@ -25,7 +25,7 @@ class WindowGLFW3 final : public window::WindowBase
     [[nodiscard]] auto is_initialized() const -> bool;
 
   private:
-    GLFWwindow* m_window{nullptr};
+    GLFWwindow* m_window{ nullptr };
 };
 
 } // namespace graphics::window

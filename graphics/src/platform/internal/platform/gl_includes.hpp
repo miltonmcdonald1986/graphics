@@ -2,7 +2,7 @@
 #define GRAPHICS_INTERNAL_PLATFORM_GL_INCLUDES_HPP
 
 #define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
 #include <GL/gl3w.h>
+#include <GLFW/glfw3.h>
 
 #endif // GRAPHICS_INTERNAL_PLATFORM_GL_INCLUDES_HPP

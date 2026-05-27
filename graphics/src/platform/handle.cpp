@@ -30,7 +30,7 @@ auto pack_handle (uint32_t index, uint32_t gen) -> uint32_t
 
 auto unpack_handle (uint32_t handle) -> Handle
 {
-    Handle unpacked{.id = handle & INDEX_MASK, .gen = handle >> INDEX_BITS};
+    Handle unpacked{ .id = handle & INDEX_MASK, .gen = handle >> INDEX_BITS };
     log_diagnostic (Platform,
         format ("unpacked {} to (index,gen)=({},{})", handle, unpacked.id,
             unpacked.gen),
